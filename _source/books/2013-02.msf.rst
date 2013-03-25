@@ -1,0 +1,15 @@
+Робин С. Шарма «Монах который продал свой Феррари»
+##################################################
+
+:category: Books
+:date: 2013-02-07
+:lang: ru
+:slug: books-msf
+:preview: sources/books/msf.jpg
+
+.. image:: sources/books/msf.jpg
+    :class: book_preview
+
+Бессмысленное чтение. Не рекомендую.
+                                                             
+**(8/10)** | `http://lib.aldebaran.ru <http://lib.aldebaran.ru/author/sharma_robin/sharma_robin_monah_kotoryi_prodal_svoi_ferrari/>`_

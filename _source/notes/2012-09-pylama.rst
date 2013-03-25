@@ -1,0 +1,111 @@
+Pylama — аудит python-кода
+==========================
+
+:category: Notes
+:date: 2012-09-02
+:lang: ru
+:slug: pylama
+:tags: python,pep8,pyflakes,mccabe
+
+
+Процесс `непрерывной интеграции <http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F>`_ программных продуктов всегда был очень
+важен для разработке. В моем случае я не ограничеваюсь только тестированием
+(юнит или интеграционным), но также провожу и интроспекцию кода на соответствие
+стандартам или например ограничение логической вложенности.
+
+Во-втором случае код моих проектов автоматически прогоняется через ряд
+утилит: **pyflakes**, **pep8**, **mccabe**, **pylint**. Какое то время
+я использовал Flake8_ сочетающую в себе все эти линтеры. Но потом его
+возможностей мне стало не хватать. Схожий функционал уже был мной разработан
+для `python-mode`_, поэтому я вынес его в отдельный модуль.
+Так появился Pylama_.
+
+Pylama_ это утилита для проверки python-кода схожая с Flake8_, но обладающая
+рядом улучшений.
+
+
+Установка
+---------
+
+.. code-block:: shell 
+
+    $ pip install pylama
+
+
+Использование
+-------------
+
+Рекурсивная проверка текущей диектории:
+
+.. code-block:: shell 
+
+    $ pylama
+
+Игнорировать определенные типы (группы типов) ошибок:
+
+.. code-block:: shell 
+
+    $ pylama -i W,E501
+
+Изменение набора линтеров:
+
+.. code-block:: shell 
+
+    $ pylama -l "pep8,mccabe"
+
+
+Опции
+-----
+
+.. code-block:: shell 
+
+    $ pylama --help
+
+    usage: pylama [-h] [--ignore IGNORE] [--verbose] [--select SELECT]
+                [--linters LINTERS] [--complexity COMPLEXITY] [--skip SKIP]
+                [path]
+
+    Code audit tool for python.
+
+    positional arguments:
+    path                  Path on file or directory.
+
+    optional arguments:
+    -h, --help            show this help message and exit
+    --ignore IGNORE, -i IGNORE
+                            Ignore errors and warnings.
+    --verbose, -v         Verbose mode.
+    --select SELECT, -s SELECT
+                            Select errors and warnings.
+    --linters LINTERS, -l LINTERS
+                            Select errors and warnings.
+    --complexity COMPLEXITY, -c COMPLEXITY
+                            Set mccabe complexity.
+    --skip SKIP           Skip files (Ex. messages.py)
+
+
+Переключение настроек pylama из файла
+-------------------------------------
+
+В любом python-файле вы можете установить опции проверки для pylama.
+Они будут установлены только для данного файла.
+
+.. code-block:: python 
+
+     .. Где-то в коде
+     # Игнорировать все Warnings кроме W301
+     # lint_ignore=W:lint_select=W301
+
+Для выключения проверки текущего файла:
+
+.. code-block:: python 
+
+     # lint=0
+
+
+Разработка pylama_ ведется на Github: http://github.com/klen/pylama
+
+
+.. _Flake8: http://pypi.python.org/pypi/flake8/
+.. _Pylama: http://pypi.python.org/pypi/pylama/
+.. _Python-mode: https://github.com/klen/python-mode

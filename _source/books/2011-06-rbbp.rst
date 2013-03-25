@@ -1,0 +1,16 @@
+«REWORK, Бизнес без предрассудков»
+##################################
+
+:category: Books
+:date: 2011-06-01
+:lang: ru
+:slug: books-rbbp
+:preview: sources/books/rbbp.jpg
+
+.. image:: sources/books/rbbp.jpg
+    :class: book_preview
+
+Книга от компании **37signals**. Производит впечатление, хотя
+описывает очевидные вещи. Стоит прочитать.
+
+**(8/10)** | http://lib.rus.ec/b/233982

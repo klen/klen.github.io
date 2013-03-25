@@ -1,0 +1,17 @@
+Дэвид Митчел «Облачный Атлас»
+#############################
+
+:category: Books
+:date: 2013-02-09
+:lang: ru
+:slug: books-atlas
+:preview: sources/books/atlas.jpg
+
+.. image:: sources/books/atlas.jpg
+    :class: book_preview
+
+Книга — матрешка. Ничего особенного, но денег за возврат билетов
+не попросите.
+                                                             
+
+**(8/10)** | `http://lib.rus.ec <http://lib.rus.ec/b/405580>`_

@@ -1,0 +1,15 @@
+Karl Seguin «The Little MongoDB Book»
+#####################################
+
+:category: Books
+:date: 2013-01-01
+:lang: ru
+:slug: books-lmb
+:preview: sources/books/lmdb.jpg
+
+.. image:: sources/books/lmdb.jpg
+    :class: book_preview
+
+Очень короткое руководство по MongoDB. Прочитывается за пол часа.
+                                                             
+**(8/10)** | `http://openmymind.net <http://openmymind.net/mongodb.pdf>`_

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} blog{% endblock %}
+
+{% block content %}  
+
+    <h1>Site archives.</h1>
+
+    <ul class="tag-cloud">
+        {% for tag in tag_cloud %}
+            <li class="tag-cloud_item tag-cloud_{{ tag.1 }}"><a href="{{ SITEURL }}/tag/{{ tag.0 }}.html">{{ tag.0 }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {% for article in dates %}
+        {# Header #}
+        <header class="article_header">
+            <time class="article_header_time" datetime="{{ article.date }}">{{ article.date.strftime('%d.%m.%Y')}}</time>
+            <span>in <a href="{{ SITEURL }}/category/{{ article.category }}.html">{{ article.category }}</a></span>
+            {% if article.tags %}
+            <span class="article_meta">
+                [{%- for tag in article.tags -%}<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>{% if not loop.last %}, {% endif %}{%- endfor -%}]
+            </span>
+            {% endif %}
+            <a href="{{article.url}}" class="article_header_link">{{ article.title }}</a>
+        </header>
+
+        <br/>
+
+    {% endfor %}
+
+    {# Disqus widget #}
+    {% include "_dwidget.html" %}
+
+    {# Google plus #}
+    {% include "_gplus.html" %}
+
+{% endblock %}

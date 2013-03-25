@@ -1,0 +1,17 @@
+Дэниел Ергин, «Добыча»
+######################
+
+:category: Books
+:date: 2012-01-30
+:lang: ru
+:slug: books-oil
+:preview: sources/books/oil.jpg
+
+.. image:: sources/books/oil.jpg
+    :class: book_preview
+
+Нефть. История открытий, создания транснациональных корпораций, мировых войн.
+История современности в разрезе нефтедобычи. Нефть — кровь современной
+цивилизации. Нефть возвышающая и уничтожающая. Нефть и человечество.
+
+**(10/10)** | `http://www.ozon.ru <http://www.ozon.ru/context/detail/id/7590819/?partner=klen>`_

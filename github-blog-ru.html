@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,git,github," />
+        <meta name="description" content="Создаем свой персональный сайт на Github." />
+
+        <meta name="application-name" content="klen.github.com" />
+        <meta name="application-url" content="." />
+        <meta name='yandex-verification' content="6a6ba8237dcc1d3e"/>
+        <meta name="google-site-verification" content="PhpguXH83A1Tir-QHZRoJYOO5FF5Tfwmqqo85NFtdSI" />
+
+        <title>Создаем свой персональный сайт на Github. — klen.github.com</title>
+
+        <link href="./theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+        <link rel="alternate" type="application/atom+xml" title="klen.github.com -- all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+        <link rel="openid.server" href="http://www.myopenid.com/server"> 
+        <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+        <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.>klen.github.com</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about.html">About me</a>            <a class="menu_item menu_link" href="./category/Blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/Books.html">Books</a>            <a class="menu_item menu_link" href="./category/Notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+                        <div id="cse" style="width: 100%; min-height:50px">&nbsp;</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('003167765861847606641:vmsxpc2lubo');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+            <article class="article">
+
+                <header class="article_header">
+            <time class="article_header_time" datetime="2011-07-03 00:00:00">03.07.2011</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Создаем свой персональный сайт на Github.</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/git.html">git</a> , </span> <span><a href="./tag/github.html">github</a> </span> </span></header>
+
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="git-revision-ru.html" class="article_paginator_right_link">Django-gitrevision, автоматическое обновление статики на клиенте</a> Ctrl→
+                </div></div>
+
+                <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id3" id="id8">Введение</a></li>
+<li><a class="reference internal" href="#id4" id="id9">Использование генераторов статических сайтов</a></li>
+<li><a class="reference internal" href="#pelican" id="id10">Установка и настройка Pelican</a></li>
+<li><a class="reference internal" href="#id5" id="id11">Автоматизация</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Mало кто знает, что <a class="reference external" href="http://github.com">Github</a> кроме превосходного хостинга ваших <a class="reference external" href="http://git-scm.com">Git</a> проектов
+может также <a class="reference external" href="http://pages.github.com/">хостить</a> ваш персональный сайт.
+Например на нем расположен этот блог. В своей первой статье я
+расскажу как максимально удобно настроить эту функциональность.</p>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">Введение</a></h2>
+<p>Для начала вам нужно быть зарегистрированным пользователем <a class="reference external" href="http://github.com">Github</a> и уметь
+работать с системой контроля версий <a class="reference external" href="http://git-scm.com">Git</a>. Предположим вы готовы.</p>
+<ul class="simple">
+<li>Первое, что вам потребуется — это создать на <a class="reference external" href="http://github.com">Github</a> репозиторий с именем вида: <cite>username.github.com</cite>, где <cite>username</cite> ваш логин на сервисе. Например для этого блога создан репозиторий <a class="reference external" href="http://github.com/klen/klen.github.com">http://github.com/klen/klen.github.com</a></li>
+<li>Вторым шагом мы создадим локальный репозиторий и привяжем его к удаленному:</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">В дальнейшем я буду приводить примеры для своего сайта: klen.github.com</p>
+</div>
+<div class="highlight"><pre>mkdir ~/Projects/klen.github.com
+<span class="nb">cd</span> ~/Projects/klen.github.com
+git init
+<span class="nb">echo</span> <span class="s1">&#39;Hello world!&#39;</span> &gt; index.html
+git add .
+git commit -m <span class="s1">&#39;Initial commit&#39;</span>
+git remote add origin git@github.com:klen/klen.github.com.git
+git push -u origin master
+</pre></div>
+<dl class="docutils">
+<dt>Отлично, ваш статический сайт уже готов! В течении 10 минут он появится по адресу:</dt>
+<dd><cite>username.github.com</cite>. В дальнейшем он будет обновляться при коммитах в удаленный
+репозиторий.</dd>
+</dl>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id9">Использование генераторов статических сайтов</a></h2>
+<p>Созданный нами сайт не слишком удобен для работы, трудно писать содержание
+используя HTML, сложно поддерживать целостность ссылок. Использовать его
+например как блог очень затруднительно.</p>
+<p>Существует масса проектов генерации статических сайтов и блогов.
+При работе с ними фактически вы пишете страницы и статьи в удобном для вас формате,
+а затем генератор обновляет структуру сайта. По-умолчанию <a class="reference external" href="http://github.com">Github</a> уже поддерживает
+написанный на ruby генератор <a class="reference external" href="http://github.com/mojombo/jekyll/">Jekyll</a>. То есть вам необязательно использовать только
+HTML синтаксис, из коробки вы можете писать в ваш сайт на <a class="reference external" href="http://en.wikipedia.org/wiki/Markdown">Markdown</a>. Подробнее читайте
+в документации <a class="reference external" href="http://pages.github.com/">Github Pages</a> и <a class="reference external" href="http://github.com/mojombo/jekyll/">Jekyll</a>.</p>
+<p>Я предпочитаю генерировать страницы локально и проверять результат без выгрузки
+содержания на <a class="reference external" href="http://github.com">Github</a>. Мне привычнее работать с <a class="reference external" href="http://python.org">Python</a> поэтому в качестве генератора
+сайта мной используется <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a>. Ниже я покажу как поставить его и настроить для работы.</p>
+<p>Если вы предпочитаете <strong>ruby</strong> дальше можете не читать.</p>
+</div>
+<div class="section" id="pelican">
+<h2><a class="toc-backref" href="#id10">Установка и настройка Pelican</a></h2>
+<p>Предполагается, что вы знакомы с <a class="reference external" href="http://python.org">Python</a> и <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">VirtualEnv</a>.</p>
+<ol class="arabic simple">
+<li>Так как мы будем использовать <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> нам необходимо выключить встроенный в <a class="reference external" href="http://github.com">Github</a> генератор <a class="reference external" href="http://github.com/mojombo/jekyll/">Jekyll</a>. Это делается добавлением в корень репозитория файла <cite>.nojekyll</cite>.</li>
+</ol>
+<div class="highlight"><pre>touch .nojekyll
+git add .
+git commit -m <span class="s1">&#39;Disable Jekyll&#39;</span>
+</pre></div>
+<ol class="arabic simple" start="2">
+<li>Теперь создадим и активируем виртуальное окружение для модулей нашего сайта:</li>
+</ol>
+<div class="highlight"><pre>virtualenv .ve_blog
+<span class="nb">source</span> .ve_blog/bin/activate
+</pre></div>
+<ol class="arabic simple" start="3">
+<li>Установим в созданный нами <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">VirtualEnv</a> генератор <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> и необходимый для него движок шаблонов <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a>:</li>
+</ol>
+<div class="highlight"><pre>easy_install pelican
+easy_install jinja2
+</pre></div>
+<ol class="arabic simple" start="4">
+<li>Мы будем держать исходники сайта в поддиректории <strong>source</strong>, а созданные статические страницы в корне репозитория, чтобы <a class="reference external" href="http://github.com">Github</a> их видел.  Создадим файл <cite>source/hello.rst</cite> с нашей первой статьей:</li>
+</ol>
+<div class="highlight"><pre><span class="gh">Hello world!</span>
+<span class="gh">############</span>
+
+<span class="nc">:slug:</span> <span class="nf">hello</span>
+
+Hello from Pelican!
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Я использую синтаксис <a class="reference external" href="http://docutils.sourceforge.net/rst.html">RST</a>, но вы можете использовать <a class="reference external" href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> для своего сайта. Просто сохраняйте файлы с расширением <cite>*.md</cite>
+<a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> поддерживает и другие форматы, но надо ставить соответствующие модули.</p>
+</div>
+<ol class="arabic simple" start="6">
+<li>И соберем статику:</li>
+</ol>
+<div class="highlight"><pre>pelican <span class="nb">source</span> -o .
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>Опция <em>-o .</em> заставляет <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> производить сборку статики в корне
+проекта.</p>
+<p class="last">Если все прошло успешно в корне проекта вы увидите несколько <strong>HTML</strong> файлов.
+Откройте <cite>index.html</cite> в браузере и посмотрите на ваш сайт.</p>
+</div>
+<ol class="arabic simple" start="7">
+<li>Теперь наши изменения можно сохранить в <a class="reference external" href="http://git-scm.com">Git</a> и отправить на <a class="reference external" href="http://github.com">Github</a>.</li>
+</ol>
+<div class="highlight"><pre>git add .
+git commit -m <span class="s1">&#39;Add virtualenv and setup pelican.&#39;</span>
+git push origin master
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id11">Автоматизация</a></h2>
+<p>Настроим наш сайт и немного автоматизируем рутинные операции.</p>
+<ol class="arabic simple">
+<li>Создадим файл настроек нашего сайта <cite>source/settings.py</cite>:</li>
+</ol>
+<div class="highlight"><pre><span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;Kirill Klenov&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s">&#39;klen.github.com&#39;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;http://klen.github.com&#39;</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Подробнее про настройки <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a>, можно прочитать в его документации.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li>Для упрощения сборки создадим sh-файл <cite>.compile</cite></li>
+</ol>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
+
+<span class="nv">VE_DIR</span><span class="o">=</span><span class="nv">$PRJ_DIR</span>/.ve_blog
+
+<span class="c"># Modify path</span>
+<span class="nv">OLD_PATH</span><span class="o">=</span><span class="nv">$PATH</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$VE_DIR/bin:$PRJ_DIR:$PATH&quot;</span>
+<span class="nb">export </span>PATH
+
+<span class="c"># Compile static files</span>
+pelican <span class="nv">$PRJ_DIR</span>/source -o <span class="nv">$PRJ_DIR</span> -s <span class="nv">$PRJ_DIR</span>/source/settings.py -v
+
+<span class="c"># Return PATH</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$OLD_PATH</span>
+<span class="nb">export </span>PATH
+</pre></div>
+<p>И дадим ему права на исполнение:</p>
+<div class="highlight"><pre>chmod +x .compile
+</pre></div>
+<p>Теперь в директории проекта можно вызывать <cite>./.compile</cite> и собирать статику даже без активации
+виртуального окружения.</p>
+<ol class="arabic simple" start="3">
+<li>Следующим шагом создадим <a class="reference external" href="http://git-scm.com">Git</a> хук для автоматической генерации сайта при коммитах. Создадим и отредактируем файл <cite>.git/hooks/pre-commit</cite>:</li>
+</ol>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
+
+<span class="nv">$PRJ_DIR</span>/.compile
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Не забудьте сделать его исполнемым.</p>
+</div>
+<p>При каждом коммите изменений в репозиторий, проект будет пере-собран
+автоматически.</p>
+<p>На этом нашу предварительную работу по созданию github-сайта можно считать
+оконченной. В дальнейшем стоит поподробнее прочитать документацию <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a>,
+модифицировать стандартную или создать собственную тему оформления и подключить
+какой нибудь сервис комментариев.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Как нетрудно догадаться исходники этого блога расположены по адресу: <a class="reference external" href="http://github.com/klen/klen.github.com">http://github.com/klen/klen.github.com</a></p>
+</div>
+</div>
+
+        </div>
+
+                
+                <g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="git-revision-ru.html" class="article_paginator_right_link">Django-gitrevision, автоматическое обновление статики на клиенте</a> Ctrl→
+                </div></div>
+    </article>
+
+            <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'github-blog';
+        var disqus_url = 'http://klen.github.com/github-blog-ru.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2012 Kirill Klenov
+        &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about.html">About me</a>
+                    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script>    <div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

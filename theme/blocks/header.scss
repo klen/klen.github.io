@@ -1,0 +1,11 @@
+.header {
+    padding: 10px 20px;
+    font-size: 2.2em;
+    margin-bottom: 0;
+
+    &_title {
+        text-decoration:none;
+        text-transform: uppercase;
+        color: #000 !important;
+    }
+}

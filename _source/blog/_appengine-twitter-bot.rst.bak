@@ -1,0 +1,227 @@
+Разговаривающий twitter бот на appengine
+########################################
+
+:category: Blog
+:date: 2011-08-03
+:lang: ru
+:slug: appengine-twitter-bot
+:tags: python, appengine, twitter
+
+
+.. note:: Статья показывает на простых примерах работу с API twitter_,
+    `Google appengine <appengine>`_ и с генерацией текстов. Расчитана на
+    начинающих пользователей.
+
+Понадобилось мне на днях сделать необычный подарок для знакомого. После недолгих
+раздумий родилась идея сделать twitter_ бота-пересмешника — некий самообущающийся
+сервис, способный следить за аккаунтом цели, обучаться на ее твитах и
+генерировать сообщения. При чем желательно еще чтобы все это крутилось
+на бесплатном хостинге приложений и работало по схеме: сделал и забыл.
+
+Немного прикинув варианты реализации, я решил использовать appengine_ и python_.
+
+Конечные требования к сервису:
+
+- Сервис должен работать на основе appengine_.
+- Сервис должен уметь получать и отправлять сообщения в twitter_;
+- Сервис должен уметь следить за целью, обучаться и генерировать сообщения;
+
+
+.. note::
+    Инструкции в данной статье приводятся для linux-систем.
+    Для других ОС потребуются незначительные изменения в процессах
+    (другая версия SDK и т.д.)
+
+.. warning::
+    Файлы с исходным кодом для данной статьи можно найти по адресу:
+    https://github.com/klen/klen.github.com/TODO
+
+----
+
+.. contents:: Содержание:
+
+----
+
+
+Подготовка к работе с twitter API
+=================================
+
+.. note::
+    Документация twitter API находится здесь: https://dev.twitter.com/docs
+
+Во-первых для начала работы нашего бота нам необходим действующий twitter_
+аккаунт. Зарегистрировать его можно по адресу: https://twitter.com/signup.
+
+Во-вторых для взаимодействия с `API twitter`_ необходимо зарегистрировать наше
+будущее приложение по адресу: https://dev.twitter.com/apps/new. Наше приложение
+будет иметь возможность читать ленту и обновлять статусы, поэтому в разделе
+настроек укажите уровень доступа "Read and Write".
+
+.. note::
+    Вы можете не создавать собственное приложение, а воспользоваться ключами
+    используемыми в этой статье.
+
+Теперь можно приступать непосредственно к программированию.
+
+Для начала создадим класс способный получать и отправлять сообщения используя
+`API twitter`_. Чтобы не изобретать велосипед я выбрал готовую библиотеку
+`twitter <twitter-lib>`_.
+
+.. note::
+    Обычно я создаю виртуальное окружение для проектов и устанавливаю в
+    него модули python. Но сейчас я просто скопирую сами модули
+    в директорию проекта.
+
+Копируем папку `twitter` из полученного архива в директорию проекта.
+
+.. note:: На текущий момент сервисы могут взаимодействовать с API твиттера
+    только при помощи протокола OAuth_.
+
+Для взаимодействия с API по протоколу OAuth_ нам потребуются четыре ключа:
+**CONSUMER_KEY**, **CONSUMER_SECRET**, **ACCESS_TOKEN_KEY**,
+**ACCESS_TOKEN_SECRET**.
+
+Создадим файл `settings.py` для их хранения.
+.. code-block:: python
+    #!/usr/bin/env python
+    # coding: utf-8
+
+    # Данные для twitter OAuth
+    CONSUMER_KEY = ""
+    CONSUMER_SECRET = ""
+    ACCESS_TOKEN_KEY = ""
+    ACCESS_TOKEN_SECRET = ""
+
+    # Твиттер цели
+    TARGET = "Interesno_Vsem"
+
+
+Ключи **CONSUMER_KEY** и **CONSUMER_SECRET** доступны на странице
+зарегистрированного в твиттере приложения https://dev.twitter.com/apps.
+Скопируйте их значения в настройки.
+
+.. note::
+    Если вы решили использовать приложение созданное для данной статьи:
+    CONSUMER_KEY = "MchK8XibR3cyEjm0U9Fwg"
+    CONSUMER_SECRET = "Z2NJuyf6lMU3lDTxoFAbKz7obkdOXjV3AgA4oLk1ns"
+
+Ключи **ACCESS_TOKEN_KEY** и **ACCESS_TOKEN_SECRET** необходимы для авторизации
+нашего бота и нам нужно их получить. В библиотеке `twitter` уже присутствуют 
+необходимые скрипты нужно только правильно их вызвать. Создаем файл
+`get_tokens.py`:
+
+.. code-block:: python
+    #!/usr/bin/env python
+    # coding: utf-8
+
+    import settings
+    from twitter import oauth_dance
+
+    tokens = oauth_dance.oauth_dance("Twitter bot", settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
+    print "ACCESS_TOKEN_KEY: %s" % tokens[0]
+    print "ACCESS_TOKEN_SECRET: %s" % tokens[1]
+
+Теперь запускаем скрипт командой `python get_tokens.py` и следуя инструкциям
+получаем ключи доступа **ACCESS_TOKEN_KEY** и **ACCESS_TOKEN_SECRET**.
+Вписываем их в `settings.py`.
+
+.. note:: 
+    Разрешите доступ для той учетной записи, которую вы планируете использовать в качестве бота.
+
+
+Работа с twitter API
+====================
+
+Наш бот должен авторизовываться в API twitter_, уметь получать и отправлять
+сообщения. Реализуем этот функционал в файле `bot.py`.
+
+.. code-block:: python
+
+    #!/usr/bin/env python
+    # coding: utf-8
+    import settings
+    import twitter
+
+
+    class Bot():
+        def __init__(self):
+            self.twitter = twitter.Twitter(
+                auth = twitter.OAuth(
+                    settings.ACCESS_TOKEN_KEY,
+                    settings.ACCESS_TOKEN_SECRET,
+                    settings.CONSUMER_KEY,
+                    settings.CONSUMER_SECRET,
+                ))
+            self.target = settings.TARGET
+
+        def timeline(self):
+            return self.twitter.statuses.friends_timeline(id=self.target)
+
+        def update(self, status):
+            return self.twitter.statuses.update(status=status)
+
+Сейчас вы можете проверить работоспособность кода командой: ::
+
+    python -c "from bot import Bot;bot = Bot(); bot.update("Hello from python!)"
+
+Если все сделано правильно будет опубликован новый твит.
+
+
+Обучение бота
+=============
+
+Я использовал метод генерации текста на основе триграмм, описанной в данной
+статье и немного подкорректированный мной.
+
+Логично, что лучше всего получается работать с аккаунтами в твитах которых содержится много текста.
+
+
+Интеграция с Appengine
+======================
+
+Скачиваем `Google appengine <appengine>`_ Python SDK по следующей ссылке:
+http://googleappengine.googlecode.com/files/google_appengine_1.5.5.zip
+
+Распаковываем скачанный архив в директорию проекта и создаем симлинк на папку google
+чтобы SDK было доступно в коде.
+
+.. note:: В качестве авльтернативы вы можете установить SDK в систему.
+
+
+Прежде всего нужно зарегистрироваться на https://appengine.google.com/ и
+создать проект. Я зарегистрировал и создал application с именем **bot721**.
+
+Прежде всего любое appengine_ приложение нуждается в основном файле
+конфигурации `app.yaml`.
+.. code-block:: yaml
+    application: bot721 
+    version: 1
+    runtime: python
+    api_version: 1
+
+    handlers:
+    - url: /update/
+      script: update.py 
+      login: admin
+
+    - url: /.*
+      script: main.py
+
+
+В этом файле мы конфигурируем наше приложение, используется YAML_ формат.
+
+В первой части файла указываем идентификатор нашего приложения и версии среды.
+
+В разделе handlers указываем файлы обработчики URL нашего веб-приложения.
+Все запросы кроме `/update` обрабатываются скриптом `main.py`. Запросы на URL вида
+`/update/` обрабатываются скриптом `update.py`.
+
+Требования к сервису не предполагают вывод какой либо информации на страницах appengine_, поэтому
+скрипт `main.py` представляет из себя простую заглушку. 
+
+.. code-block:: python
+    pass
+
+Файл `update.py` поинтереснее, в нем размещается логика нашего бота.
+.. code-block:: python
+    pass

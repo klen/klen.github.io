@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="android,push,c2dm,python,django," />
+        <meta name="description" content="Серверная реализация Android C2DM Push уведомлений (python)" />
+
+        <meta name="application-name" content="klen.github.com" />
+        <meta name="application-url" content="." />
+        <meta name='yandex-verification' content="6a6ba8237dcc1d3e"/>
+        <meta name="google-site-verification" content="PhpguXH83A1Tir-QHZRoJYOO5FF5Tfwmqqo85NFtdSI" />
+
+        <title>Серверная реализация Android C2DM Push уведомлений (python) — klen.github.com</title>
+
+        <link href="./theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+        <link rel="alternate" type="application/atom+xml" title="klen.github.com -- all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+        <link rel="openid.server" href="http://www.myopenid.com/server"> 
+        <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+        <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.>klen.github.com</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about.html">About me</a>            <a class="menu_item menu_link" href="./category/Blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/Books.html">Books</a>            <a class="menu_item menu_link" href="./category/Notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+                        <div id="cse" style="width: 100%; min-height:50px">&nbsp;</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('003167765861847606641:vmsxpc2lubo');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+            <article class="article">
+
+                <header class="article_header">
+            <time class="article_header_time" datetime="2012-04-03 00:00:00">03.04.2012</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Серверная реализация Android C2DM Push уведомлений (python)</h1><span class="article_meta">tags: <span><a href="./tag/android.html">android</a> , </span> <span><a href="./tag/push.html">push</a> , </span> <span><a href="./tag/c2dm.html">c2dm</a> , </span> <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/django.html">django</a> </span> </span></header>
+
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="create-python-packages-ru.html" class="article_paginator_right_link">Создание python-пакетов (aka setup scripts)</a> Ctrl→
+                </div>                <div class="article_paginator_left">
+                    ←Ctrl <a href="ios-push-python-ru.html" class="article_paginator_left_link">Серверная реализация IOS Push уведомлений (python)</a>
+                </div></div>
+
+                <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id7">Введение</a></li>
+<li><a class="reference internal" href="#id3" id="id8">Подготовка к работе</a></li>
+<li><a class="reference internal" href="#id4" id="id9">Получение токена для сервера</a></li>
+<li><a class="reference internal" href="#push" id="id10">Отправка Push уведомлений</a></li>
+<li><a class="reference internal" href="#django" id="id11">Интеграция с Django</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p><strong>Статьи по теме</strong></p>
+<ol class="arabic simple">
+<li><a class="reference external" href="../urbanairship-ru.html">Urbanairship, push-уведомления для мобильных приложений</a></li>
+<li><a class="reference external" href="../ru-ios-push-python.html">IOS Push Уведомления</a></li>
+</ol>
+<hr class="docutils" />
+<p>Настало время рассказать, как реализовать серверную поддержку <a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F_Push">Push</a> уведомлений для <a class="reference external" href="http://ru.wikipedia.org/wiki/Android">Android</a>. Эта возможность появилась
+в мобильной системе начиная с версии <strong>2.2</strong> (API8). Ниже я рассмотрю реализацию на <a class="reference external" href="http://python.org">Python</a>, но для программиста владеющего
+другими языками, не должно составить труда справиться самостоятельно.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Исходные коды для данной статьи можно увидеть по адресу: <a class="reference external" href="https://github.com/klen/klen.github.com/tree/master/_code/android-push">https://github.com/klen/klen.github.com/tree/master/_code/android-push</a></p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id7">Введение</a></h2>
+<img alt="sources/android-push1.png" src="sources/android-push1.png" />
+<p>Эта простая схема описывает работу с <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> сервисом. Ваше <a class="reference external" href="http://ru.wikipedia.org/wiki/Android">Android</a> приложение (<strong>APP</strong>) регистрируется в <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> сервисе
+(например при запуске) и отправляет полученный регистрационный код серверу (<strong>APP SERVER</strong>).</p>
+<p>Теперь сервер (<strong>APP SERVER</strong>) используя полученный регистрационный код и специальный токен может сформировать специальный
+HTTP-запрос сервису <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a>, который в свою очередь отправит <a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F_Push">Push</a> сообщение устройству на котором запущена ваша программа.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">По-умолчанию в <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> установлена квота на отсылку не более 200000 уведомлений в день.
+<a class="reference external" href="http://code.google.com/android/c2dm/quotas.html">http://code.google.com/android/c2dm/quotas.html</a></p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">Подготовка к работе</a></h2>
+<p>Для начала необходимо зарегистрировать ваше приложение в <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> по адресу: <a class="reference external" href="http://code.google.com/android/c2dm/signup.html">http://code.google.com/android/c2dm/signup.html</a></p>
+<img alt="sources/android-push2.png" src="sources/android-push2.png" />
+<p>Вам потребуется указать ваш действующий Google-аккаунт и доменное имя вашего приложения. Вы должны получить на почту письмо
+с подтверждением. После регистрации вашему приложению будет добавлена возможность получать Push-уведомления с
+учетом действующих в <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> квот.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Настройка поддержки <a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F_Push">Push</a> уведомлений на стороне приложения в данной статье не рассматривается.
+Вы можете изучить например эту статью: <a class="reference external" href="http://prodroid.com.ua/?p=66">C2DM Написание Android клиента</a></p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id9">Получение токена для сервера</a></h2>
+<p>Получение авторизационного токена для сервера подробно рассматривается в документации: <a class="reference external" href="https://developers.google.com/accounts/docs/AuthForInstalledApps">ClientLogin for Installed Applications</a>. Резюмируя данный документ: для получения токена, нам надо сформировать <strong>POST</strong> запрос со следующими параметрами:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>accountType</strong></td>
+<td>HOSTED_OR_GOOGLE</td>
+</tr>
+<tr><td><strong>Email</strong></td>
+<td><a class="reference external" href="mailto:our&#64;email.here">our&#64;email.here</a> (email аккаунта регистрировавшего C2DM)</td>
+</tr>
+<tr><td><strong>Passwd</strong></td>
+<td>our_password_here (пароль)</td>
+</tr>
+<tr><td><strong>service</strong></td>
+<td>ac2dm</td>
+</tr>
+<tr><td><strong>source</strong></td>
+<td>our.app идентификатор для логирования (например доменное имя)</td>
+</tr>
+</tbody>
+</table>
+<p>Пример запроса:</p>
+<pre class="literal-block">
+POST /accounts/ClientLogin HTTP/1.0
+Content-type: application/x-www-form-urlencoded
+
+accountType=HOSTED_OR_GOOGLE&amp;Email;=jondoe&#64;gmail.com&amp;Passwd;=north23AZ&amp;service;=cl&amp;source=Gulp-CalGulp-1.05
+</pre>
+<p>Сделать это можно например используя <a class="reference external" href="http://ru.wikipedia.org/wiki/CURL">Curl</a> (Замените <em>ACCOUNT</em>, <em>PASSWORD</em>, <em>SOURCE</em> на ваши реквизиты):</p>
+<pre class="literal-block">
+curl -X POST https://www.google.com/accounts/ClientLogin -d Email=ACCOUNT -d Passwd=PASSWORD -d source=SOURCE -d accountType=HOSTED_OR_GOOGLE -d service=ac2dm
+</pre>
+<p>В третьей строке <em>Auth=...</em> и будет ваш искомый токен. Сохраните его в надежном месте.</p>
+</div>
+<div class="section" id="push">
+<h2><a class="toc-backref" href="#id10">Отправка Push уведомлений</a></h2>
+<p>Отправка уведомлений описана в разделе: <a class="reference external" href="http://code.google.com/android/c2dm/index.html#push">How the Application Server Sends Messages</a>.
+Поддерживаются следующие параметры:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>registration_id</strong></td>
+<td>Ключ регистрации, полученный приложением от <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a> и переданный серверу приложений</td>
+</tr>
+<tr><td><strong>collapse_key</strong></td>
+<td>Название группы сообщений.</td>
+</tr>
+<tr><td><strong>Authorization: GoogleLogin auth=</strong></td>
+<td>Токен авторизации (передается в заголовке)</td>
+</tr>
+<tr><td>data.&lt;key&gt;</td>
+<td>Набор дополнительных данных в формате key-value</td>
+</tr>
+<tr><td>delay_while_idle</td>
+<td>Флаг отложенной доставки. Сообщение может быть доставлено позже.</td>
+</tr>
+</tbody>
+</table>
+<p>Этих данных достаточно, чтобы написать простой код (для работы с HTTP я использую замечательную библиотеку <a class="reference external" href="http://docs.python-requests.org/en/latest/index.html">Requests</a>):</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.settings</span> <span class="kn">import</span> <span class="n">C2DM_URL</span><span class="p">,</span> <span class="n">C2DM_TOKEN</span>
+
+
+<span class="k">class</span> <span class="nc">AndroidNotifyError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">send_notify</span><span class="p">(</span><span class="n">registration_id</span><span class="p">,</span> <span class="n">collapse_key</span><span class="o">=</span><span class="s">&quot;default&quot;</span><span class="p">,</span> <span class="n">delay_while_idle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">payloads</span><span class="p">):</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Authorization</span><span class="o">=</span><span class="s">&#39;GoogleLogin auth=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">C2DM_TOKEN</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;registration_id&#39;</span><span class="p">:</span> <span class="n">registration_id</span><span class="p">,</span>
+            <span class="s">&#39;collapse_key&#39;</span><span class="p">:</span> <span class="n">collapse_key</span><span class="p">,</span>
+            <span class="s">&#39;delay_while_idle&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">payloads</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">&quot;data.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">C2DM_URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span> <span class="ow">and</span> <span class="s">&#39;Error&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">error_type</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">AndroidNotifyError</span><span class="p">(</span><span class="n">error_type</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AndroidNotifyError</span><span class="p">(</span><span class="s">&#39;ClientLogin invalid.&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">503</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AndroidNotifyError</span><span class="p">(</span><span class="s">&#39;Service temporarily unavailable.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span>  <span class="c">#**</span>
+</pre></div>
+<p>Теперь отправлять нотификации можно так:</p>
+<div class="highlight"><pre><span class="n">send_notify</span><span class="p">(</span><span class="s">&#39;device-registration-id-here&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="n">sound</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="django">
+<h2><a class="toc-backref" href="#id11">Интеграция с Django</a></h2>
+<p>При интеграции с <a class="reference external" href="http://django-project.com">Django</a> проектом стоит подумать об асинхронности запросов в <a class="reference external" href="http://code.google.com/android/c2dm/">C2DM</a>.</p>
+<p>Асинхронность достигается использованием <a class="reference external" href="http://celeryproject.org/">Celery</a>.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">celery.decorators</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">from</span> <span class="nn">android</span> <span class="kn">import</span> <span class="n">send_notify</span>
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">ignore_result</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default_retry_delay</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_async_android_push</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">payloads</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">send_notify</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="o">**</span><span class="n">payloads</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">send_async_android_notify</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="o">**</span><span class="n">payloads</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_async_android_push</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">payloads</span><span class="p">))</span>  <span class="c"># Fix rst**</span>
+</pre></div>
+<p>Мысли на будущее: отключение недействительных устройств, массовые рассылки и проверка доставки.</p>
+</div>
+
+        </div>
+
+                
+                <g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="create-python-packages-ru.html" class="article_paginator_right_link">Создание python-пакетов (aka setup scripts)</a> Ctrl→
+                </div>                <div class="article_paginator_left">
+                    ←Ctrl <a href="ios-push-python-ru.html" class="article_paginator_left_link">Серверная реализация IOS Push уведомлений (python)</a>
+                </div></div>
+    </article>
+
+            <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'android-push-python';
+        var disqus_url = 'http://klen.github.com/android-push-python-ru.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2012 Kirill Klenov
+        &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about.html">About me</a>
+                    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script>    <div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

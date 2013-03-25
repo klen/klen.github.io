@@ -1,0 +1,17 @@
+Платон «Диалоги»
+################
+
+:category: Books
+:date: 2013-02-04
+:lang: ru
+:slug: books-dp
+:preview: sources/books/dp.jpg
+
+.. image:: sources/books/dp.jpg
+    :class: book_preview
+
+Приключения Сократа — величайшего тролля в истории.
+Хорошая разминка для ума и юмористическое чтиво, да простят
+меня ценители Платона.
+                                                             
+**(7/10)** | `http://psylib.org.ua <http://psylib.org.ua/books/plato01/index.htm>`_

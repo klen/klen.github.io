@@ -1,0 +1,31 @@
+.social {
+
+    margin: 0;
+
+    &_item {
+
+        @include z-clearfix;
+        margin-bottom: 1em;
+
+        &_icon {
+
+            @include z-float;
+
+            margin-right: 10px
+
+        }
+
+        &_title {
+            font: {
+                size: 1.5em;
+                weight: bold;
+            }
+        }
+
+        &_info {
+            color: #808080;
+            margin: 0;
+        }
+    }
+
+}

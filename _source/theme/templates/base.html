@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="{{ AUTHOR }}" />
+        <meta name="keywords" content="{% block keywords %}kirill klenov, klen, horneds, python, django, vim{%endblock%}" />
+        <meta name="description" content="{% block description %}Kirill Klenov, klen, horneds{%endblock%}" />
+
+        <meta name="application-name" content="{{ SITENAME }}" />
+        <meta name="application-url" content="{{ SITEURL }}" />
+        <meta name='yandex-verification' content="{{ YANDEX_VERIFICATION }}"/>
+        <meta name="google-site-verification" content="{{ GOOGLE_VERIFICATION }}" />
+
+        <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+
+        <link href="{{ SITEURL }}/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+        {# Feed -#}
+        {% if FEED_URL -%}
+            <link rel="alternate" type="application/atom+xml" title="{{ FEED_TITLE }}" href="{{ FEED_URL }}"> 
+        {% endif -%}
+
+        {# OpenID -#}
+        {% if MYOPENID_IDENTIFICATOR -%}
+        <link rel="openid.server" href="http://www.myopenid.com/server"> 
+        <link rel="openid.delegate" href="http://{{ MYOPENID_IDENTIFICATOR }}.myopenid.com/"> 
+        <link rel="openid2.local_id" href="http://{{ MYOPENID_IDENTIFICATOR }}.myopenid.com/"> 
+        <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+        <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username={{ MYOPENID_IDENTIFICATOR }}.myopenid.com"> 
+        {%- endif %}
+    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href={{ SITEURL }}>{{ SITENAME }}</a>
+        </h1>
+
+        <nav class="menu">
+            {%- if DISPLAY_PAGES_ON_MENU -%}
+                {%- for p in PAGES -%}
+                    {%- if page == p %}
+            <b class="menu_item">{{ p.title }}</b>
+                    {%- else %}
+            <a class="menu_item menu_link" href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+                    {%- endif -%}
+                {%- endfor -%}
+            {%- endif -%}
+
+            {%- for cat, null in categories -%}
+                {%- if category == cat and not article %}
+            <b class="menu_item">{{ cat }}</b>
+                {%- else %}
+            <a class="menu_item menu_link" href="{{ SITEURL }}/category/{{ cat }}.html">{{ cat }}</a>
+                {%- endif -%}
+            {%- endfor %}
+        </nav>
+
+        <div class="content">
+
+            {# Google custom search #}
+            {% include "_gsearch.html" %}
+
+            {% block content %}{% endblock %}
+
+            {#- Social share -#}
+            {% include "_share.html" %}
+        </div>
+
+    <a class="github" href="{{ GITHUB_IDENTIFICATOR }}"><img src="{{ SITEURL }}/static/ForkMe_Wht.png" alt="alt"/></a>
+
+    {#- Footer #}
+    <footer class="footer">
+        © 2011–2012 Kirill Klenov
+        {% for p in PAGES %}&nbsp;&nbsp;|&nbsp;&nbsp;{% if page == p %}
+            <b>{{ p.title }}</b>
+        {% else %}
+            <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="{{ SITEURL }}/theme/_main.js"></script>
+
+    {#- Metrika #}
+    {% include '_metrika.html' %}
+
+    {#- Analytics #}
+    {% include '_ganal.html' %}
+
+</body>
+</html>

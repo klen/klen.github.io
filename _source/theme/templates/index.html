@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %} 
+
+    <!-- <h1 class="content_title">My online</h1> -->
+    <ul class="social">
+
+        <!-- RSS -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="{{ FEED_URL }}"><img src="theme/images/icons/rss.png"></a> 
+            </div> 
+            <a class="social_item_title" href="./archives.html">Blog in Russian</a> 
+            {% for a in dates[:2] %}
+                <p class="social_item_info">
+                    <time datetime="{{ a.date }}">{{ a.date.strftime('%d.%m.%Y') }}</time>
+                    <a href="{{ a.url }}">{{ a.title }}</a>
+                </p>
+            {% endfor %}
+        </li>
+
+        <!-- Twitter -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="http://twitter.com/horneds"><img src="theme/images/icons/twitter.png"></a> 
+            </div> 
+            <a class="social_item_title" href="http://twitter.com/horneds">Twitter</a> 
+            <p class="twitter zeta social_item_info">
+            </p>
+        </li>
+
+        <!-- Facebook -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="http://facebook.com/horneds"><img src="theme/images/icons/facebook.png"></a> 
+            </div> 
+            <a class="social_item_title" href="http://facebook.com/horneds">Facebook</a> 
+            <p class="social_item_info"> Im in biggest social network. </p>
+        </li>
+
+        <!-- Linkedin -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="http://www.linkedin.com/profile/view?id=27707936"><img src="theme/images/icons/linkedin.png"></a> 
+            </div> 
+            <a class="social_item_title" href="http://www.linkedin.com/profile/view?id=27707936">Linkedin</a> 
+            <p class="social_item_info"> Im in biggest professional social network. </p>
+        </li>
+
+        <!-- Vkontakte -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="http://vk.com/horneds"><img src="theme/images/icons/vk.png"></a> 
+            </div> 
+            <a class="social_item_title" href="http://vk.com/horneds">Vkontakte</a> 
+            <p class="social_item_info"> Im in biggest social network in Russia. </p>
+        </li>
+
+        <!-- Github -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="http://github.com/klen"><img src="theme/images/icons/github.png"></a> 
+            </div> 
+            <a class="social_item_title" href="http://github.com/klen">Github</a> 
+            <p class="social_item_info">My opensource projects</p>
+            <ul style="clear:both;margin-left:58px;">
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/makesite">Makesite</a> — system for deploying and managing sites.
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/zeta-library">Zetalibrary</a> — tool allows to create, collect and pack css, scss, js files much easier.
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/python-mode">Python-mode</a> — powerfull vim-plugin for python programmers
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/python-scss">Python-scss</a> — SCSS compiler for Python.
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/adrest">Django-ADREST</a> — Another Django REST Framework
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/django-gitrevision">Django-gitrevision</a> — use git last head commit hexstring in views and templates
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/django_markdown">Django-markdown</a> — markdown support in Django
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/django-netauth">Django-netauth</a> — authenticate users use openid and oauth
+                </li>
+                <li class="social_item_info">And etc.</li>
+            </ul>
+        </li>
+    </ul>
+
+{% endblock content %}

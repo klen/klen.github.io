@@ -1,0 +1,17 @@
+Андрей Н. Латков «КНДР вчера и сегодня»
+#######################################
+
+:category: Books
+:date: 2013-02-10
+:lang: ru
+:slug: books-kndr
+:preview: sources/books/kndr.jpg
+
+.. image:: sources/books/kndr.jpg
+    :class: book_preview
+
+Хроника становления одной из самых гипертрофированных диктатур мира.
+Сухие факты, цифры и комментарии.
+                                                             
+
+**(8/10)** | `http://lib.ru <http://lib.ru/EMIGRATION/LANKOV/n-korea.txt>`_

@@ -1,0 +1,57 @@
+Filler. Пример простой игры на Canvas.
+######################################
+
+:category: Notes
+:date: 2012-04-01
+:lang: ru
+:slug: filler
+:tags: canvas, javascript, filler, libcanvas, atomjs
+
+.. note:: Canvas_ HTML API для отрисовки графики. Поддерживается всеми
+            **современными** браузерами (в IE начиная с 9й версии)
+
+Для изучения Canvas_ решил написать что-нибудь на JavaScript_, с которым я 
+практически никогда не работал. В качестве задачи, выбрал реализацию простой игры
+по захвату поля, которая в наших интернетах называется **Filler**.
+
+В процессе разработки использовал отличные библиотеки AtomJS_ и LibCanvas_ от
+TheShock_. Инструменты понравились и всячески рекомендуются к применению.
+Выражаю огромную благодарность автору за работу.
+
+Результат вы можете опробовать ниже. Цель игры захватить большинство клеток,
+меняя свой цвет. Игра начнется по клику на поле. Управлять можно также контролами снизу.
+Для начала новой игры, перезагрузите страницу.
+
+Боты довольно слабенькие, код довольно грязный. Нет поддержки тача (добавлю).
+Но в первом приближении другого и не требовалось.
+
+Исходники доступны на гитхабе: https://github.com/klen/filler
+
+.. raw:: html
+
+    <div class="filler"></div>
+    <style>
+        .filler { background: #000; width: 760px; margin: 0 auto; padding: 10px 0;}
+        .filler div { margin: 0 auto; }
+    </style>
+    <script src="../theme/other/filler.js" type="text/javascript"></script>
+    <script>atom.dom(function(){
+            window.game = new Filler.Game({
+                appendTo: '.filler',
+                engineSize: new Point(25,20) });
+        });
+    </script>
+
+
+Ссылки:
+
+* `Обучение canvas <https://developer.mozilla.org/ru/%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_canvas>`_
+* `Canvas FAQ <http://habrahabr.ru/post/119772/>`_
+* `Основы LibCanvas <http://habrahabr.ru/post/121046/>`_
+
+
+.. _Canvas: http://ru.wikipedia.org/wiki/Canvas_(HTML)
+.. _JavaScript: http://ru.wikipedia.org/wiki/JavaScript
+.. _TheShock: https://github.com/theshock
+.. _AtomJS: https://github.com/theshock/atomjs
+.. _LIBCanvas: https://github.com/theshock/libcanvas

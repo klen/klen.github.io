@@ -1,0 +1,18 @@
+Фредерик Пол «Человек Плюс»
+###########################
+
+:category: Books
+:date: 2013-02-13
+:lang: ru
+:slug: books-plus
+:preview: sources/books/plus.jpg
+
+.. image:: sources/books/plus.jpg
+    :class: book_preview
+
+
+Циничная история «киборгизации» рядового американского космонавта.
+Конец достоин сюжета.
+                                                             
+
+**(9/10)** | `http://www.lib.ru <http://www.lib.ru/INOFANT/POL/manplus.txt_with-big-pictures.html>`_

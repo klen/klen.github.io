@@ -1,0 +1,19 @@
+Real World Haskell
+##################
+
+:category: Books
+:date: 2011-03-01
+:lang: ru
+:slug: books-HIRW
+:preview: sources/books/hirw.jpg
+
+.. image:: sources/books/hirw.jpg
+    :class: book_preview
+
+Отличная книга для изучения **Haskell**. Быстрый переход от основ к
+практическому применению.
+
+Очень полезно прочитать для расширения сознания и программистам работающим с
+императивными языками.
+
+**(9/10)** | http://book.realworldhaskell.org/

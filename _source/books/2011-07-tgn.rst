@@ -1,0 +1,15 @@
+Михаил Успенский, «Там, где нас нет»
+####################################
+
+:category: Books
+:date: 2011-07-01
+:lang: ru
+:slug: books-tgn
+:preview: sources/books/tgn.jpg
+
+.. image:: sources/books/tgn.jpg
+    :class: book_preview
+
+Русское шансон-фэнтази с претензией на юмор. Не моё.
+
+**(5/10)** | http://lib.rus.ec/b/77726

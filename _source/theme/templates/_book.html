@@ -1,0 +1,10 @@
+<script type="text/javascript" src="//www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("books", "0");
+    function initialize() {
+        var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+        viewer.load('{{ article.books }}');
+    }
+    google.setOnLoadCallback(initialize);
+</script>
+<div id="viewerCanvas" style="width: 720px; height: 600px;"></div>

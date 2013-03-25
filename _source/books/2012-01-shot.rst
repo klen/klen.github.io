@@ -1,0 +1,16 @@
+Стивен Хокинг, «Кратчайшая история времени»
+###########################################
+
+:category: Books
+:date: 2012-01-20
+:lang: ru
+:slug: books-shot
+:preview: sources/books/shot.jpg
+
+.. image:: sources/books/shot.jpg
+    :class: book_preview
+
+Абсолютный бестселлер от Хокинга. Теории относительности и струн, многомерность
+вселенной, квантовая механика — описанные человеческим языком.
+
+**(10/10)** | `http://www.ozon.ru <http://www.ozon.ru/context/detail/id/3599916/?partner=klen>`_

@@ -1,0 +1,15 @@
+Аркадий и Борис Стругацкие «Град обреченный»
+############################################
+
+:category: Books
+:date: 2013-02-03
+:lang: ru
+:slug: books-lc
+:preview: sources/books/lc.jpg
+
+.. image:: sources/books/lc.jpg
+    :class: book_preview
+
+Моя любимейшая книга у Стругацких. Очень ценю Атмосферу этого произведения.
+                                                             
+**(10/10)** | `http://www.rusf.ru <http://www.rusf.ru/abs/books/go00.htm>`_

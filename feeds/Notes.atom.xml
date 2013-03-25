@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.com</title><link href="http://klen.github.com/" rel="alternate"></link><link href="http://klen.github.com/feeds/Notes.atom.xml" rel="self"></link><id>http://klen.github.com/</id><updated>2012-09-02T00:00:00+04:00</updated><entry><title>Pylama — аудит python-кода</title><link href="http://klen.github.com/pylama-ru.html" rel="alternate"></link><updated>2012-09-02T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-09-02:pylama-ru.html</id><summary type="html">&lt;p&gt;Процесс &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F"&gt;непрерывной интеграции&lt;/a&gt; программных продуктов всегда был очень
+важен для разработке. В моем случае я не ограничеваюсь только тестированием
+(юнит или интеграционным), но также провожу и интроспекцию кода на соответствие
+стандартам или например ограничение логической вложенности.&lt;/p&gt;
+&lt;p&gt;Во-втором случае код моих проектов автоматически прогоняется через ряд
+утилит: &lt;strong&gt;pyflakes&lt;/strong&gt;, &lt;strong&gt;pep8&lt;/strong&gt;, &lt;strong&gt;mccabe&lt;/strong&gt;, &lt;strong&gt;pylint&lt;/strong&gt;. Какое то время
+я использовал &lt;a class="reference external" href="http://pypi.python.org/pypi/flake8/"&gt;Flake8&lt;/a&gt; сочетающую в себе все эти линтеры. Но потом его
+возможностей мне стало не хватать. Схожий функционал уже был мной разработан
+для &lt;a class="reference external" href="https://github.com/klen/python-mode"&gt;python-mode&lt;/a&gt;, поэтому я вынес его в отдельный модуль.
+Так появился &lt;a class="reference external" href="http://pypi.python.org/pypi/pylama/"&gt;Pylama&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://pypi.python.org/pypi/pylama/"&gt;Pylama&lt;/a&gt; это утилита для проверки python-кода схожая с &lt;a class="reference external" href="http://pypi.python.org/pypi/flake8/"&gt;Flake8&lt;/a&gt;, но обладающая
+рядом улучшений.&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;Установка&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pip install pylama
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;Использование&lt;/h2&gt;
+&lt;p&gt;Рекурсивная проверка текущей диектории:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Игнорировать определенные типы (группы типов) ошибок:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama -i W,E501
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Изменение набора линтеров:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama -l &amp;quot;pep8,mccabe&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;Опции&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama --help
+
+usage: pylama [-h] [--ignore IGNORE] [--verbose] [--select SELECT]
+            [--linters LINTERS] [--complexity COMPLEXITY] [--skip SKIP]
+            [path]
+
+Code audit tool for python.
+
+positional arguments:
+path                  Path on file or directory.
+
+optional arguments:
+-h, --help            show this help message and exit
+--ignore IGNORE, -i IGNORE
+                        Ignore errors and warnings.
+--verbose, -v         Verbose mode.
+--select SELECT, -s SELECT
+                        Select errors and warnings.
+--linters LINTERS, -l LINTERS
+                        Select errors and warnings.
+--complexity COMPLEXITY, -c COMPLEXITY
+                        Set mccabe complexity.
+--skip SKIP           Skip files (Ex. messages.py)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pylama"&gt;
+&lt;h2&gt;Переключение настроек pylama из файла&lt;/h2&gt;
+&lt;p&gt;В любом python-файле вы можете установить опции проверки для pylama.
+Они будут установлены только для данного файла.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="err"&gt;Где&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;то&lt;/span&gt; &lt;span class="err"&gt;в&lt;/span&gt; &lt;span class="err"&gt;коде&lt;/span&gt;
+&lt;span class="c"&gt;# Игнорировать все Warnings кроме W301&lt;/span&gt;
+&lt;span class="c"&gt;# lint_ignore=W:lint_select=W301&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Для выключения проверки текущего файла:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# lint=0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Разработка &lt;a class="reference external" href="http://pypi.python.org/pypi/pylama/"&gt;pylama&lt;/a&gt; ведется на Github: &lt;a class="reference external" href="http://github.com/klen/pylama"&gt;http://github.com/klen/pylama&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="pep8"></category><category term="pyflakes"></category><category term="mccabe"></category></entry><entry><title>Pyradio — простой консольный радиоплеер</title><link href="http://klen.github.com/pyradio-ru.html" rel="alternate"></link><updated>2012-09-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-09-01:pyradio-ru.html</id><summary type="html">&lt;img alt="sources/pyradio.png" src="sources/pyradio.png" /&gt;
+&lt;p&gt;Очень простой клиент для прослушивания онлайн-радиостанций. Ничего лишнего.&lt;/p&gt;
+&lt;p&gt;Автор оригинального проекта, прекратил его поддержку длительное время назад
+и пока не выходит на связь.&lt;/p&gt;
+&lt;p&gt;Я исправил ошибки, доработал консольный клиент и собрал пакет для PYPI.
+Теперь можно просто ввести:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo pip install pyradio
+pyradio -p 15
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;На самом деле вам еще понадобиться установленный mplayer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;И слушать музыку.&lt;/p&gt;
+</summary><category term="python"></category><category term="radio"></category></entry><entry><title>Полезности для GIT</title><link href="http://klen.github.com/some-git-things-ru.html" rel="alternate"></link><updated>2012-07-19T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-07-19:some-git-things-ru.html</id><summary type="html">&lt;p&gt;Алиас для более компактного &lt;cite&gt;git status&lt;/cite&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.st &amp;#39;status -sb&amp;#39;
+$ git st
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Алиас для редактирования последнего коммита:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.amend &amp;#39;commit --amend -C HEAD&amp;#39;
+$ git amend
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Алиас для отмены последнего коммита:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.undo &amp;#39;reset --soft HEAD^&amp;#39;
+$ git undo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Предпочитаемый мной вывод &lt;cite&gt;diff&lt;/cite&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.diff &amp;#39;diff --word-diff&amp;#39;
+$ git undo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;«Визуальная» история веток в консоли:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.hist &amp;quot;log --pretty=format:&amp;#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&amp;#39; --graph --date=short&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Удобная работа с &lt;a class="reference external" href="https://github.com/nvie/gitflow/"&gt;Git-Flow&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.hotfix &amp;#39;flow hotfix&amp;#39;
+$ git config --global alias.feature &amp;#39;flow feature&amp;#39;
+$ git config --global alias.release &amp;#39;flow release&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Автоматическая коррекция опечаток во вводимых командах:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global help.autocorrect 1
+$ git comit
+$ git bronch
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Автоматическая запись разрешенных мердж конфликтов, для будущего использования:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global rerere.enabled 1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Получение веток с не влитыми данными:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git branch --no-merged
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Список коммитов в ветке &lt;em&gt;branchA&lt;/em&gt; отсуствующих в ветке &lt;em&gt;branchB&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ git log branchA ^branchB
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Многие используют баш функцию &lt;cite&gt;__git_ps1&lt;/cite&gt; для вывода названия текущей ветки,
+но не все знают, что ее можно сделать более информативной.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# In your .bashrc or .profile:
+
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+
+    $ (develop *$):
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="git"></category></entry><entry><title>PyServe. Веб-сервер одной командой</title><link href="http://klen.github.com/pyserve-ru.html" rel="alternate"></link><updated>2012-06-14T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-06-14:pyserve-ru.html</id><summary type="html">&lt;p&gt;Иногда возникает необходимость быстро запустить веб-сервер
+нацеленный на содержимое локальной директории.&lt;/p&gt;
+&lt;p&gt;При установленном python это делается буквально в одну строку.&lt;/p&gt;
+&lt;p&gt;Для python версий 2.*:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ python -m SimpleHTTPServer
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Для python версий 3.*:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ python -m http.server
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Я часто пользовался этой функциональностью, например при отладке standalone HTML
+приложений работающих с удаленными API. В какой то момент мне захотелось большего:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Одинаковый синтаксис для python 2 и 3 версий;&lt;/li&gt;
+&lt;li&gt;Возможность отключения &amp;quot;автоиндекса&amp;quot; для директорий (игнорирование index.html);&lt;/li&gt;
+&lt;li&gt;Возможность указания IP-адреса сервера (шаринг в сети);&lt;/li&gt;
+&lt;li&gt;Возможность скрытия системных файлов;&lt;/li&gt;
+&lt;li&gt;Более приятный внешний вид при выводе каталога директории;&lt;/li&gt;
+&lt;li&gt;Возможность указания пути к директории (не только текущей);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Так появился пакет &lt;a class="reference external" href="https://github.com/klen/pyserve"&gt;PyServe&lt;/a&gt;.&lt;/p&gt;
+&lt;img alt="sources/pyserve.png" src="sources/pyserve.png" /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ pip install pyserve
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
+в установке. Теперь независимо от версии python вы можете запустить сервер одной командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ serve
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="python"></category><category term="http"></category></entry><entry><title>Filler. Пример простой игры на Canvas.</title><link href="http://klen.github.com/filler-ru.html" rel="alternate"></link><updated>2012-04-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-04-01:filler-ru.html</id><summary type="html">&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;&lt;a class="reference external" href="http://ru.wikipedia.org/wiki/Canvas_(HTML)"&gt;Canvas&lt;/a&gt; HTML API для отрисовки графики. Поддерживается всеми
+&lt;strong&gt;современными&lt;/strong&gt; браузерами (в IE начиная с 9й версии)&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Для изучения &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/Canvas_(HTML)"&gt;Canvas&lt;/a&gt; решил написать что-нибудь на &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/JavaScript"&gt;JavaScript&lt;/a&gt;, с которым я
+практически никогда не работал. В качестве задачи, выбрал реализацию простой игры
+по захвату поля, которая в наших интернетах называется &lt;strong&gt;Filler&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;В процессе разработки использовал отличные библиотеки &lt;a class="reference external" href="https://github.com/theshock/atomjs"&gt;AtomJS&lt;/a&gt; и &lt;a class="reference external" href="https://github.com/theshock/libcanvas"&gt;LibCanvas&lt;/a&gt; от
+&lt;a class="reference external" href="https://github.com/theshock"&gt;TheShock&lt;/a&gt;. Инструменты понравились и всячески рекомендуются к применению.
+Выражаю огромную благодарность автору за работу.&lt;/p&gt;
+&lt;p&gt;Результат вы можете опробовать ниже. Цель игры захватить большинство клеток,
+меняя свой цвет. Игра начнется по клику на поле. Управлять можно также контролами снизу.
+Для начала новой игры, перезагрузите страницу.&lt;/p&gt;
+&lt;p&gt;Боты довольно слабенькие, код довольно грязный. Нет поддержки тача (добавлю).
+Но в первом приближении другого и не требовалось.&lt;/p&gt;
+&lt;p&gt;Исходники доступны на гитхабе: &lt;a class="reference external" href="https://github.com/klen/filler"&gt;https://github.com/klen/filler&lt;/a&gt;&lt;/p&gt;
+&lt;div class="filler"&gt;&lt;/div&gt;
+&lt;style&gt;
+    .filler { background: #000; width: 760px; margin: 0 auto; padding: 10px 0;}
+    .filler div { margin: 0 auto; }
+&lt;/style&gt;
+&lt;script src="../theme/other/filler.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script&gt;atom.dom(function(){
+        window.game = new Filler.Game({
+            appendTo: '.filler',
+            engineSize: new Point(25,20) });
+    });
+&lt;/script&gt;&lt;p&gt;Ссылки:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://developer.mozilla.org/ru/%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_canvas"&gt;Обучение canvas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://habrahabr.ru/post/119772/"&gt;Canvas FAQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://habrahabr.ru/post/121046/"&gt;Основы LibCanvas&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</summary><category term="canvas"></category><category term="javascript"></category><category term="filler"></category><category term="libcanvas"></category><category term="atomjs"></category></entry><entry><title>Flask. Примеры opensource проектов</title><link href="http://klen.github.com/notes-flask-opensource-ru.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-02-18:notes-flask-opensource-ru.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; — легковесный веб-фреймворк для python. Создатель стремится сделать его
+простым, легким в освоении для новичков и легко расширяемым.&lt;/p&gt;
+&lt;p&gt;Ядро микрофреймворка содержит следующие возможности:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Сервер для разработки и дебаггер;&lt;/li&gt;
+&lt;li&gt;Поддержка unit тестов;&lt;/li&gt;
+&lt;li&gt;RESTfull request routing;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Jinja_(template_engine)"&gt;Jinja2&lt;/a&gt; шаблоны;&lt;/li&gt;
+&lt;li&gt;Сессии;&lt;/li&gt;
+&lt;li&gt;100% совместимость с &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/WSGI"&gt;WSGI&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;Поддержка Unicode;&lt;/li&gt;
+&lt;li&gt;Хорошая документация;&lt;/li&gt;
+&lt;li&gt;Совместимость с &lt;a class="reference external" href="GAE"&gt;Google App Engine&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;Лёгкая расширяемость.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Лучшие способ освоить новую библиотеку — прочитать документацию и
+изучить хорошие примеры. Несколько открытых проектов на &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; я и собрал ниже.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://hg.rafaelmartins.eng.br/blohg/"&gt;http://hg.rafaelmartins.eng.br/blohg/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/j4mie/brightonpy.org"&gt;https://github.com/j4mie/brightonpy.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/dcolish/Cockerel"&gt;https://github.com/dcolish/Cockerel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://bitbucket.org/xoraxax/domination"&gt;https://bitbucket.org/xoraxax/domination&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/lincolnloop/emailed-me"&gt;https://github.com/lincolnloop/emailed-me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/mitsuhiko/flask-feedback"&gt;https://github.com/mitsuhiko/flask-feedback&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/mitsuhiko/flask-pastebin"&gt;https://github.com/mitsuhiko/flask-pastebin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/sharms/HomePage"&gt;https://github.com/sharms/HomePage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/kennethreitz/httpbin"&gt;https://github.com/kennethreitz/httpbin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/riquellopes/micro-blog"&gt;https://github.com/riquellopes/micro-blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/sfermigier/Planet-GTLL.git"&gt;https://github.com/sfermigier/Planet-GTLL.git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://bitbucket.org/leafstorm/ryshcate"&gt;https://bitbucket.org/leafstorm/ryshcate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/eugenkiss/Simblin.git"&gt;https://github.com/eugenkiss/Simblin.git&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Если вам известны другие хорошие примеры, я с удовольствием добавлю их в этот
+список.&lt;/p&gt;
+</summary><category term="flask"></category></entry><entry><title>Ссылки и заметки</title><link href="http://klen.github.com/notes-welcome-ru.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-02-18:notes-welcome-ru.html</id><summary type="html">&lt;p&gt;Новый дизайн сайта и новая рубрика «Заметки». Формат полноценной статьи не
+всегда удобен когда хочется поделиться мыслями или найденной в интернете
+информацией. Для этих целей и предназначен данный раздел.&lt;/p&gt;
+</summary><category term="notes"></category></entry></feed>

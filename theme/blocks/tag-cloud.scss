@@ -1,0 +1,27 @@
+.tag-cloud {
+
+    margin: 1.5em 0;
+    background: #f5f4ed;
+    padding: 15px;
+    @include z-round(5px);
+
+    &_item {
+        display: inline;
+        margin-right: 15px;
+    }
+
+    &_active {
+        background: #000;
+        a {
+            color: #fff;
+            padding: 2px;
+        }
+    }
+
+    &_6 { font-size: 12px; }
+    &_5 { font-size: 14px; }
+    &_4 { font-size: 16px; }
+    &_3 { font-size: 18px; }
+    &_2 { font-size: 20px; }
+    &_1 { font-size: 22px; }
+}

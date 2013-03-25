@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="javascript,jsonp," />
+        <meta name="description" content="Простейшая реализация протокола JSONP" />
+
+        <meta name="application-name" content="klen.github.com" />
+        <meta name="application-url" content="." />
+        <meta name='yandex-verification' content="6a6ba8237dcc1d3e"/>
+        <meta name="google-site-verification" content="PhpguXH83A1Tir-QHZRoJYOO5FF5Tfwmqqo85NFtdSI" />
+
+        <title>Простейшая реализация протокола JSONP — klen.github.com</title>
+
+        <link href="./theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+        <link rel="alternate" type="application/atom+xml" title="klen.github.com -- all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+        <link rel="openid.server" href="http://www.myopenid.com/server"> 
+        <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+        <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+        <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.>klen.github.com</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about.html">About me</a>            <a class="menu_item menu_link" href="./category/Blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/Books.html">Books</a>            <a class="menu_item menu_link" href="./category/Notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+                        <div id="cse" style="width: 100%; min-height:50px">&nbsp;</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('003167765861847606641:vmsxpc2lubo');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+            <article class="article">
+
+                <header class="article_header">
+            <time class="article_header_time" datetime="2011-07-05 00:00:00">05.07.2011</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Простейшая реализация протокола JSONP</h1><span class="article_meta">tags: <span><a href="./tag/javascript.html">javascript</a> , </span> <span><a href="./tag/jsonp.html">jsonp</a> </span> </span></header>
+
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="tornadio_socket-io-ru.html" class="article_paginator_right_link">Создание сервера оповещений с использованием Tornado и Socket.IO</a> Ctrl→
+                </div>                <div class="article_paginator_left">
+                    ←Ctrl <a href="git-revision-ru.html" class="article_paginator_left_link">Django-gitrevision, автоматическое обновление статики на клиенте</a>
+                </div></div>
+
+                <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id4">Пример в действии:</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Когда в веб-проекте необходимы кроссдоменные <a class="reference external" href="http://en.wikipedia.org/wiki/JSONP">JSONP</a> запросы, а подключать
+javascript фреймворки не хочется, можно воспользоваться этой простейшей
+реализацией:</p>
+<div class="highlight"><pre><span class="c1">// simplest JSONP request implementation</span>
+<span class="kd">function</span> <span class="nx">jsonp</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;jsonp&quot;</span> <span class="o">+</span>  <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">,</span>
+        <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">),</span>
+        <span class="nx">head</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nb">window</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
+    <span class="nx">script</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/=\?/</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="nx">head</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">script</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>Пример использования (получение информации о пользователе с использованием API twitter.com):</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="s2">&quot;http://api.twitter.com/1/statuses/user_timeline.json?screen_name=horneds&amp;count=2&amp;callback=?&quot;</span>
+
+<span class="nx">jsonp</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">});</span>
+</pre></div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id4">Пример в действии:</a></h2>
+<p>Изменяйте значение поля ниже, на логин пользователя в твиттере, чтобы загрузить
+изображение его профиля.</p>
+<img src="#" id="img"/>
+<br/>
+<input value="horneds" onchange="get_image(this.value)" />
+<script>
+    // simplest JSONP request implementation
+    function jsonp (url, callback) {
+        var name = 'jsonp' +  + new Date,
+            script = document.createElement('script'),
+            head = document.getElementsByTagName('head')[0];
+        window[name] = callback;
+        script.src = url.replace(/=\?/, '=' + name);
+        head.insertBefore(script, head.firstChild);
+    }
+    var link = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=horneds&count=2&callback=?"
+
+    function my_callback( data ) {
+        alert(data);
+    }
+
+    var image = document.getElementById('img');
+
+    function get_image( value ) {
+        var link = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=" + value + "&count=2&callback=?";
+        jsonp(link, function (data) {
+            image.src = data[0].user.profile_image_url;
+        });
+    }
+
+    get_image( 'horneds' );
+</script></div>
+
+        </div>
+
+                
+                <g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+                <div class="article_paginator zeta">                <div class="article_paginator_right">
+                    <a href="tornadio_socket-io-ru.html" class="article_paginator_right_link">Создание сервера оповещений с использованием Tornado и Socket.IO</a> Ctrl→
+                </div>                <div class="article_paginator_left">
+                    ←Ctrl <a href="git-revision-ru.html" class="article_paginator_left_link">Django-gitrevision, автоматическое обновление статики на клиенте</a>
+                </div></div>
+    </article>
+
+            <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'simple-jsonp';
+        var disqus_url = 'http://klen.github.com/simple-jsonp-ru.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2012 Kirill Klenov
+        &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about.html">About me</a>
+                    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script>    <div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

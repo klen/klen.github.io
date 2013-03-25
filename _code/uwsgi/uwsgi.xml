@@ -1,0 +1,33 @@
+<!-- UWSGI XML Configuration File -->
+<uwsgi>
+
+    <!-- Сокет для передачи данных -->
+    <socket>/home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.sock</socket>
+
+    <!-- Путь к виртуальному окружению -->
+    <!-- <home>/home/klen/Projects/klen.github.com/_code/uwsgi/.virtualenv</home> -->
+
+    <!-- Дополнительный python-путь -->
+    <pythonpath>/home/klen/Projects/klen.github.com/_code/uwsgi</pythonpath>
+
+    <!-- Модуль python с определением wsgi приложения -->
+    <module>wsgi</module>
+
+    <!-- Количество процессов -->
+    <processes>10</processes>
+
+    <!-- Максимальное количество соединений для каждого процесса -->
+    <max-requests>5000</max-requests>
+
+    <!-- Максимальный размер запроса -->
+    <buffer-size>32768</buffer-size>
+
+    <!-- Убивать каждое соединение требующее больше 30 сек для обработки -->
+    <harakiri>30</harakiri>
+
+    <reload-mercy>8</reload-mercy>
+    <master />
+    <no-orphans />
+
+</uwsgi>
+
