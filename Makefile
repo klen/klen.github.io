@@ -1,5 +1,5 @@
-ENV = $(CURDIR)/.env
-PYTHON = $(ENV)/bin/python
+VIRTUALENV=$(shell echo "$${VDIR:-'.env'}")
+PYTHON = $(VIRTUALENV)/bin/python
 PELICAN = $(PYTHON) $(CURDIR)/pelican
 SOURCE_DIR = $(CURDIR)/_source
 SETTINGS = $(SOURCE_DIR)/settings.py
@@ -9,11 +9,11 @@ BOOK_DIR = $(THEME_DIR)/static/images/sources/books
 
 all: compile
 
-$(ENV): requirements.txt
-	virtualenv .env --no-site-packages
-	$(ENV)/bin/pip install -r requirements.txt
+$(VIRTUALENV): requirements.txt
+	virtualenv $(VIRTUALENV) --no-site-packages
+	$(VIRTUALENV)/bin/pip install -r requirements.txt
 
-clean: $(ENV)
+clean: $(VIRTUALENV)
 	mv 404.html 404.bak
 	rm -rf *.html category feeds tag theme pages author
 	mv 404.bak 404.html
@@ -27,7 +27,7 @@ compile: clean index.html theme/_main.css books
 books:
 	mogrify -format jpg -background black -gravity center -thumbnail '100x150>' -extent 100x150 $(BOOK_DIR)/*.jpg
 
-index.html: $(ENV)
+index.html: $(VIRTUALENV)
 	$(PELICAN) $(SOURCE_DIR) -o $(CURDIR) -s $(SETTINGS) -t $(THEME_DIR) -v
 
 theme/_main.css: theme
