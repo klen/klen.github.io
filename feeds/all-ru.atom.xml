@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.com</title><link href="http://klen.github.com/" rel="alternate"></link><link href="http://klen.github.com/feeds/all-ru.atom.xml" rel="self"></link><id>http://klen.github.com/</id><updated>2012-09-02T00:00:00+04:00</updated><entry><title>Pylama — аудит python-кода</title><link href="http://klen.github.com/pylama-ru.html" rel="alternate"></link><updated>2012-09-02T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-09-02:pylama-ru.html</id><summary type="html">&lt;p&gt;Процесс &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F"&gt;непрерывной интеграции&lt;/a&gt; программных продуктов всегда был очень
+<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.com</title><link href="http://klen.github.com/" rel="alternate"></link><link href="http://klen.github.com/feeds/all-ru.atom.xml" rel="self"></link><id>http://klen.github.com/</id><updated>2013-04-04T00:00:00+04:00</updated><entry><title>OSX - Программы которые я использую</title><link href="http://klen.github.com/mac-ru.html" rel="alternate"></link><updated>2013-04-04T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2013-04-04:mac-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
+&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title first"&gt;Содержание:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id11"&gt;Джентльменский набор&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#xtrafinder" id="id12"&gt;XtraFinder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#xee" id="id13"&gt;Xee&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#vlc" id="id14"&gt;VLC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#transmission" id="id15"&gt;Transmission&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#apptrap" id="id16"&gt;AppTrap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#deegres" id="id17"&gt;Deegres&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#iterm2" id="id18"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#face2face" id="id19"&gt;Face2Face&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id20"&gt;Заключение&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;hr class="docutils" /&gt;
+&lt;img alt="sources/osx.jpg" src="sources/osx.jpg" /&gt;
+&lt;p&gt;Вот и настала моя очередь перейти на &lt;a class="reference external" href="http://www.apple.com/us/en/mac/"&gt;Mac&lt;/a&gt;. Уже некоторое время я использую
+&lt;strong&gt;Macbook Pro Retina&lt;/strong&gt; и могу сказать, что доволен выбором на все 100%. Это
+именно его вы можете наблюдать на картинке сверху.&lt;/p&gt;
+&lt;p&gt;Долгое время меня удерживали от перехода на технику Apple трудности установки
+и настройки серверного окружения для разработки. Я использовал debian системы
+и поднимал на своем рабочем ноутбуке туже среду, что и на сервере. Да конечно,
+если постараться многое можно настроить и на &lt;strong&gt;OSX&lt;/strong&gt;, но далеко не все так же
+просто. Некоторое время назад я стал плотно работать с виртуализаций и гостевая
+система стала для меня не такой критичной. Возможно я напишу об этом в следующих
+статьях, но в этой мне захотелось описать используемое мной программное
+обеспечение.&lt;/p&gt;
+&lt;p&gt;И так мой «must have» лист. Все программы и плагины представленные ниже,
+бесплатны на момент написания этого текста.&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id11"&gt;Джентльменский набор&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Программное обеспечение которое в описании не нуждается: &lt;a class="reference external" href="http://skype.com"&gt;Skype&lt;/a&gt;, &lt;a class="reference external" href="https://www.google.com/intl/en/chrome/browser/"&gt;Chrome&lt;/a&gt;,
+&lt;a class="reference external" href="http://dropbox.com"&gt;Dropbox&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ну и для &lt;strong&gt;OSX&lt;/strong&gt; включю сюда же &lt;a class="reference external" href="http://adium.im/"&gt;Adium&lt;/a&gt; и (для разработчиков) &lt;a class="reference external" href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="xtrafinder"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;XtraFinder&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/xtra.jpg" src="sources/xtra.jpg" /&gt;
+&lt;p&gt;После &lt;strong&gt;nautilus&lt;/strong&gt; мне не хватало нескольких вещей в стандартном файловом
+менеджере OSX — &lt;strong&gt;Finder&lt;/strong&gt;. В основном это касалось панельного режима.&lt;/p&gt;
+&lt;p&gt;Проблему решил бесплатный плагин &lt;a class="reference external" href="http://www.trankynam.com/xtrafinder/"&gt;Xtrafinder&lt;/a&gt;. Вкладки, панели, удобные кнопки,
+быстрое переключение отображения скрытых файлов и много другого. Платные
+аналоги стоят до $50 и уступают в функциональности.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="xee"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;Xee&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/xee.jpg" src="sources/xee.jpg" /&gt;
+&lt;p&gt;Не смог я привыкнуть к стандартному Preview для просмотра картинок. Нет опции
+запоминания увеличения, достаточно спорное решение с листанием. OpenSource
+просмотрщик &lt;a class="reference external" href="http://wakaba.c3.cx/s/apps/xee.html"&gt;Xee&lt;/a&gt; пришелся по душе гораздо больше.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="vlc"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;VLC&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/vlc.jpg" src="sources/vlc.jpg" /&gt;
+&lt;p&gt;Нет проблем с форматами, устраивающая меня во всем функциональность, отличный
+медиа проигрыватель (я использую в основном для видео). Стандартный &lt;strong&gt;Quicktime&lt;/strong&gt;
+не соперник &lt;a class="reference external" href="http://wakaba.c3.cx/s/apps/xee.html"&gt;VLC&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="transmission"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;Transmission&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/transmission.jpg" src="sources/transmission.jpg" /&gt;
+&lt;p&gt;Торрент-качалка. Возможно и не лучший выбор, но опять же присутствует на всех
+платформах, то избавляет от модальности при переключении на другие OS.&lt;/p&gt;
+&lt;p&gt;Интерфейс &lt;a class="reference internal" href="#transmission"&gt;Transmission&lt;/a&gt; не перегружен и оставляет приятное впечатление.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="apptrap"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;AppTrap&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/apptrap1small.png" src="sources/apptrap1small.png" /&gt;
+&lt;p&gt;В 2013 году при удалении программ на OSX стандартными инструментами в системе
+остаются служебные файлы стертого софта, обнаружить и очистить которые —
+задача нетривильная. &lt;a class="reference external" href="http://onnati.net/apptrap/"&gt;Apptrap&lt;/a&gt; бесплатное решение для полного удаления программ.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="deegres"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id17"&gt;Deegres&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/deegres.jpg" src="sources/deegres.jpg" /&gt;
+&lt;p&gt;Бесплатный виджет для менюбара показывающий текущую погоду. В том или ином виде
+я использую подобные решения на всех платформах.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="iterm2"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id18"&gt;iTerm2&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/iterm.jpg" src="sources/iterm.jpg" /&gt;
+&lt;p&gt;Использую &lt;a class="reference external" href="http://www.iterm2.com/"&gt;iTerm2&lt;/a&gt; вместо стандартного терминала OSX. Вкладки, темы,
+полезные хоткеи удобная работа с клипбордом, панельный режим.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="face2face"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id19"&gt;Face2Face&lt;/a&gt;&lt;/h2&gt;
+&lt;img alt="sources/mail.jpg" src="sources/mail.jpg" /&gt;
+&lt;p&gt;&lt;strong&gt;Mail&lt;/strong&gt; стандартное приложение в OSX. Упомянул же я про него только в контексте
+описания плагина &lt;a class="reference external" href="http://www.chungwasoft.com/face2face/"&gt;Face2Face&lt;/a&gt;. Плагин ищет изображения отправителей писем используя
+такие сервисы как &lt;a class="reference external" href="http://gravatar.com"&gt;Gravatar&lt;/a&gt;, &lt;a class="reference external" href="http://facebook.com"&gt;Facebook&lt;/a&gt; и прочие.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id20"&gt;Заключение&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Надеюсь вы нашли для себя что-нибудь полезное из приведенного списка.&lt;/p&gt;
+&lt;p&gt;PS: Разумеется я рассказал не о всех используемых мной приложениях. Например
+я предпочитаю &lt;a class="reference external" href="http://picasa.google.com/"&gt;Picasa&lt;/a&gt; стандартному &lt;a class="reference external" href="http://www.apple.com/ilife/iphoto/"&gt;iPhoto&lt;/a&gt;. Из платных выделил бы &lt;a class="reference external" href="https://agilebits.com/onepassword"&gt;1Password&lt;/a&gt;,
+&lt;a class="reference external" href="http://macpaw.com/cleanmymac"&gt;CleanMyMac&lt;/a&gt;, &lt;a class="reference external" href="http://macbookreader.com/"&gt;Bookreader&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В заключении хочу спросить пользователей OSX, часто ли и в каких целях вы
+используете &lt;a class="reference external" href="http://support.apple.com/kb/ht2492"&gt;Dashboard&lt;/a&gt;? Все мои знакомые в лучшем случае держат там погоду и
+калькулятор и практически не открывают его. Я после пары недель использования
+осознал его бесполезность для себя и полностью удалил из системы.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+defaults write com.apple.dashboard mcx-disabled -boolean true
+killall Dock
+defaults write com.apple.dashboard mcx-disabled -boolean false
+&lt;/pre&gt;
+&lt;/div&gt;
+</summary><category term="mac"></category><category term="osx"></category><category term="software"></category></entry><entry><title>Pylama — аудит python-кода</title><link href="http://klen.github.com/pylama-ru.html" rel="alternate"></link><updated>2012-09-02T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.com,2012-09-02:pylama-ru.html</id><summary type="html">&lt;p&gt;Процесс &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F"&gt;непрерывной интеграции&lt;/a&gt; программных продуктов всегда был очень
 важен для разработке. В моем случае я не ограничеваюсь только тестированием
 (юнит или интеграционным), но также провожу и интроспекцию кода на соответствие
 стандартам или например ограничение логической вложенности.&lt;/p&gt;
