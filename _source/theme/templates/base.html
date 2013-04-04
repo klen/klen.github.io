@@ -52,7 +52,7 @@
                 {%- if category == cat and not article %}
             <b class="menu_item">{{ cat }}</b>
                 {%- else %}
-            <a class="menu_item menu_link" href="{{ SITEURL }}/category/{{ cat }}.html">{{ cat }}</a>
+            <a class="menu_item menu_link" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
                 {%- endif -%}
             {%- endfor %}
         </nav>
