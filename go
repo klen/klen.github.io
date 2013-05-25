@@ -16,7 +16,7 @@ __command () {
 
 __command apt-get && {
     __command git || sudo apt-get install git -y
-    __command make || sudo apt-get build-essential -y
+    __command make || sudo apt-get install build-essential -y
 }
 
 
