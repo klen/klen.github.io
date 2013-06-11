@@ -43,3 +43,6 @@ commit:
 
 test: compile
 	open index.html
+
+run:
+	pyserve $(CURDIR)
