@@ -81,7 +81,7 @@
 <p>Обычно при разработке тестов, программисты нуждаются в генерации данных для них.
 Тут можно выделить два пути, первый — подготовить данные заранее
 (используя так называемые <strong>fixtures</strong>) и второй — генерировать данные для
-тестов налету.</p>
+тестов непосредственно в момент выполнения.</p>
 <p>Первый обладает рядом минусов. Во-первых данные необходимо готовить заранее.
 Во-вторых при изменении структуры данных необходимо тратить ресурсы на
 поддержку актуальности <strong>fixtures</strong>. В третьих вы не можете получить больше
@@ -153,7 +153,7 @@
 <span class="c"># А здесь price это какой то decimal, а type равен `food` или `drinks`</span>
 <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
 </pre></div>
-<p>В качестве предзаданных данных <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> поддерживает также функции и генераторы.</p>
+<p id="generators">В качестве предзаданных данных <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> поддерживает также функции и генераторы.</p>
 <div class="highlight"><pre><span class="c"># Пример с функцией</span>
 
 <span class="k">def</span> <span class="nf">get_super</span><span class="p">():</span>
@@ -190,9 +190,9 @@
 <div class="section" id="id5">
 <h3><a class="toc-backref" href="#id12">mixer.fake</a></h3>
 <p>Поведение <tt class="docutils literal">mixer.fake</tt> похоже на <a class="reference internal" href="#mixer-random">mixer.random</a>, но в отличии от последнего,
-генерирующего случайные данные, генерирует данные анализируя имя
-поля. Например для строкового поля <tt class="docutils literal">login</tt> это скорее всего будет строка
-имитируящая логин пользователя, а не случайный набор символов.</p>
+генерирующего случайные данные, данный атрибут генерирует данные «фейковые
+данные» анализируя имя поля. Например для строкового поля <tt class="docutils literal">login</tt> это будет
+строка имитирующая логин пользователя, а не просто случайный набор символов.</p>
 <div class="highlight"><pre><span class="n">test</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;app.message&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">fake</span><span class="p">)</span>
 </pre></div>
 <div class="note">
@@ -204,8 +204,8 @@
 <div class="section" id="id6">
 <span id="mixer-select"></span><h3><a class="toc-backref" href="#id13">mixer.select</a></h3>
 <p><tt class="docutils literal">mixer.select</tt> похож на <a class="reference internal" href="#mixer-fake">mixer.fake</a> и <a class="reference internal" href="#mixer-random">mixer.random</a>, но работает с
-уже существующими данными. В приведенном примере пользователю присваивается
-группа из существующих в базе данных:</p>
+уже существующими данными. В приведенном ниже примере пользователю присваивается
+одна из существующих в базе данных групп.</p>
 <div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">select</span><span class="p">)</span>
 </pre></div>
 <p><tt class="docutils literal">mixer.select</tt> может принимать параметры фильтрации, например для <a class="reference external" href="http://djangoproject.org/">Django</a>:</p>
@@ -215,15 +215,15 @@
 <div class="section" id="mixer-mix">
 <h3><a class="toc-backref" href="#id14">mixer.mix</a></h3>
 <p><tt class="docutils literal">mixer.mix</tt> это волшебный атрибут указывающий на будущее сгенерированное
-значение. Например сгенерируем пользователя с одинаковыми <cite>username</cite> и
+значение. Например создадим пользователя с одинаковыми <cite>username</cite> и
 <cite>last_name</cite>.</p>
 <div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span>
 </pre></div>
-<p>Как мы помним <tt class="docutils literal">mixer.mix</tt> указывает на будующий сгенерированный объект.
+<p>Как мы помним <tt class="docutils literal">mixer.mix</tt> указывает на объект который будет сгенерирован.
 Поэтому <tt class="docutils literal">mixer.mix.first_name</tt> будет указывать на поле этого объекта и цель
-будет достигнута.</p>
+достигнута.</p>
 <p>Использование <tt class="docutils literal">mixer.mix</tt> может быть и более интересным.</p>
-<div class="highlight"><pre><span class="n">book</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span>
+<div class="highlight"><pre><span class="n">ship</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span>
     <span class="n">Ship</span><span class="p">,</span>
     <span class="n">captain__country</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">country</span><span class="p">,</span>
     <span class="n">title</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">captain</span><span class="o">.</span><span class="n">nick</span>
@@ -243,8 +243,8 @@
 <h3><a class="toc-backref" href="#id15">mixer.sequence</a></h3>
 <p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a>, как уже указывалось, умеет принимать в качестве значений полей генераторы.
 <tt class="docutils literal">mixer.sequence</tt> это помощник для создания генераторов из функций. Он принимает
-функцию от одного аргумента и создает генератор на основе ее.</p>
-<p>Например создадим объекты с полями вида: 'test0', 'test1' и тд.</p>
+функцию от одного аргумента и на ее основе создает генератор.</p>
+<p>Например несколько пользователей с логинами вида: 'test0', 'test1' и тд.</p>
 <div class="highlight"><pre><span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span>
     <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="s">&#39;test&#39;</span> <span class="o">+</span> <span class="n">c</span>
 <span class="p">))</span>
@@ -260,14 +260,13 @@
 <div class="section" id="id7">
 <h2><a class="toc-backref" href="#id16">Преимущества по сравнению с другими библиотеками</a></h2>
 <p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> поддерживает <strong>python</strong> второй и третьей версии.</p>
-<p>Обладает интеграцией с <a class="reference external" href="http://djangoproject.org/">Django</a>, <a class="reference external" href="http://flask.pocoo.org/">Flask</a>, <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> и легко расширяется для
+<p>Библиотека обладает интеграцией с <a class="reference external" href="http://djangoproject.org/">Django</a>, <a class="reference external" href="http://flask.pocoo.org/">Flask</a>, <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> и легко расширяется для
 других бэкэндов. Независимо от проекта вы получаете единый интерфейс для
 генерации данных.</p>
 <p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> из коробки умеет генерировать не только случайные, но и фейковые данные,
 с которыми приятно работать.</p>
 <p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> интуитивно понятен, гибок в настройке и прост.</p>
-<p>Надеюсь с <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> генерация данных станет для вас более приятным и легким
-занятием.</p>
+<p>Надеюсь с данным модулем генерация данных станет для вас легче и приятнее.</p>
 </div>
 
         </div>

@@ -22,7 +22,7 @@
 &lt;p&gt;Обычно при разработке тестов, программисты нуждаются в генерации данных для них.
 Тут можно выделить два пути, первый — подготовить данные заранее
 (используя так называемые &lt;strong&gt;fixtures&lt;/strong&gt;) и второй — генерировать данные для
-тестов налету.&lt;/p&gt;
+тестов непосредственно в момент выполнения.&lt;/p&gt;
 &lt;p&gt;Первый обладает рядом минусов. Во-первых данные необходимо готовить заранее.
 Во-вторых при изменении структуры данных необходимо тратить ресурсы на
 поддержку актуальности &lt;strong&gt;fixtures&lt;/strong&gt;. В третьих вы не можете получить больше
@@ -94,7 +94,7 @@
 &lt;span class="c"&gt;# А здесь price это какой то decimal, а type равен `food` или `drinks`&lt;/span&gt;
 &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Product&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;В качестве предзаданных данных &lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; поддерживает также функции и генераторы.&lt;/p&gt;
+&lt;p id="generators"&gt;В качестве предзаданных данных &lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; поддерживает также функции и генераторы.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Пример с функцией&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_super&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -131,9 +131,9 @@
 &lt;div class="section" id="id5"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="#id12"&gt;mixer.fake&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Поведение &lt;tt class="docutils literal"&gt;mixer.fake&lt;/tt&gt; похоже на &lt;a class="reference internal" href="#mixer-random"&gt;mixer.random&lt;/a&gt;, но в отличии от последнего,
-генерирующего случайные данные, генерирует данные анализируя имя
-поля. Например для строкового поля &lt;tt class="docutils literal"&gt;login&lt;/tt&gt; это скорее всего будет строка
-имитируящая логин пользователя, а не случайный набор символов.&lt;/p&gt;
+генерирующего случайные данные, данный атрибут генерирует данные «фейковые
+данные» анализируя имя поля. Например для строкового поля &lt;tt class="docutils literal"&gt;login&lt;/tt&gt; это будет
+строка имитирующая логин пользователя, а не просто случайный набор символов.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;app.message&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fake&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="note"&gt;
@@ -145,8 +145,8 @@
 &lt;div class="section" id="id6"&gt;
 &lt;span id="mixer-select"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id13"&gt;mixer.select&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;tt class="docutils literal"&gt;mixer.select&lt;/tt&gt; похож на &lt;a class="reference internal" href="#mixer-fake"&gt;mixer.fake&lt;/a&gt; и &lt;a class="reference internal" href="#mixer-random"&gt;mixer.random&lt;/a&gt;, но работает с
-уже существующими данными. В приведенном примере пользователю присваивается
-группа из существующих в базе данных:&lt;/p&gt;
+уже существующими данными. В приведенном ниже примере пользователю присваивается
+одна из существующих в базе данных групп.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;auth.user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;groups&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;tt class="docutils literal"&gt;mixer.select&lt;/tt&gt; может принимать параметры фильтрации, например для &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt;:&lt;/p&gt;
@@ -156,15 +156,15 @@
 &lt;div class="section" id="mixer-mix"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;mixer.mix&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;tt class="docutils literal"&gt;mixer.mix&lt;/tt&gt; это волшебный атрибут указывающий на будущее сгенерированное
-значение. Например сгенерируем пользователя с одинаковыми &lt;cite&gt;username&lt;/cite&gt; и
+значение. Например создадим пользователя с одинаковыми &lt;cite&gt;username&lt;/cite&gt; и
 &lt;cite&gt;last_name&lt;/cite&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;auth.user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Как мы помним &lt;tt class="docutils literal"&gt;mixer.mix&lt;/tt&gt; указывает на будующий сгенерированный объект.
+&lt;p&gt;Как мы помним &lt;tt class="docutils literal"&gt;mixer.mix&lt;/tt&gt; указывает на объект который будет сгенерирован.
 Поэтому &lt;tt class="docutils literal"&gt;mixer.mix.first_name&lt;/tt&gt; будет указывать на поле этого объекта и цель
-будет достигнута.&lt;/p&gt;
+достигнута.&lt;/p&gt;
 &lt;p&gt;Использование &lt;tt class="docutils literal"&gt;mixer.mix&lt;/tt&gt; может быть и более интересным.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;book&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ship&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;Ship&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;captain__country&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;region&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;captain&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nick&lt;/span&gt;
@@ -184,8 +184,8 @@
 &lt;h3&gt;&lt;a class="toc-backref" href="#id15"&gt;mixer.sequence&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt;, как уже указывалось, умеет принимать в качестве значений полей генераторы.
 &lt;tt class="docutils literal"&gt;mixer.sequence&lt;/tt&gt; это помощник для создания генераторов из функций. Он принимает
-функцию от одного аргумента и создает генератор на основе ее.&lt;/p&gt;
-&lt;p&gt;Например создадим объекты с полями вида: 'test0', 'test1' и тд.&lt;/p&gt;
+функцию от одного аргумента и на ее основе создает генератор.&lt;/p&gt;
+&lt;p&gt;Например несколько пользователей с логинами вида: 'test0', 'test1' и тд.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cycle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;auth.user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;test&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;
 &lt;span class="p"&gt;))&lt;/span&gt;
@@ -201,14 +201,13 @@
 &lt;div class="section" id="id7"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;Преимущества по сравнению с другими библиотеками&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; поддерживает &lt;strong&gt;python&lt;/strong&gt; второй и третьей версии.&lt;/p&gt;
-&lt;p&gt;Обладает интеграцией с &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt;, &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt;, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; и легко расширяется для
+&lt;p&gt;Библиотека обладает интеграцией с &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt;, &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt;, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; и легко расширяется для
 других бэкэндов. Независимо от проекта вы получаете единый интерфейс для
 генерации данных.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; из коробки умеет генерировать не только случайные, но и фейковые данные,
 с которыми приятно работать.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; интуитивно понятен, гибок в настройке и прост.&lt;/p&gt;
-&lt;p&gt;Надеюсь с &lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; генерация данных станет для вас более приятным и легким
-занятием.&lt;/p&gt;
+&lt;p&gt;Надеюсь с данным модулем генерация данных станет для вас легче и приятнее.&lt;/p&gt;
 &lt;/div&gt;
 </summary><category term="python"></category><category term="flask"></category><category term="sqlalchemy"></category><category term="django"></category><category term="orm"></category><category term="tests"></category></entry><entry><title>Ускорение python тестов. Конкурентный запуск.</title><link href="http://klen.github.io/concurrency-tests-ru.html" rel="alternate"></link><updated>2013-06-11T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2013-06-11:concurrency-tests-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
 &lt;div class="contents topic" id="id1"&gt;
