@@ -12,7 +12,11 @@
         <meta name="application-url" content="{{ SITEURL }}" />
         <meta name='yandex-verification' content="{{ YANDEX_VERIFICATION }}"/>
         <meta name="google-site-verification" content="{{ GOOGLE_VERIFICATION }}" />
-        <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+
+        {% block meta %}
+            <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+            <meta name="og:title" content="{{ SITENAME }}" />
+        {% endblock %}
 
         <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
 

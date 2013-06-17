@@ -3,6 +3,10 @@
 {% block title %}{{ article.title }} — {{ super() }}{% endblock %}
 {% block keywords %}{% for t in article.tags %}{{ t }},{% endfor %}{% endblock %}
 {% block description %}{{ article.title }}{% endblock %}
+{% block meta %}
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="{{ article.title }}" />
+{% endblock %}
 
 {%- block content -%}    
     <article class="article">
