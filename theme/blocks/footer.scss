@@ -1,6 +1,7 @@
 .footer {
     margin: 2em 0;
     text-align: center;
+    position: relative;
     font: {
         size: .8em;
         weight: bold;
@@ -8,8 +9,8 @@
 
     .pos1 {
         position: absolute;
-        left: 0;
-        top: 200;
+        left: -181px;
+        bottom: 0;
         width: 200px;
         height: 400px;
         background: url(../images/pos1.png) no-repeat;
@@ -17,8 +18,8 @@
 
     .pos2 {
         position: absolute;
-        right: 0;
-        top: 200;
+        right: -200px;
+        bottom: 0;
         width: 200px;
         height: 400px;
         background: url(../images/pos2.png) no-repeat;
