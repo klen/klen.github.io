@@ -505,6 +505,22 @@ cite {
   font-size: .8em;
   font-weight: bold;
 }
+.footer .pos1 {
+  position: absolute;
+  left: 0;
+  top: 200;
+  width: 200px;
+  height: 400px;
+  background: url(images/pos1.png) no-repeat;
+}
+.footer .pos2 {
+  position: absolute;
+  right: 0;
+  top: 200;
+  width: 200px;
+  height: 400px;
+  background: url(images/pos2.png) no-repeat;
+}
 
 /* ========== */
 /* From: '.' */
