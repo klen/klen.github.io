@@ -17,8 +17,9 @@
 &lt;/div&gt;
 &lt;hr class="docutils" /&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; — это удобная библиотека для генерации данных для тестов. Из коробки
-обладает поддержкой &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt; ORM, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; ORM и простым синтаксисом для
-интеграции любых бэкэндов. Работает в версиях python 2-х и 3-х версий.&lt;/p&gt;
+обладает поддержкой &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt; ORM, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; ORM, &lt;a class="reference external" href="http://mongoengine.org/"&gt;Mongoengine&lt;/a&gt; ODM и простым
+синтаксисом для интеграции любых бэкэндов.
+Работает в версиях python 2-х и 3-х версий.&lt;/p&gt;
 &lt;p&gt;Обычно при разработке тестов, программисты нуждаются в генерации данных для них.
 Тут можно выделить два пути, первый — подготовить данные заранее
 (используя так называемые &lt;strong&gt;fixtures&lt;/strong&gt;) и второй — генерировать данные для
@@ -112,7 +113,7 @@
 &lt;span class="n"&gt;authors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cycle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Author&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;books&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mixer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cycle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Book&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;authors&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Синтаксис для работы &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; или &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; схож и в данной статье
+&lt;p&gt;Синтаксис для работы &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt;, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt;, &lt;a class="reference external" href="http://mongoengine.org/"&gt;Mongoengine&lt;/a&gt; схож и в данной статье
 рассматриваться не будет. Импортируете необходимый бэкэнд, указываете модель
 и получаете данные.&lt;/p&gt;
 &lt;/div&gt;
@@ -201,15 +202,15 @@
 &lt;div class="section" id="id7"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;Преимущества по сравнению с другими библиотеками&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; поддерживает &lt;strong&gt;python&lt;/strong&gt; второй и третьей версии.&lt;/p&gt;
-&lt;p&gt;Библиотека обладает интеграцией с &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt;, &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt;, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; и легко расширяется для
-других бэкэндов. Независимо от проекта вы получаете единый интерфейс для
-генерации данных.&lt;/p&gt;
+&lt;p&gt;Библиотека обладает интеграцией с &lt;a class="reference external" href="http://djangoproject.org/"&gt;Django&lt;/a&gt; ORM, &lt;a class="reference external" href="http://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; ORM, &lt;a class="reference external" href="http://mongoengine.org/"&gt;Mongoengine&lt;/a&gt;
+ODM и легко расширяется для других бэкэндов. Независимо от проекта вы получаете
+единый интерфейс для генерации данных.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; из коробки умеет генерировать не только случайные, но и фейковые данные,
 с которыми приятно работать.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://mixer.readthedocs.org/"&gt;Mixer&lt;/a&gt; интуитивно понятен, гибок в настройке и прост.&lt;/p&gt;
 &lt;p&gt;Надеюсь с данным модулем генерация данных станет для вас легче и приятнее.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="flask"></category><category term="sqlalchemy"></category><category term="django"></category><category term="orm"></category><category term="tests"></category></entry><entry><title>Ускорение python тестов. Конкурентный запуск.</title><link href="http://klen.github.io/concurrency-tests-ru.html" rel="alternate"></link><updated>2013-06-11T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2013-06-11:concurrency-tests-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
+</summary><category term="python"></category><category term="flask"></category><category term="sqlalchemy"></category><category term="django"></category><category term="orm"></category><category term="tests"></category><category term="mongoengine"></category></entry><entry><title>Ускорение python тестов. Конкурентный запуск.</title><link href="http://klen.github.io/concurrency-tests-ru.html" rel="alternate"></link><updated>2013-06-11T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2013-06-11:concurrency-tests-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
 &lt;div class="contents topic" id="id1"&gt;
 &lt;p class="topic-title first"&gt;Содержание:&lt;/p&gt;
 &lt;ul class="simple"&gt;
