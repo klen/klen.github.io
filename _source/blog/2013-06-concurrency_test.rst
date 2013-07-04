@@ -90,6 +90,7 @@ Django
             concurrency_suite = ConcurrentTestSuite(suite, fork_for_tests())
             return concurrency_suite
 
+
 Теперь осталось переопределить опцию ``TEST_RUNNER`` в настройках  Django_,
 указав путь импорта к нашему раннеру: ::
 
@@ -104,7 +105,14 @@ Django
 выполнения тестов составил от 35% до 60% процентов, на 4-х ядерном macbook pro.
 
 
+.. note:: Кстати если вы используете tox_ для прогона тестов используя разные
+    окружения, то для использования конкурентного запуска вам достаточно
+    просто установить модуль detox_ и запускать tox-тесты с его помощью.
+
+
 .. _Django: http://djangoproject.org/
 .. _nose: https://nose.readthedocs.org/en/latest/
 .. _concurrencytest: https://github.com/cgoldberg/concurrencytest.git
 .. _`Corey Goldberg`: http://goldb.org/
+.. _tox: https://pypi.python.org/pypi/tox/
+.. _detox: https://pypi.python.org/pypi/detox/

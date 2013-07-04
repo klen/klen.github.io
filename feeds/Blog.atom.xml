@@ -299,6 +299,12 @@ TEST_RUNNER = 'main.test_runner.DjangoConcurencyTestSuiteRunner'
 &lt;p&gt;Все, теперь запуск Django тестов будет автоматически использовать
 все присуствующие в системе ядра процессора. В моих проектах прирост скорости
 выполнения тестов составил от 35% до 60% процентов, на 4-х ядерном macbook pro.&lt;/p&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Кстати если вы используете &lt;a class="reference external" href="https://pypi.python.org/pypi/tox/"&gt;tox&lt;/a&gt; для прогона тестов используя разные
+окружения, то для использования конкурентного запуска вам достаточно
+просто установить модуль &lt;a class="reference external" href="https://pypi.python.org/pypi/detox/"&gt;detox&lt;/a&gt; и запускать tox-тесты с его помощью.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </summary><category term="python"></category><category term="test"></category><category term="django"></category></entry><entry><title>Неделя с Flask</title><link href="http://klen.github.io/some-flask-things-ru.html" rel="alternate"></link><updated>2012-08-31T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-08-31:some-flask-things-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
