@@ -13,7 +13,7 @@
                 <a href="{{ FEED_URL }}"><img src="theme/images/icons/rss.png"></a> 
             </div> 
             <a class="social_item_title" href="./archives.html">Blog in Russian</a> 
-            {% for a in dates[:2] %}
+            {% for a in dates[:4] %}
                 <p class="social_item_info">
                     <time datetime="{{ a.date }}">{{ a.date.strftime('%d.%m.%Y') }}</time>
                     <a href="{{ a.url }}">{{ a.title }}</a>
@@ -27,8 +27,7 @@
                 <a href="http://twitter.com/horneds"><img src="theme/images/icons/twitter.png"></a> 
             </div> 
             <a class="social_item_title" href="http://twitter.com/horneds">Twitter</a> 
-            <p class="twitter zeta social_item_info">
-            </p>
+            <p class="social_item_info">Just simple thoughts.</p>
         </li>
 
         <!-- Facebook -->
@@ -37,7 +36,7 @@
                 <a href="http://facebook.com/horneds"><img src="theme/images/icons/facebook.png"></a> 
             </div> 
             <a class="social_item_title" href="http://facebook.com/horneds">Facebook</a> 
-            <p class="social_item_info"> Im in biggest social network. </p>
+            <p class="social_item_info"> Im in biggest social network.</p>
         </li>
 
         <!-- Linkedin -->
@@ -46,16 +45,7 @@
                 <a href="http://www.linkedin.com/profile/view?id=27707936"><img src="theme/images/icons/linkedin.png"></a> 
             </div> 
             <a class="social_item_title" href="http://www.linkedin.com/profile/view?id=27707936">Linkedin</a> 
-            <p class="social_item_info"> Im in biggest professional social network. </p>
-        </li>
-
-        <!-- Vkontakte -->
-        <li class="social_item">
-            <div class="social_item_icon"> 
-                <a href="http://vk.com/horneds"><img src="theme/images/icons/vk.png"></a> 
-            </div> 
-            <a class="social_item_title" href="http://vk.com/horneds">Vkontakte</a> 
-            <p class="social_item_info"> Im in biggest social network in Russia. </p>
+            <p class="social_item_info"> Im in biggest professional social network.</p>
         </li>
 
         <!-- Github -->
@@ -65,7 +55,7 @@
             </div> 
             <a class="social_item_title" href="http://github.com/klen">Github</a> 
             <p class="social_item_info">My opensource projects</p>
-            <ul style="clear:both;margin-left:58px;">
+            <ul style="clear:both; margin: 0">
                 <li class="social_item_info">
                     <a href="http://github.com/klen/makesite">Makesite</a> — system for deploying and managing sites.
                 </li>

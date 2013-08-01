@@ -77,7 +77,7 @@
 
     {#- Footer #}
     <footer class="footer">
-        © 2011–2012 Kirill Klenov
+        © 2011–{{ articles[0].date.year }} Kirill Klenov
         {% for p in PAGES %}&nbsp;&nbsp;|&nbsp;&nbsp;{% if page == p %}
             <b>{{ p.title }}</b>
         {% else %}
