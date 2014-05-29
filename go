@@ -2,25 +2,14 @@
 
 RED='\033[1;31m'
 GREEN='\033[0;32m'
+CFG_REPO=https://github.com/klen/.home.git
 
-[ -d $HOME/.home ] && {
-    echo $RED"Already bootstraped." 
-    exit 1
-}
-
-
-__command () {
-    command -v $1 1>/dev/null
-}
-
-
-__command apt-get && {
-    __command git || sudo apt-get install git -y
-    __command make || sudo apt-get install build-essential -y
-}
+command -v apt-get 1>/dev/null && {
+    sudo apt-get update
+    sudo apt-get install ansible -y
+} || echo $RED"apt-get not found, exiting" && exit 2
 
 
 echo $GREEN"Bootstrap $(hostname -f)"
-git clone git://github.com/klen/.home.git $HOME/.home
-cd $HOME/.home && make uninstall
-cd $HOME/.home && make install
+git clone --recursive $CFG_REPO $HOME/.home
+cd $HOME/.home && ansible-playbook -i inventory setup/playbook.yml -c local -sK
