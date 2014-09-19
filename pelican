@@ -1,6 +1,0 @@
-import sys, os
-from pelican import main
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-main()
-

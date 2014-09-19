@@ -10,7 +10,7 @@
 
 Алиас для более компактного `git status`:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.st 'status -sb'
     $ git st
@@ -18,7 +18,7 @@
 
 Алиас для редактирования последнего коммита:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.amend 'commit --amend -C HEAD'
     $ git amend
@@ -26,7 +26,7 @@
 
 Алиас для отмены последнего коммита:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.undo 'reset --soft HEAD^'
     $ git undo
@@ -34,7 +34,7 @@
 
 Предпочитаемый мной вывод `diff`:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.diff 'diff --word-diff'
     $ git undo
@@ -42,14 +42,14 @@
 
 «Визуальная» история веток в консоли:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.hist "log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short"
 
 
 Удобная работа с `Git-Flow <https://github.com/nvie/gitflow/>`_:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global alias.hotfix 'flow hotfix'
     $ git config --global alias.feature 'flow feature'
@@ -58,7 +58,7 @@
 
 Автоматическая коррекция опечаток во вводимых командах:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global help.autocorrect 1
     $ git comit
@@ -67,21 +67,21 @@
 
 Автоматическая запись разрешенных мердж конфликтов, для будущего использования:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git config --global rerere.enabled 1
 
 
 Получение веток с не влитыми данными:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git branch --no-merged
 
 
 Список коммитов в ветке *branchA* отсуствующих в ветке *branchB*:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ git log branchA ^branchB
 
@@ -89,7 +89,7 @@
 Многие используют баш функцию `__git_ps1` для вывода названия текущей ветки,
 но не все знают, что ее можно сделать более информативной.
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     # In your .bashrc or .profile:
 

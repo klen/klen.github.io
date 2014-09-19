@@ -1,0 +1,8 @@
+Sorry dude. Page not found
+##########################
+
+:slug: 404
+:date: 2011-01-01
+
+.. image:: {filename}/static/404.jpg
+

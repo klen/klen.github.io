@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,test,django," />
+        <meta name="description" content="Ускорение python тестов. Конкурентный запуск." />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Ускорение python тестов. Конкурентный запуск." />
+
+        <title>Ускорение python тестов. Конкурентный запуск. — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2013-06-11 00:00:00">11.06.2013</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Ускорение python тестов. Конкурентный запуск.</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/test.html">test</a> , </span> <span><a href="./tag/django.html">django</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="mixer.html" class="article_paginator_right_link">Mixer -- удобная генерация данных для тестирования</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="some-flask-things.html" class="article_paginator_left_link">Неделя с Flask</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#nose" id="id4">Nose</a></li>
+<li><a class="reference internal" href="#unittest" id="id5">Unittest</a><ul>
+<li><a class="reference internal" href="#django" id="id6">Django</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Прогон тестов на большом проекте отнимает продолжительное время. Простейший
+способ ускорить выполнение на многоядерной системе использовать конкуренцию.</p>
+<div class="section" id="nose">
+<h2><a class="toc-backref" href="#id4">Nose</a></h2>
+<p>Если вы используете <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a> для тестирования, то у вас уже есть возможность
+конкурентного запуска.</p>
+<blockquote>
+<p>&quot;You can parallelize a test run across a configurable number of worker
+processes. While this can speed up CPU-bound test runs, it is mainly useful
+for IO-bound tests that spend most of their time waiting for data to arrive
+from someplace else and can benefit from parallelization.&quot;</p>
+<p class="attribution">&mdash;<a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a></p>
+</blockquote>
+<p>Обычный запуск тестов выглядит так:</p>
+<pre class="literal-block">
+$ nosetests
+</pre>
+<p>Для использования конкуренции:</p>
+<pre class="literal-block">
+$ nosetests --processes=4
+</pre>
+</div>
+<div class="section" id="unittest">
+<h2><a class="toc-backref" href="#id5">Unittest</a></h2>
+<p>Все хорошо, но как ускорить тесты если вы не используете <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a>? Задавшись этим
+вопросом я обнаружил модуль <a class="reference external" href="https://github.com/cgoldberg/concurrencytest.git">concurrencytest</a> от <a class="reference external" href="http://goldb.org/">Corey Goldberg</a>. Он позволяет
+переопределить <tt class="docutils literal">unittest.TestSuite</tt> для использования конкурентного запуска
+тестов.</p>
+<p>Базовый пример использования:</p>
+<pre class="literal-block">
+from concurrencytest import ConcurrentTestSuite, fork_for_tests
+
+# Здесь мы определяем unittest.TestSuite и unittest.TestRunner
+suite = ...
+
+# И обеспечиваем конкурентный запуск
+concurrent_suite = ConcurrentTestSuite(suite, fork_for_tests())
+runner.run(concurrent_suite)
+</pre>
+<p>Вот и все. Теперь тесты будут выполняться асинхронно.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">По умолчанию <a class="reference external" href="https://github.com/cgoldberg/concurrencytest.git">concurrencytest</a> запускает форки по количеству ядер
+процессора вашей системы. Вы можете явно указать количество процессов
+при создании ConcurrentTestSuite задав аргумент для функции для
+fork_for_tests (fork_for_tests(8)).</p>
+</div>
+<div class="section" id="django">
+<h3><a class="toc-backref" href="#id6">Django</a></h3>
+<p>Приведу пример интеграции <a class="reference external" href="https://github.com/cgoldberg/concurrencytest.git">concurrencytest</a> в <a class="reference external" href="http://djangoproject.org/">Django</a> проект. Нужно создать
+собственный <cite>TestRunner</cite> который переопределит создаваемую <cite>TestSuite</cite>.
+Пусть код проекта лежит в модуле <cite>main</cite>, создадим файл <cite>main/test_runner.py</cite>:</p>
+<pre class="literal-block">
+from concurrencytest import ConcurrentTestSuite, fork_for_tests
+from django.test.simple import DjangoTestSuiteRunner
+
+
+class DjangoConcurencyTestSuiteRunner(DjangoTestSuiteRunner):
+
+    def build_suite(self, test_labels, extra_tests=None, **kwargs):
+        suite = super(DjangoConcurencyTestSuiteRunner, self).build_suite(
+            test_labels, extra_tests=extra_tests, **kwargs
+        )
+
+        concurrency_suite = ConcurrentTestSuite(suite, fork_for_tests())
+        return concurrency_suite
+</pre>
+<p>Теперь осталось переопределить опцию <tt class="docutils literal">TEST_RUNNER</tt> в настройках  <a class="reference external" href="http://djangoproject.org/">Django</a>,
+указав путь импорта к нашему раннеру:</p>
+<pre class="literal-block">
+TEST_RUNNER = 'main.test_runner.DjangoConcurencyTestSuiteRunner'
+</pre>
+<p>Не забудьте добавить в ваше окружение зависимость от <a class="reference external" href="https://github.com/cgoldberg/concurrencytest.git">concurrencytest</a> и
+обновить его.</p>
+<p>Все, теперь запуск Django тестов будет автоматически использовать
+все присуствующие в системе ядра процессора. В моих проектах прирост скорости
+выполнения тестов составил от 35% до 60% процентов, на 4-х ядерном macbook pro.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Кстати если вы используете <a class="reference external" href="https://pypi.python.org/pypi/tox/">tox</a> для прогона тестов используя разные
+окружения, то для использования конкурентного запуска вам достаточно
+просто установить модуль <a class="reference external" href="https://pypi.python.org/pypi/detox/">detox</a> и запускать tox-тесты с его помощью.</p>
+</div>
+</div>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="mixer.html" class="article_paginator_right_link">Mixer -- удобная генерация данных для тестирования</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="some-flask-things.html" class="article_paginator_left_link">Неделя с Flask</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'concurrency-tests';
+        var disqus_url = './concurrency-tests.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

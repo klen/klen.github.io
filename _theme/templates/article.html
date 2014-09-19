@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} — {{ super() }}{% endblock %}
+{% block keywords %}{% for t in article.tags %}{{ t }},{% endfor %}{% endblock %}
+{% block description %}{{ article.title }}{% endblock %}
+{% block meta %}
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="{{ article.title }}" />
+{% endblock %}
+
+{%- block content -%}    
+    <article class="article">
+
+        {# [>- Header <] #}
+        <header class="article_header">
+            <time class="article_header_time" datetime="{{ article.date }}">{{ article.date.strftime('%d.%m.%Y')}}</time>
+            <span>in <a href="{{ SITEURL }}/category/{{ article.category }}.html">{{ article.category }}</a></span>
+            <h1 class="article_header_title">{{ article.title }}</h1>
+            {%- if article.tags -%}
+                <span class="article_meta">tags: {% for tag in article.tags %}<span><a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a> {% if not loop.last %}, {% endif %}</span> {% endfor %}</span>
+            {%- endif -%}
+        </header>
+
+        {# [> Paginator <] #}
+        {% include "_article_paginator.html" %}
+
+    {% if article.metadata.parts_articles %}
+        <hr/>
+        <p>This post is part of a series:</p>
+        <ol class="parts">
+            {% for part_article in article.metadata.parts_articles %}
+                {% if part_article == article %}
+                <li style="font-weight: bold">{{ part_article.title }}</li>
+                {% else %}
+                <li><a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+        {# [>- Content <] #}
+        <div class="article_content">
+            {{ article.content }}
+        </div>
+
+        {# [> Books <] #}
+        {% if article.books %}{% include "_book.html" %}{% endif %}
+
+        {# [>- Google plus <] #}
+        {% include "_gplus.html" %}
+
+        {# [> Paginator <] #}
+        {% include "_article_paginator.html" %}
+
+    </article>
+
+    {# [>- Disqus -<] #}
+    {% include "_disqus.html" %} 
+
+{% endblock %}

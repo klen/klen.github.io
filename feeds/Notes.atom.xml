@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.io</title><link href="http://klen.github.io/" rel="alternate"></link><link href="http://klen.github.io/feeds/notes.atom.xml" rel="self"></link><id>http://klen.github.io/</id><updated>2013-04-04T00:00:00+04:00</updated><entry><title>OSX - Программы которые я использую</title><link href="http://klen.github.io/mac-ru.html" rel="alternate"></link><updated>2013-04-04T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2013-04-04:mac-ru.html</id><summary type="html">&lt;hr class="docutils" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.io</title><link href="http://klen.github.io/" rel="alternate"></link><link href="http://klen.github.io/feeds/notes.atom.xml" rel="self"></link><id>http://klen.github.io/</id><updated>2013-04-04T00:00:00+04:00</updated><entry><title>OSX - Программы которые я использую</title><link href="http://klen.github.io/mac.html" rel="alternate"></link><updated>2013-04-04T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2013-04-04:mac.html</id><summary type="html">&lt;hr class="docutils" /&gt;
 &lt;div class="contents topic" id="id1"&gt;
 &lt;p class="topic-title first"&gt;Содержание:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -16,7 +16,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;hr class="docutils" /&gt;
-&lt;img alt="sources/osx.jpg" src="sources/osx.jpg" /&gt;
+&lt;img alt="" src="/static/img/osx.jpg" /&gt;
 &lt;p&gt;Вот и настала моя очередь перейти на &lt;a class="reference external" href="http://www.apple.com/us/en/mac/"&gt;Mac&lt;/a&gt;. Уже некоторое время я использую
 &lt;strong&gt;Macbook Pro Retina&lt;/strong&gt; и могу сказать, что доволен выбором на все 100%. Это
 именно его крышку вы можете наблюдать на картинке сверху.&lt;/p&gt;
@@ -38,7 +38,7 @@
 &lt;/div&gt;
 &lt;div class="section" id="xtrafinder"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;XtraFinder&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/xtra.jpg" src="sources/xtra.jpg" /&gt;
+&lt;img alt="" src="/static/img/xtra.jpg" /&gt;
 &lt;p&gt;После использования &lt;cite&gt;nautilus&lt;/cite&gt; мне не хватало нескольких вещей в стандартном файловом
 менеджере &lt;strong&gt;OSX&lt;/strong&gt; — &lt;cite&gt;Finder&lt;/cite&gt;. В основном это касалось панельного режима.&lt;/p&gt;
 &lt;p&gt;Проблему решил бесплатный плагин &lt;a class="reference external" href="http://www.trankynam.com/xtrafinder/"&gt;Xtrafinder&lt;/a&gt;. Вкладки, панели, удобные кнопки,
@@ -47,47 +47,47 @@
 &lt;/div&gt;
 &lt;div class="section" id="xee"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;Xee&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/xee.jpg" src="sources/xee.jpg" /&gt;
+&lt;img alt="" src="/static/img/xee.jpg" /&gt;
 &lt;p&gt;Не смог я привыкнуть к стандартному &lt;cite&gt;Preview&lt;/cite&gt; для просмотра картинок. Нет опции
 запоминания увеличения, достаточно спорное решение с листанием. OpenSource
 просмотрщик &lt;a class="reference external" href="http://wakaba.c3.cx/s/apps/xee.html"&gt;Xee&lt;/a&gt; пришелся по душе гораздо больше.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="vlc"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;VLC&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/vlc.jpg" src="sources/vlc.jpg" /&gt;
+&lt;img alt="" src="/static/img/vlc.jpg" /&gt;
 &lt;p&gt;Удобный кроссплатформенный медиа-плеер. Практически комбайн, хотя я использую
 его исключительно для просмотра видео. Стандартный &lt;cite&gt;Quicktime&lt;/cite&gt; не соперник для &lt;a class="reference external" href="http://wakaba.c3.cx/s/apps/xee.html"&gt;VLC&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="transmission"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;Transmission&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/transmission.jpg" src="sources/transmission.jpg" /&gt;
+&lt;img alt="" src="/static/img/transmission.jpg" /&gt;
 &lt;p&gt;Торрент-качалка. Возможно и не лучший выбор, но опять же присутствует на всех
 платформах, что избавляет от модальности при переключении на другие &lt;strong&gt;OS&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Интерфейс &lt;a class="reference internal" href="#transmission"&gt;Transmission&lt;/a&gt; не перегружен и оставляет приятное впечатление.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="apptrap"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;AppTrap&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/apptrap1small.png" src="sources/apptrap1small.png" /&gt;
+&lt;img alt="" src="/static/img/apptrap1small.png" /&gt;
 &lt;p&gt;В 2013 году при удалении программ на &lt;strong&gt;OSX&lt;/strong&gt; стандартными инструментами, в системе
 остаются неиспользуемые служебные файлы, обнаружить и очистить которые —
 задача нетривиальная. &lt;a class="reference external" href="http://onnati.net/apptrap/"&gt;Apptrap&lt;/a&gt; — бесплатное решение для надежного удаления программ.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="deegres"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id17"&gt;Deegres&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/deegres.jpg" src="sources/deegres.jpg" /&gt;
+&lt;img alt="" src="/static/img/deegres.jpg" /&gt;
 &lt;p&gt;Бесплатный виджет для меню-бара отображающий текущую погоду. В том или ином виде
 использую подобные решения на всех платформах. &lt;a class="reference external" href="https://itunes.apple.com/us/app/degrees/id430173763?mt=12"&gt;Deegres&lt;/a&gt; можно найти в &lt;strong&gt;AppStore&lt;/strong&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="iterm2"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id18"&gt;iTerm2&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/iterm.jpg" src="sources/iterm.jpg" /&gt;
+&lt;img alt="" src="/static/img/iterm.jpg" /&gt;
 &lt;p&gt;Использую &lt;a class="reference external" href="http://www.iterm2.com/"&gt;iTerm2&lt;/a&gt; вместо стандартного терминала &lt;strong&gt;OSX&lt;/strong&gt;. Вкладки, темы,
 полезные хоткеи, удобная работа с клипбордом, панельный режим.&lt;/p&gt;
 &lt;p&gt;Считаю его удобнее чем &lt;cite&gt;TotalTerminal&lt;/cite&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="face2face"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id19"&gt;Face2Face&lt;/a&gt;&lt;/h2&gt;
-&lt;img alt="sources/mail.jpg" src="sources/mail.jpg" /&gt;
+&lt;img alt="" src="/static/img/mail.jpg" /&gt;
 &lt;p&gt;&lt;strong&gt;Mail&lt;/strong&gt; — стандартное приложение электронной почты в &lt;strong&gt;OSX&lt;/strong&gt;. Для него
 существует немалое количество плагинов.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.chungwasoft.com/face2face/"&gt;Face2Face&lt;/a&gt; ищет изображения отправителей писем используя такие сервисы
@@ -109,7 +109,7 @@ killall Dock
 defaults write com.apple.dashboard mcx-disabled -boolean false
 &lt;/pre&gt;
 &lt;/div&gt;
-</summary><category term="mac"></category><category term="osx"></category><category term="software"></category></entry><entry><title>Pylama — аудит python-кода</title><link href="http://klen.github.io/pylama-ru.html" rel="alternate"></link><updated>2012-09-02T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-09-02:pylama-ru.html</id><summary type="html">&lt;p&gt;Процесс &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F"&gt;непрерывной интеграции&lt;/a&gt; программных продуктов всегда был очень
+</summary><category term="mac"></category><category term="osx"></category><category term="software"></category></entry><entry><title>Pylama — аудит python-кода</title><link href="http://klen.github.io/pylama.html" rel="alternate"></link><updated>2012-09-02T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-09-02:pylama.html</id><summary type="html">&lt;p&gt;Процесс &lt;a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F"&gt;непрерывной интеграции&lt;/a&gt; программных продуктов всегда был очень
 важен для разработке. В моем случае я не ограничеваюсь только тестированием
 (юнит или интеграционным), но также провожу и интроспекцию кода на соответствие
 стандартам или например ограничение логической вложенности.&lt;/p&gt;
@@ -123,36 +123,58 @@ defaults write com.apple.dashboard mcx-disabled -boolean false
 рядом улучшений.&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;Установка&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pip install pylama
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install pylama
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
 &lt;h2&gt;Использование&lt;/h2&gt;
 &lt;p&gt;Рекурсивная проверка текущей диектории:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pylama
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Игнорировать определенные типы (группы типов) ошибок:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama -i W,E501
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Игнорировать определенные типы (группы типов) ошибок:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pylama -i W,E501
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Изменение набора линтеров:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama -l &amp;quot;pep8,mccabe&amp;quot;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Изменение набора линтеров:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pylama -l &lt;span class="s2"&gt;&amp;quot;pep8,mccabe&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
 &lt;h2&gt;Опции&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pylama --help
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pylama --help
 
-usage: pylama [-h] [--ignore IGNORE] [--verbose] [--select SELECT]
-            [--linters LINTERS] [--complexity COMPLEXITY] [--skip SKIP]
-            [path]
+usage: pylama &lt;span class="o"&gt;[&lt;/span&gt;-h&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;--ignore IGNORE&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;--verbose&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;--select SELECT&lt;span class="o"&gt;]&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;--linters LINTERS&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;--complexity COMPLEXITY&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;--skip SKIP&lt;span class="o"&gt;]&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;path&lt;span class="o"&gt;]&lt;/span&gt;
 
-Code audit tool for python.
+Code audit tool &lt;span class="k"&gt;for &lt;/span&gt;python.
 
 positional arguments:
 path                  Path on file or directory.
 
 optional arguments:
--h, --help            show this help message and exit
+-h, --help            show this &lt;span class="nb"&gt;help &lt;/span&gt;message and &lt;span class="nb"&gt;exit&lt;/span&gt;
 --ignore IGNORE, -i IGNORE
                         Ignore errors and warnings.
 --verbose, -v         Verbose mode.
@@ -162,93 +184,109 @@ optional arguments:
                         Select errors and warnings.
 --complexity COMPLEXITY, -c COMPLEXITY
                         Set mccabe complexity.
---skip SKIP           Skip files (Ex. messages.py)
+--skip SKIP           Skip files &lt;span class="o"&gt;(&lt;/span&gt;Ex. messages.py&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
 &lt;div class="section" id="pylama"&gt;
 &lt;h2&gt;Переключение настроек pylama из файла&lt;/h2&gt;
 &lt;p&gt;В любом python-файле вы можете установить опции проверки для pylama.
 Они будут установлены только для данного файла.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="err"&gt;Где&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;то&lt;/span&gt; &lt;span class="err"&gt;в&lt;/span&gt; &lt;span class="err"&gt;коде&lt;/span&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="err"&gt;Где&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="err"&gt;то&lt;/span&gt; &lt;span class="err"&gt;в&lt;/span&gt; &lt;span class="err"&gt;коде&lt;/span&gt;
 &lt;span class="c"&gt;# Игнорировать все Warnings кроме W301&lt;/span&gt;
 &lt;span class="c"&gt;# lint_ignore=W:lint_select=W301&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Для выключения проверки текущего файла:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# lint=0&lt;/span&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Для выключения проверки текущего файла:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# lint=0&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Разработка &lt;a class="reference external" href="http://pypi.python.org/pypi/pylama/"&gt;pylama&lt;/a&gt; ведется на Github: &lt;a class="reference external" href="http://github.com/klen/pylama"&gt;http://github.com/klen/pylama&lt;/a&gt;&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Разработка &lt;a class="reference external" href="http://pypi.python.org/pypi/pylama/"&gt;pylama&lt;/a&gt; ведется на Github: &lt;a class="reference external" href="http://github.com/klen/pylama"&gt;http://github.com/klen/pylama&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="pep8"></category><category term="pyflakes"></category><category term="mccabe"></category></entry><entry><title>Pyradio — простой консольный радиоплеер</title><link href="http://klen.github.io/pyradio-ru.html" rel="alternate"></link><updated>2012-09-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-09-01:pyradio-ru.html</id><summary type="html">&lt;img alt="sources/pyradio.png" src="sources/pyradio.png" /&gt;
+</summary><category term="python"></category><category term="pep8"></category><category term="pyflakes"></category><category term="mccabe"></category></entry><entry><title>Pyradio — простой консольный радиоплеер</title><link href="http://klen.github.io/pyradio.html" rel="alternate"></link><updated>2012-09-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-09-01:pyradio.html</id><summary type="html">&lt;img alt="" src="/static/img/pyradio.png" /&gt;
 &lt;p&gt;Очень простой клиент для прослушивания онлайн-радиостанций. Ничего лишнего.&lt;/p&gt;
 &lt;p&gt;Автор оригинального проекта, прекратил его поддержку длительное время назад
 и пока не выходит на связь.&lt;/p&gt;
 &lt;p&gt;Я исправил ошибки, доработал консольный клиент и собрал пакет для PYPI.
 Теперь можно просто ввести:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo pip install pyradio
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;sudo pip install pyradio
 pyradio -p 15
 &lt;/pre&gt;&lt;/div&gt;
-&lt;div class="note"&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p class="last"&gt;На самом деле вам еще понадобиться установленный mplayer.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;И слушать музыку.&lt;/p&gt;
-</summary><category term="python"></category><category term="radio"></category></entry><entry><title>Полезности для GIT</title><link href="http://klen.github.io/some-git-things-ru.html" rel="alternate"></link><updated>2012-07-19T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-07-19:some-git-things-ru.html</id><summary type="html">&lt;p&gt;Алиас для более компактного &lt;cite&gt;git status&lt;/cite&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.st &amp;#39;status -sb&amp;#39;
-$ git st
+</summary><category term="python"></category><category term="radio"></category></entry><entry><title>Полезности для GIT</title><link href="http://klen.github.io/some-git-things.html" rel="alternate"></link><updated>2012-07-19T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-07-19:some-git-things.html</id><summary type="html">&lt;p&gt;Алиас для более компактного &lt;cite&gt;git status&lt;/cite&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.st &lt;span class="s1"&gt;&amp;#39;status -sb&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git st
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Алиас для редактирования последнего коммита:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.amend &amp;#39;commit --amend -C HEAD&amp;#39;
-$ git amend
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Алиас для редактирования последнего коммита:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.amend &lt;span class="s1"&gt;&amp;#39;commit --amend -C HEAD&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git amend
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Алиас для отмены последнего коммита:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.undo &amp;#39;reset --soft HEAD^&amp;#39;
-$ git undo
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Алиас для отмены последнего коммита:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.undo &lt;span class="s1"&gt;&amp;#39;reset --soft HEAD^&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git undo
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Предпочитаемый мной вывод &lt;cite&gt;diff&lt;/cite&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.diff &amp;#39;diff --word-diff&amp;#39;
-$ git undo
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Предпочитаемый мной вывод &lt;cite&gt;diff&lt;/cite&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.diff &lt;span class="s1"&gt;&amp;#39;diff --word-diff&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git undo
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;«Визуальная» история веток в консоли:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.hist &amp;quot;log --pretty=format:&amp;#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&amp;#39; --graph --date=short&amp;quot;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;«Визуальная» история веток в консоли:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.hist &lt;span class="s2"&gt;&amp;quot;log --pretty=format:&amp;#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&amp;#39; --graph --date=short&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Удобная работа с &lt;a class="reference external" href="https://github.com/nvie/gitflow/"&gt;Git-Flow&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global alias.hotfix &amp;#39;flow hotfix&amp;#39;
-$ git config --global alias.feature &amp;#39;flow feature&amp;#39;
-$ git config --global alias.release &amp;#39;flow release&amp;#39;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Удобная работа с &lt;a class="reference external" href="https://github.com/nvie/gitflow/"&gt;Git-Flow&lt;/a&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.hotfix &lt;span class="s1"&gt;&amp;#39;flow hotfix&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.feature &lt;span class="s1"&gt;&amp;#39;flow feature&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global alias.release &lt;span class="s1"&gt;&amp;#39;flow release&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Автоматическая коррекция опечаток во вводимых командах:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global help.autocorrect 1
-$ git comit
-$ git bronch
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Автоматическая коррекция опечаток во вводимых командах:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global help.autocorrect 1
+&lt;span class="nv"&gt;$ &lt;/span&gt;git comit
+&lt;span class="nv"&gt;$ &lt;/span&gt;git bronch
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Автоматическая запись разрешенных мердж конфликтов, для будущего использования:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git config --global rerere.enabled 1
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Автоматическая запись разрешенных мердж конфликтов, для будущего использования:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git config --global rerere.enabled 1
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Получение веток с не влитыми данными:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git branch --no-merged
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Получение веток с не влитыми данными:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git branch --no-merged
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Список коммитов в ветке &lt;em&gt;branchA&lt;/em&gt; отсуствующих в ветке &lt;em&gt;branchB&lt;/em&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ git log branchA ^branchB
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Список коммитов в ветке &lt;em&gt;branchA&lt;/em&gt; отсуствующих в ветке &lt;em&gt;branchB&lt;/em&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git log branchA ^branchB
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Многие используют баш функцию &lt;cite&gt;__git_ps1&lt;/cite&gt; для вывода названия текущей ветки,
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Многие используют баш функцию &lt;cite&gt;__git_ps1&lt;/cite&gt; для вывода названия текущей ветки,
 но не все знают, что ее можно сделать более информативной.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# In your .bashrc or .profile:
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# In your .bashrc or .profile:&lt;/span&gt;
 
-    GIT_PS1_SHOWDIRTYSTATE=1
-    GIT_PS1_SHOWSTASHSTATE=1
+    &lt;span class="nv"&gt;GIT_PS1_SHOWDIRTYSTATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+    &lt;span class="nv"&gt;GIT_PS1_SHOWSTASHSTATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 
-    $ (develop *$):
+    &lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;develop *&lt;span class="nv"&gt;$)&lt;/span&gt;:
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="git"></category></entry><entry><title>PyServe. Веб-сервер одной командой</title><link href="http://klen.github.io/pyserve-ru.html" rel="alternate"></link><updated>2012-06-14T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-06-14:pyserve-ru.html</id><summary type="html">&lt;p&gt;Иногда возникает необходимость быстро запустить веб-сервер
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary><category term="git"></category></entry><entry><title>PyServe. Веб-сервер одной командой</title><link href="http://klen.github.io/pyserve.html" rel="alternate"></link><updated>2012-06-14T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-06-14:pyserve.html</id><summary type="html">&lt;p&gt;Иногда возникает необходимость быстро запустить веб-сервер
 нацеленный на содержимое локальной директории.&lt;/p&gt;
 &lt;p&gt;При установленном python это делается буквально в одну строку.&lt;/p&gt;
 &lt;p&gt;Для python версий 2.*:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python -m SimpleHTTPServer
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python -m SimpleHTTPServer
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Для python версий 3.*:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ python -m http.server
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Для python версий 3.*:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python -m http.server
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Я часто пользовался этой функциональностью, например при отладке standalone HTML
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Я часто пользовался этой функциональностью, например при отладке standalone HTML
 приложений работающих с удаленными API. В какой то момент мне захотелось большего:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Одинаковый синтаксис для python 2 и 3 версий;&lt;/li&gt;
@@ -259,14 +297,14 @@ $ git bronch
 &lt;li&gt;Возможность указания пути к директории (не только текущей);&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Так появился пакет &lt;a class="reference external" href="https://github.com/klen/pyserve"&gt;PyServe&lt;/a&gt;.&lt;/p&gt;
-&lt;img alt="sources/pyserve.png" src="sources/pyserve.png" /&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ pip install pyserve
+&lt;img alt="" src="/static/img/pyserve.png" /&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip install pyserve
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
 в установке. Теперь независимо от версии python вы можете запустить сервер одной командой:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$ serve
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;serve
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="python"></category><category term="http"></category></entry><entry><title>Filler. Пример простой игры на Canvas.</title><link href="http://klen.github.io/filler-ru.html" rel="alternate"></link><updated>2012-04-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-04-01:filler-ru.html</id><summary type="html">&lt;div class="note"&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary><category term="python"></category><category term="http"></category></entry><entry><title>Filler. Пример простой игры на Canvas.</title><link href="http://klen.github.io/filler.html" rel="alternate"></link><updated>2012-04-01T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-04-01:filler.html</id><summary type="html">&lt;div class="note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p class="last"&gt;&lt;a class="reference external" href="http://ru.wikipedia.org/wiki/Canvas_(HTML)"&gt;Canvas&lt;/a&gt; HTML API для отрисовки графики. Поддерживается всеми
 &lt;strong&gt;современными&lt;/strong&gt; браузерами (в IE начиная с 9й версии)&lt;/p&gt;
@@ -300,7 +338,7 @@ $ git bronch
 &lt;li&gt;&lt;a class="reference external" href="http://habrahabr.ru/post/119772/"&gt;Canvas FAQ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://habrahabr.ru/post/121046/"&gt;Основы LibCanvas&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="canvas"></category><category term="javascript"></category><category term="filler"></category><category term="libcanvas"></category><category term="atomjs"></category></entry><entry><title>Flask. Примеры opensource проектов</title><link href="http://klen.github.io/notes-flask-opensource-ru.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-02-18:notes-flask-opensource-ru.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; — легковесный веб-фреймворк для python. Создатель стремится сделать его
+</summary><category term="canvas"></category><category term="javascript"></category><category term="filler"></category><category term="libcanvas"></category><category term="atomjs"></category></entry><entry><title>Flask. Примеры opensource проектов</title><link href="http://klen.github.io/notes-flask-opensource.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-02-18:notes-flask-opensource.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; — легковесный веб-фреймворк для python. Создатель стремится сделать его
 простым, легким в освоении для новичков и легко расширяемым.&lt;/p&gt;
 &lt;p&gt;Ядро микрофреймворка содержит следующие возможности:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -334,7 +372,7 @@ $ git bronch
 &lt;/ul&gt;
 &lt;p&gt;Если вам известны другие хорошие примеры, я с удовольствием добавлю их в этот
 список.&lt;/p&gt;
-</summary><category term="flask"></category></entry><entry><title>Ссылки и заметки</title><link href="http://klen.github.io/notes-welcome-ru.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-02-18:notes-welcome-ru.html</id><summary type="html">&lt;p&gt;Новый дизайн сайта и новая рубрика «Заметки». Формат полноценной статьи не
+</summary><category term="flask"></category></entry><entry><title>Ссылки и заметки</title><link href="http://klen.github.io/notes-welcome.html" rel="alternate"></link><updated>2012-02-18T00:00:00+04:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2012-02-18:notes-welcome.html</id><summary type="html">&lt;p&gt;Новый дизайн сайта и новая рубрика «Заметки». Формат полноценной статьи не
 всегда удобен когда хочется поделиться мыслями или найденной в интернете
 информацией. Для этих целей и предназначен данный раздел.&lt;/p&gt;
 </summary><category term="notes"></category></entry></feed>

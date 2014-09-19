@@ -1,4 +1,4 @@
-klen.github.com
-===============
+klen.github.io
+==============
 
-My github powered site.
+Sources of my github powered site: http://klen.github.io

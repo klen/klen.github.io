@@ -7,7 +7,7 @@ Pyradio — простой консольный радиоплеер
 :slug: pyradio
 :tags: python,radio
 
-.. image:: sources/pyradio.png
+.. image:: /static/img/pyradio.png
 
 Очень простой клиент для прослушивания онлайн-радиостанций. Ничего лишнего.
 
@@ -17,7 +17,7 @@ Pyradio — простой консольный радиоплеер
 Я исправил ошибки, доработал консольный клиент и собрал пакет для PYPI.
 Теперь можно просто ввести:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     sudo pip install pyradio
     pyradio -p 15

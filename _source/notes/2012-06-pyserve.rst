@@ -15,13 +15,13 @@ PyServe. Веб-сервер одной командой
 
 Для python версий 2.*:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ python -m SimpleHTTPServer
 
 Для python версий 3.*:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ python -m http.server
 
@@ -38,16 +38,16 @@ PyServe. Веб-сервер одной командой
 
 Так появился пакет PyServe_.
 
-.. image:: sources/pyserve.png
+.. image:: /static/img/pyserve.png
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pip install pyserve
 
 Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
 в установке. Теперь независимо от версии python вы можете запустить сервер одной командой:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ serve
 

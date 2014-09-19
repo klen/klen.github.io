@@ -63,9 +63,8 @@ Pyflakes_ и Rope_). Вот его основные возможности:
 Чтобы продемонстрировать работу плагина я снял небольшой скринкаст (извиняюсь за
 качество, это мой первый опыт). Итак **Python-mode**:
 
-.. raw:: html
-
-    <iframe width="560" height="315" src="http://www.youtube.com/embed/67OZNp9Z0CQ" frameborder="0" allowfullscreen></iframe>
+.. youtube:: 67OZNp9Z0CQ
+    :align: center
 
 Скачать плагин можно с Github: https://github.com/klen/python-mode
 

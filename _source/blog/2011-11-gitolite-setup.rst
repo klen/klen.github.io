@@ -6,14 +6,7 @@
 :lang: ru
 :slug: gitolite-setup
 :tags: hosting, git, gitolite
-
-----
-
-**Создание и настройка полноценного сервера разработки:**
-
-1. `Год облачного хостинга от Amazon — бесплатно <../aws-ru.html>`_
-2. **Настройка сервера. Gitolite — хостинг git-репозиториев**
-3. `Настройка сервера. Создаем и разворачиваем django-проект <../deploy-setup-ru.html>`_
+:parts: deploy_old
 
 ----
 

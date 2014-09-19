@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,pep8,pyflakes,mccabe," />
+        <meta name="description" content="Pylama — аудит python-кода" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Pylama — аудит python-кода" />
+
+        <title>Pylama — аудит python-кода — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2012-09-02 00:00:00">02.09.2012</time>
+            <span>in <a href="./category/Notes.html">Notes</a></span>
+            <h1 class="article_header_title">Pylama — аудит python-кода</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/pep8.html">pep8</a> , </span> <span><a href="./tag/pyflakes.html">pyflakes</a> , </span> <span><a href="./tag/mccabe.html">mccabe</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="mac.html" class="article_paginator_right_link">OSX - Программы которые я использую</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="pyradio.html" class="article_paginator_left_link">Pyradio — простой консольный радиоплеер</a>
+        </div></div>
+
+        <div class="article_content">
+            <p>Процесс <a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F">непрерывной интеграции</a> программных продуктов всегда был очень
+важен для разработке. В моем случае я не ограничеваюсь только тестированием
+(юнит или интеграционным), но также провожу и интроспекцию кода на соответствие
+стандартам или например ограничение логической вложенности.</p>
+<p>Во-втором случае код моих проектов автоматически прогоняется через ряд
+утилит: <strong>pyflakes</strong>, <strong>pep8</strong>, <strong>mccabe</strong>, <strong>pylint</strong>. Какое то время
+я использовал <a class="reference external" href="http://pypi.python.org/pypi/flake8/">Flake8</a> сочетающую в себе все эти линтеры. Но потом его
+возможностей мне стало не хватать. Схожий функционал уже был мной разработан
+для <a class="reference external" href="https://github.com/klen/python-mode">python-mode</a>, поэтому я вынес его в отдельный модуль.
+Так появился <a class="reference external" href="http://pypi.python.org/pypi/pylama/">Pylama</a>.</p>
+<p><a class="reference external" href="http://pypi.python.org/pypi/pylama/">Pylama</a> это утилита для проверки python-кода схожая с <a class="reference external" href="http://pypi.python.org/pypi/flake8/">Flake8</a>, но обладающая
+рядом улучшений.</p>
+<div class="section" id="id2">
+<h2>Установка</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pip install pylama
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id3">
+<h2>Использование</h2>
+<p>Рекурсивная проверка текущей диектории:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pylama
+</pre></div>
+</td></tr></table><p>Игнорировать определенные типы (группы типов) ошибок:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pylama -i W,E501
+</pre></div>
+</td></tr></table><p>Изменение набора линтеров:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pylama -l <span class="s2">&quot;pep8,mccabe&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id4">
+<h2>Опции</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pylama --help
+
+usage: pylama <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--ignore IGNORE<span class="o">]</span> <span class="o">[</span>--verbose<span class="o">]</span> <span class="o">[</span>--select SELECT<span class="o">]</span>
+            <span class="o">[</span>--linters LINTERS<span class="o">]</span> <span class="o">[</span>--complexity COMPLEXITY<span class="o">]</span> <span class="o">[</span>--skip SKIP<span class="o">]</span>
+            <span class="o">[</span>path<span class="o">]</span>
+
+Code audit tool <span class="k">for </span>python.
+
+positional arguments:
+path                  Path on file or directory.
+
+optional arguments:
+-h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+--ignore IGNORE, -i IGNORE
+                        Ignore errors and warnings.
+--verbose, -v         Verbose mode.
+--select SELECT, -s SELECT
+                        Select errors and warnings.
+--linters LINTERS, -l LINTERS
+                        Select errors and warnings.
+--complexity COMPLEXITY, -c COMPLEXITY
+                        Set mccabe complexity.
+--skip SKIP           Skip files <span class="o">(</span>Ex. messages.py<span class="o">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="pylama">
+<h2>Переключение настроек pylama из файла</h2>
+<p>В любом python-файле вы можете установить опции проверки для pylama.
+Они будут установлены только для данного файла.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">..</span> <span class="err">Где</span><span class="o">-</span><span class="err">то</span> <span class="err">в</span> <span class="err">коде</span>
+<span class="c"># Игнорировать все Warnings кроме W301</span>
+<span class="c"># lint_ignore=W:lint_select=W301</span>
+</pre></div>
+</td></tr></table><p>Для выключения проверки текущего файла:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># lint=0</span>
+</pre></div>
+</td></tr></table><p>Разработка <a class="reference external" href="http://pypi.python.org/pypi/pylama/">pylama</a> ведется на Github: <a class="reference external" href="http://github.com/klen/pylama">http://github.com/klen/pylama</a></p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="mac.html" class="article_paginator_right_link">OSX - Программы которые я использую</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="pyradio.html" class="article_paginator_left_link">Pyradio — простой консольный радиоплеер</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'pylama';
+        var disqus_url = './pylama.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

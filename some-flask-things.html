@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,flask,sqlalchemy," />
+        <meta name="description" content="Неделя с Flask" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Неделя с Flask" />
+
+        <title>Неделя с Flask — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2012-08-31 00:00:00">31.08.2012</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Неделя с Flask</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/flask.html">flask</a> , </span> <span><a href="./tag/sqlalchemy.html">sqlalchemy</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="concurrency-tests.html" class="article_paginator_right_link">Ускорение python тестов. Конкурентный запуск.</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="create-python-packages.html" class="article_paginator_left_link">Создание python-пакетов (aka setup scripts)</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#flask-foundation" id="id5">Flask-Foundation</a></li>
+<li><a class="reference internal" href="#flask-mixer" id="id6">Flask-Mixer</a></li>
+<li><a class="reference internal" href="#flask-collect" id="id7">Flask-Collect</a></li>
+<li><a class="reference internal" href="#id3" id="id8">Заключение</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Стал использовать <a class="reference external" href="http://flask.pocoo.org/">Flask</a> для небольших проектов. <a class="reference external" href="http://djangoproject.org/">Django</a> неимоверно разрослась,
+да и просто замылила глаз. В процессе работы родилось несколько полезных приложений.</p>
+<div class="section" id="flask-foundation">
+<h2><a class="toc-backref" href="#id5">Flask-Foundation</a></h2>
+<p>Я <a class="reference external" href="../notes-flask-opensource-ru.html">уже писал</a> про open-source проекты на <a class="reference external" href="http://flask.pocoo.org/">Flask</a> с хорошим исходным кодом.
+Но как показывает практика, для быстрого старта их недостаточно.</p>
+<p>Я собрал свою сборку: <a class="reference external" href="http://github.com/klen/Flask-Foundation">http://github.com/klen/Flask-Foundation</a> базового
+проекта на <a class="reference external" href="http://flask.pocoo.org/">Flask</a>, содержащую следующие вещи:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/mrjoes/flask-admin/">Flask-Admin</a> — администрирование;</li>
+<li><a class="reference external" href="http://github.com/rduplain/flask-script">Flask-Script</a> — автоматизация;</li>
+<li><a class="reference external" href="http://packages.python.org/Flask-Cache/">Flask-Cache</a> — кеширование;</li>
+<li><a class="reference external" href="http://flask.pocoo.org/docs/extensiondev/">Flask-Debugtoolbar</a> — отладка;</li>
+<li><a class="reference external" href="http://github.com/mitsuhiko/flask-babel">Flask-Babel</a> — локализация;</li>
+<li><a class="reference external" href="http://github.com/rduplan/flask-wtf">Flask-WTF</a> — поддержка WTForms;</li>
+<li><a class="reference external" href="http://github.com/mbr/flask-bootstrap">Flask-Bootstrap</a> — стилизация;</li>
+<li><a class="reference external" href="http://packages.python.org/Flask-Mail/">Flask-Mail</a> — почта;</li>
+<li><a class="reference external" href="http://github.com/mitsuhiko/flask-sqlalchemy">Flask-SQLAlchemy</a> — ORM, базы данных;</li>
+<li><a class="reference external" href="http://packages.python.org/Flask-Testing/">Flask-Testing</a> — тестирование;</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/alembic/0.3.5">Alembic</a> — миграции бд;</li>
+</ul>
+<p>Проект содержит богатый функционал и может послужить хорошим примером для быстрого старта.</p>
+</div>
+<div class="section" id="flask-mixer">
+<h2><a class="toc-backref" href="#id6">Flask-Mixer</a></h2>
+<p>Фабрика генерации объектов из <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> моделей. Создавалась мной в целях тестирования,
+но может использоваться и в других случаях (пакетная генерация данных).</p>
+<p>Адрес на <a class="reference external" href="http://github.com">Github</a>: <a class="reference external" href="http://github.com/klen/Flask-Mixer">http://github.com/klen/Flask-Mixer</a></p>
+<p>Примеры работы:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Простая генерация модели</span>
+<span class="n">user1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user1</span><span class="o">.</span><span class="n">id</span> <span class="ow">and</span> <span class="n">user1</span><span class="o">.</span><span class="n">username</span> <span class="ow">and</span> <span class="n">user1</span><span class="o">.</span><span class="n">created_at</span>
+<span class="k">assert</span> <span class="n">user1</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">50</span>
+<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">user</span>
+
+<span class="c"># Модель может быть задана строкой</span>
+<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;app.models.Role&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">role1</span><span class="o">.</span><span class="n">user</span>
+<span class="k">assert</span> <span class="n">role1</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">role1</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c"># Генерация объекта с предопределенными значениями</span>
+<span class="n">user2</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user2</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;test&#39;</span>
+
+<span class="c"># Это могут быть значения для референс-объектов</span>
+<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Role</span><span class="p">,</span> <span class="n">user__username</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">role2</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;test2&#39;</span>
+
+<span class="c"># Значение может быть функцией</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="s">&#39;callable_value&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;callable_value&#39;</span>
+
+<span class="c"># Принудительная установка случайного значения для поля с default value</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">score</span> <span class="o">!=</span> <span class="mi">50</span>
+
+<span class="c"># Установка случайного значения из базы данных</span>
+<span class="n">profiles</span> <span class="o">=</span> <span class="n">Profile</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">profile</span> <span class="ow">in</span> <span class="n">profiles</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="flask-collect">
+<h2><a class="toc-backref" href="#id7">Flask-Collect</a></h2>
+<p>Нехватку такого приложения я почувствовал при первом же деплое <a class="reference external" href="http://flask.pocoo.org/">Flask</a>-проекта.
+Как известно раздавать статичные файлы (css, js и тп) питоном в нашем
+бизнесе не комильфо. Обычно проксирующий WSGI веб-сервер отдает их
+из определенной папки напрямую. Для сборки таких файлов из приложений проекта
+в <a class="reference external" href="http://djangoproject.org/">Django</a> существует встроенное приложение.</p>
+<p>Во <a class="reference external" href="http://flask.pocoo.org/">Flask</a> ничего подобного не нашлось. Есть инструкции в документации где
+рекомендовано отдавать статичные файлы веб-сервером, но нет ни слова о том
+как их собирать. Не найдя ничего на Pypi я написал свое.</p>
+<p>Использование:</p>
+<p>В коде:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">collect</span> <span class="o">=</span> <span class="n">Collect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">collect</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>или из консоли при использовании <a class="reference external" href="http://github.com/rduplain/flask-script">Flask-Script</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>$ ./manage.py collect
+</pre></div>
+</td></tr></table><p>Адрес на <a class="reference external" href="http://github.com">Github</a>: <a class="reference external" href="http://github.com/klen/Flask-Collect">http://github.com/klen/Flask-Collect</a></p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">Заключение</a></h2>
+<p>В целом <a class="reference external" href="http://flask.pocoo.org/">Flask</a> мне нравится. Код чище, его меньше, работает быстрее.
+<a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> на голову уделывает на текущий момент <a class="reference external" href="http://djangoproject.org/">Django</a> ORM.</p>
+<p>Но порог вхождения гораздо выше, как ни странно, множество задач уже
+решенных сообществом <a class="reference external" href="http://djangoproject.org/">Django</a> тут приходится решать заново.</p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="concurrency-tests.html" class="article_paginator_right_link">Ускорение python тестов. Конкурентный запуск.</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="create-python-packages.html" class="article_paginator_left_link">Создание python-пакетов (aka setup scripts)</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'some-flask-things';
+        var disqus_url = './some-flask-things.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

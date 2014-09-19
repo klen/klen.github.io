@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,uwsgi,nginx,supervisor,django," />
+        <meta name="description" content="Запуск django и других python проектов при помощи uwsgi+nginx" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Запуск django и других python проектов при помощи uwsgi+nginx" />
+
+        <title>Запуск django и других python проектов при помощи uwsgi+nginx — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2011-07-15 00:00:00">15.07.2011</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Запуск django и других python проектов при помощи uwsgi+nginx</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/uwsgi.html">uwsgi</a> , </span> <span><a href="./tag/nginx.html">nginx</a> , </span> <span><a href="./tag/supervisor.html">supervisor</a> , </span> <span><a href="./tag/django.html">django</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="urbanairship.html" class="article_paginator_right_link">Urbanairship, push-уведомления для мобильных приложений</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="git-markdown.html" class="article_paginator_left_link">Django-markdown — поддержка Markdown в Django</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id7">Установка зависимостей</a></li>
+<li><a class="reference internal" href="#id3" id="id8">Конфигурирование и запуск</a></li>
+<li><a class="reference internal" href="#id4" id="id9">Запуск</a></li>
+<li><a class="reference internal" href="#django" id="id10">Настройка django-проекта</a></li>
+<li><a class="reference internal" href="#id5" id="id11">Управление</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Редакция от 11/11/2011</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Статья описывает развертывание python-проектов на linux сервере с использованием
+<a class="reference external" href="http://nginx.net/">nginx</a>, <a class="reference external" href="http://supervisord.org/">supervisor</a>, <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a>. В интернете уже есть множество материалов на эту тему,
+ниже находится небольшая систематизация моего опыта.</p>
+</div>
+<p>Практически в каждом веб-проекте используется легковесный веб-сервер (<strong>nginx</strong>,
+<strong>lighthttpd</strong> и тд), как минимум для генерации статики. При этом довольно часто для
+динамической части проекта применяют apache + модули. В один момент мне надоело
+ставить nginx и apache одновременно и теперь я использую связку <a class="reference external" href="http://nginx.net/">nginx</a> + <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a>
+из-за простоты развертывания, удобства обслуживания и быстродействия.</p>
+<p><strong>UWSGI</strong> — быстрый, легко настраиваемый сервер для <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a> приложений, написанный на <strong>C</strong>.</p>
+<p>Далее я покажу как настроить и запустить python <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a> приложение (в том числе
+и с использованием <a class="reference external" href="http://django-project.com">Django</a>).</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Сравнение производительности WSGI серверов:
+<a class="reference external" href="http://nichol.as/benchmark-of-python-web-servers">http://nichol.as/benchmark-of-python-web-servers</a></p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id7">Установка зависимостей</a></h2>
+<p>Для начала необходимо установить <a class="reference external" href="http://nginx.net/">nginx</a>, <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a>. Последние версии <a class="reference external" href="http://nginx.net/">nginx</a> уже
+содержат поддержку <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a>, поэтому вручную собирать ничего не надо.</p>
+<s>Я предпочитаю устанавливать <b>uwsgi</b> с помощью <b>pip</b>.</s><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Рассмотрено для debian-based дистрибутивов. Права суперпользователя.</p>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># nginx и uwsgi устанавливаем прямо из репозиториев</span>
+<span class="c"># для последних версий uwsgi неоюходимо дополнительно</span>
+<span class="c"># установить пакет: uwsgi-plugin-python</span>
+apt-get install nginx uwsgi uwsgi-plugin-python
+</pre></div>
+</td></tr></table><p>Для управления <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a> и множеством других процессов, я использую <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>apt-get install supervisor
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Если вы получите ошибку <strong>ImportError</strong> поставьте python-модуль
+<strong>elementtree</strong> и повторите установку <a class="reference external" href="http://supervisord.org/">supervisor</a>.</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">Конфигурирование и запуск</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Файлы с исходным кодом для данной статьи можно найти по адресу:
+<a class="reference external" href="https://github.com/klen/klen.github.com/tree/master/_code/uwsgi">https://github.com/klen/klen.github.com/tree/master/_code/uwsgi</a></p>
+</div>
+<p>Предположим у нас есть python-проект расположенный состоящий
+из очень простого <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a> приложения (<cite>wsgi.py</cite>):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s">&#39;200 OK&#39;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;Pong!&#39;</span>
+
+    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s">&#39;text/plain&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)))]</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">output</span><span class="p">]</span>
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Здесь и далее предполагается, что корневой путь для проекта
+<cite>/home/klen/Projects/klen.github.com/_code/uwsgi</cite></p>
+</div>
+<p>Создадим конфигурационный файл с настройками <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a> для запуска нашего приложения: <cite>uwsgi.xml</cite></p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">В данном примере рассмотрен XML формат, но можно использовать
+INI или параметры строки запуска</p>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">&lt;!-- UWSGI XML Configuration File --&gt;</span>
+<span class="nt">&lt;uwsgi&gt;</span>
+
+    <span class="c">&lt;!-- Сокет для передачи данных --&gt;</span>
+    <span class="nt">&lt;socket&gt;</span>/home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.sock<span class="nt">&lt;/socket&gt;</span>
+
+    <span class="c">&lt;!-- Путь к виртуальному окружению --&gt;</span>
+    <span class="c">&lt;!-- &lt;home&gt;/home/klen/Projects/klen.github.com/_code/uwsgi/.virtualenv&lt;/home&gt; --&gt;</span>
+
+    <span class="c">&lt;!-- Нам понадобится включенный python плагин --&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>python<span class="nt">&lt;/plugins&gt;</span>
+
+    <span class="c">&lt;!-- Дополнительный python-путь --&gt;</span>
+    <span class="nt">&lt;pythonpath&gt;</span>/home/klen/Projects/klen.github.com/_code/uwsgi<span class="nt">&lt;/pythonpath&gt;</span>
+
+    <span class="c">&lt;!-- Модуль python с определением wsgi приложения --&gt;</span>
+    <span class="nt">&lt;module&gt;</span>wsgi<span class="nt">&lt;/module&gt;</span>
+
+    <span class="c">&lt;!-- Количество процессов --&gt;</span>
+    <span class="nt">&lt;processes&gt;</span>10<span class="nt">&lt;/processes&gt;</span>
+
+    <span class="c">&lt;!-- Максимальное количество соединений для каждого процесса --&gt;</span>
+    <span class="nt">&lt;max-requests&gt;</span>5000<span class="nt">&lt;/max-requests&gt;</span>
+
+    <span class="c">&lt;!-- Максимальный размер запроса --&gt;</span>
+    <span class="nt">&lt;buffer-size&gt;</span>32768<span class="nt">&lt;/buffer-size&gt;</span>
+
+    <span class="c">&lt;!-- Убивать каждое соединение требующее больше 30 сек для обработки --&gt;</span>
+    <span class="nt">&lt;harakiri&gt;</span>30<span class="nt">&lt;/harakiri&gt;</span>
+
+    <span class="nt">&lt;reload-mercy&gt;</span>8<span class="nt">&lt;/reload-mercy&gt;</span>
+    <span class="nt">&lt;master</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;no-orphans</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/uwsgi&gt;</span>
+</pre></div>
+</td></tr></table><p>Создадим конфигурационный файл с настройками для <a class="reference external" href="http://supervisord.org/">supervisor</a>: <cite>supervisor.conf</cite></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">[program:example]</span>
+<span class="na">command</span><span class="o">=</span><span class="s">/usr/bin/uwsgi -x /home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.xml</span>
+<span class="na">user</span><span class="o">=</span><span class="s">www-data</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi/logs/uwsgi.log</span>
+<span class="na">stderr_logfile</span><span class="o">=</span><span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi/logs/uwsgi_err.log</span>
+<span class="na">directory</span><span class="o">=</span><span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+<span class="na">stopsignal</span><span class="o">=</span><span class="s">QUIT</span>
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Обычно я держу конфигурацию <a class="reference external" href="http://supervisord.org/">supervisor</a> в проекте и создаю
+на нее симлинки в <cite>/etc/supervisor/conf.d</cite></p>
+</div>
+<p>Настроим <strong>server</strong> в <a class="reference external" href="http://nginx.net/">nginx</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">upstream</span> <span class="s">example.proxy</span> <span class="p">{</span>
+    <span class="kn">ip_hash</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="s">unix:///home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.sock</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+
+    <span class="kn">listen</span>      <span class="mi">4444</span><span class="p">;</span>
+
+    <span class="c1"># В продакшен добавьте сюда свой домен</span>
+    <span class="c1"># server_name example.com;</span>
+
+    <span class="kn">access_log</span>  <span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi/logs/nginx_access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span>   <span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi/logs/nginx_error.log</span><span class="p">;</span>
+
+    <span class="c1"># Статика у нас будет хранится в папк static в корне проекта</span>
+    <span class="kn">location</span> <span class="s">^~</span> <span class="s">/static/</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/var/www/example</span><span class="p">;</span>
+        <span class="kn">expires</span> <span class="s">max</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/favicon.ico</span> <span class="p">{</span>
+        <span class="kn">rewrite</span> <span class="s">(.*)</span> <span class="s">/static/favicon.ico</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/robots.txt</span> <span class="p">{</span>
+        <span class="kn">rewrite</span> <span class="s">(.*)</span> <span class="s">/static/robots.txt</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">uwsgi_pass</span>  <span class="s">example.proxy</span><span class="p">;</span>
+        <span class="kn">include</span>     <span class="s">uwsgi_params</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id9">Запуск</a></h2>
+<p>Создадим ссылку на файлы конфигурации проекта для <a class="reference external" href="http://nginx.net/">nginx</a> и <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># создадим папку для логов</span>
+mkdir logs
+
+<span class="c"># nginx</span>
+ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/nginx.conf /etc/nginx/sites-enabled/uwsgi-example.conf
+
+<span class="c"># supervisor</span>
+ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/supervisor.conf /etc/supervisor/conf.d/uwsgi-example.conf
+</pre></div>
+</td></tr></table><p>Дадим права на запись всем пользователям:</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">По хорошему надо просто изменить владельца проекта на www-data.</p>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>chmod a+w -R /home/klen/Projects/klen.github.com/_code/uwsgi
+</pre></div>
+</td></tr></table><p>Перезапустим <a class="reference external" href="http://nginx.net/">nginx</a> и <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre>/etc/init.d/nginx restart
+/etc/init.d/supervisor stop
+/etc/init.d/supervisor start
+</pre></div>
+</td></tr></table><p>Если все прошло успешно, то перейдя по адресу: <a class="reference external" href="http://localhost:4444/">http://localhost:4444/</a>
+вы должны увидеть наше работающее приложение.</p>
+</div>
+<div class="section" id="django">
+<h2><a class="toc-backref" href="#id10">Настройка django-проекта</a></h2>
+<p>Для <a class="reference external" href="http://django-project.com">Django</a> проекта вам необходимо просто изменить <cite>wsgi.py</cite>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">django.core.handlers.wsgi</span> <span class="kn">import</span> <span class="n">WSGIHandler</span>
+
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s">&#39;settings&#39;</span><span class="p">)</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">WSGIHandler</span><span class="p">()</span>
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Предпологается, что проект находится в той же директории,
+в противном случае добавьте необходимые пути в sys.path</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id11">Управление</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Старт проекта</span>
+supervisorctl start example
+
+<span class="c"># Перезапуск проекта</span>
+supervisorctl restart example
+
+<span class="c"># Останов проекта</span>
+supervisorctl stop example
+
+<span class="c"># Статус проекта</span>
+supervisorctl status example
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Также вы можете использовать параметр <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a> <strong>touch-reload</strong></p>
+</div>
+<p>Данный способ успешно применяется мной в боевой и девелоперской среде.
+Например так работают сайты <a class="reference external" href="http://intaxi.ru">http://intaxi.ru</a> и <a class="reference external" href="http://venturebrothers.ru">http://venturebrothers.ru</a>.</p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="urbanairship.html" class="article_paginator_right_link">Urbanairship, push-уведомления для мобильных приложений</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="git-markdown.html" class="article_paginator_left_link">Django-markdown — поддержка Markdown в Django</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'uwsgi-nginx';
+        var disqus_url = './uwsgi-nginx.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

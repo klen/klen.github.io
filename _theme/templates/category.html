@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block title %}{{ super() }} :: {{ category }}{% endblock %}
+
+{% block content %}
+
+    <h1><i class="fa fa-arrow-right"></i> {{ category }}</h1>
+
+    {% if category == 'notes' %}
+        Ссылки и заметки о веб-технологиях.
+        <br/><br/>
+    {% elif category == 'blog' %}
+        Статьи о веб-разработке.
+        <br/><br/>
+        <ul class="tag-cloud">
+            {% for t in tag_cloud|sort %}
+                <li class="tag-cloud_item tag-cloud_{{ t.1 }} {% if tag == t.0 %} tag-cloud_active{% endif %}"><a href="{{ SITEURL }}/tag/{{ t.0 }}.html">{{ t.0 }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% for article in articles %}
+        {# Header #}
+        <header class="article_header">
+            <time class="article_header_time" datetime="{{ article.date }}">{{ article.date.strftime('%d.%m.%Y')}}</time>
+            {% if article.tags %}
+            <span class="article_meta">
+                [{%- for tag in article.tags -%}<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>{% if not loop.last %}, {% endif %}{%- endfor -%}]
+            </span>
+            {% endif %}
+            <a href="{{ SITEURL }}/{{article.url}}" class="article_header_link">{{ article.title }}</a>
+        </header>
+
+        <br/>
+
+    {% endfor %}
+
+    {# Google plus #}
+    {% include "_gplus.html" %}
+    
+{% endblock %}

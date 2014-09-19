@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ super() }} :: {{ page.title }}{% endblock %}
+
+{% block content %}        
+
+    <h1><i class="fa fa-arrow-right"></i> {{ page.title }}</h1>
+
+    <div class="article_content">
+        {{ page.content }}
+    </div>
+
+{% endblock %}

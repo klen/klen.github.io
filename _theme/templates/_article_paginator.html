@@ -1,0 +1,12 @@
+<div class="article_paginator zeta">
+    {%- if article.next_article_in_category %}
+        <div class="article_paginator_right">
+            <a href="{{ article.next_article_in_category.url }}" class="article_paginator_right_link">{{ article.next_article_in_category.title }}</a> Ctrl→
+        </div>
+    {%- endif -%}
+    {%- if article.prev_article_in_category %}
+        <div class="article_paginator_left">
+            ←Ctrl <a href="{{ article.prev_article_in_category.url }}" class="article_paginator_left_link">{{ article.prev_article_in_category.title }}</a>
+        </div>
+    {%- endif -%}
+</div>

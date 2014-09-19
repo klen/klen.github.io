@@ -1,7 +1,5 @@
 *.log
 *.pyc
 .DS_Store
-.env
 .ropeproject
 _
-env

@@ -27,7 +27,7 @@ Pylama_ это утилита для проверки python-кода схожа
 Установка
 ---------
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pip install pylama
 
@@ -37,19 +37,19 @@ Pylama_ это утилита для проверки python-кода схожа
 
 Рекурсивная проверка текущей диектории:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pylama
 
 Игнорировать определенные типы (группы типов) ошибок:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pylama -i W,E501
 
 Изменение набора линтеров:
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pylama -l "pep8,mccabe"
 
@@ -57,7 +57,7 @@ Pylama_ это утилита для проверки python-кода схожа
 Опции
 -----
 
-.. code-block:: shell 
+.. code-block:: sh 
 
     $ pylama --help
 

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="git," />
+        <meta name="description" content="Полезности для GIT" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Полезности для GIT" />
+
+        <title>Полезности для GIT — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2012-07-19 00:00:00">19.07.2012</time>
+            <span>in <a href="./category/Notes.html">Notes</a></span>
+            <h1 class="article_header_title">Полезности для GIT</h1><span class="article_meta">tags: <span><a href="./tag/git.html">git</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="pyradio.html" class="article_paginator_right_link">Pyradio — простой консольный радиоплеер</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="pyserve.html" class="article_paginator_left_link">PyServe. Веб-сервер одной командой</a>
+        </div></div>
+
+        <div class="article_content">
+            <p>Алиас для более компактного <cite>git status</cite>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.st <span class="s1">&#39;status -sb&#39;</span>
+<span class="nv">$ </span>git st
+</pre></div>
+</td></tr></table><p>Алиас для редактирования последнего коммита:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.amend <span class="s1">&#39;commit --amend -C HEAD&#39;</span>
+<span class="nv">$ </span>git amend
+</pre></div>
+</td></tr></table><p>Алиас для отмены последнего коммита:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.undo <span class="s1">&#39;reset --soft HEAD^&#39;</span>
+<span class="nv">$ </span>git undo
+</pre></div>
+</td></tr></table><p>Предпочитаемый мной вывод <cite>diff</cite>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.diff <span class="s1">&#39;diff --word-diff&#39;</span>
+<span class="nv">$ </span>git undo
+</pre></div>
+</td></tr></table><p>«Визуальная» история веток в консоли:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hist <span class="s2">&quot;log --pretty=format:&#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&#39; --graph --date=short&quot;</span>
+</pre></div>
+</td></tr></table><p>Удобная работа с <a class="reference external" href="https://github.com/nvie/gitflow/">Git-Flow</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hotfix <span class="s1">&#39;flow hotfix&#39;</span>
+<span class="nv">$ </span>git config --global alias.feature <span class="s1">&#39;flow feature&#39;</span>
+<span class="nv">$ </span>git config --global alias.release <span class="s1">&#39;flow release&#39;</span>
+</pre></div>
+</td></tr></table><p>Автоматическая коррекция опечаток во вводимых командах:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global help.autocorrect 1
+<span class="nv">$ </span>git comit
+<span class="nv">$ </span>git bronch
+</pre></div>
+</td></tr></table><p>Автоматическая запись разрешенных мердж конфликтов, для будущего использования:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global rerere.enabled 1
+</pre></div>
+</td></tr></table><p>Получение веток с не влитыми данными:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git branch --no-merged
+</pre></div>
+</td></tr></table><p>Список коммитов в ветке <em>branchA</em> отсуствующих в ветке <em>branchB</em>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git log branchA ^branchB
+</pre></div>
+</td></tr></table><p>Многие используют баш функцию <cite>__git_ps1</cite> для вывода названия текущей ветки,
+но не все знают, что ее можно сделать более информативной.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># In your .bashrc or .profile:</span>
+
+    <span class="nv">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span>1
+    <span class="nv">GIT_PS1_SHOWSTASHSTATE</span><span class="o">=</span>1
+
+    <span class="nv">$ </span><span class="o">(</span>develop *<span class="nv">$)</span>:
+</pre></div>
+</td></tr></table>
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="pyradio.html" class="article_paginator_right_link">Pyradio — простой консольный радиоплеер</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="pyserve.html" class="article_paginator_left_link">PyServe. Веб-сервер одной командой</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'some-git-things';
+        var disqus_url = './some-git-things.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

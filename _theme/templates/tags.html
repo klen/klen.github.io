@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block title %}{{ super() }} :: tags{% endblock %}
+
+{% block content %}
+    {% for tag, articles in tags|sort %}
+
+        <h3>{{ tag }}</h3>
+
+        {% for article in articles %}
+            {# Header #}
+            <header class="article_header">
+                <time class="article_header_time" datetime="{{ article.date }}">{{ article.date.strftime('%d.%m.%Y')}}</time>
+                {% if article.tags %}
+                <span class="article_meta">
+                    [{%- for tag in article.tags -%}<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>{% if not loop.last %}, {% endif %}{%- endfor -%}]
+                </span>
+                {% endif %}
+                <a href="{{article.url}}" class="article_header_link">{{ article.title }}</a>
+            </header>
+
+            <br/>
+        {% endfor %}
+
+    {% endfor %}
+{% endblock %}

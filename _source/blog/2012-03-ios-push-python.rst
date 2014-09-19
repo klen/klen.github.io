@@ -13,7 +13,7 @@
 
 ----
 
-.. image:: sources/push.jpg
+.. image:: /static/img/push.jpg
 
 Я уже писал `статью <../urbanairship-ru.html>`_ про реализацию Push_ уведомлений с использованием сервиса Urbanairship_.
 У этого способа есть ряд преимуществ и недостатков. Преимущества я описал в вышеприведенной статье, недостаки сервиса в
@@ -31,7 +31,7 @@ IOS_ Push_ уведомления бывают двух видов: локаль
 клиента и в данной статье не рассматриваются. Удаленные уведомления отсылаются со стороны сервера на клиентское приложение
 при помощи службы APNS_ (Apple Push Notification Service). Процесс выглядит следующим образом:
 
-.. image:: sources/apns-scheme.jpg
+.. image:: /static/img/apns-scheme.jpg
 
 1. Приложение регистрируется в APNS_ и получает Device Token;
 2. Приложение сообщает Device Token нашему серверу;
@@ -43,21 +43,21 @@ IOS_ Push_ уведомления бывают двух видов: локаль
 
 Push_ сертификаты для приложений можно получить на `iOS Provisioning Portal <https://developer.apple.com/ios/manage/overview/index.action>`_.
 
-.. image:: sources/ios-push.png
+.. image:: /static/img/ios-push.png
 
 Выберите свое приложение и зайдите в раздел настроек: ``Configure``.
 
-.. image:: sources/ios-push2.png
+.. image:: /static/img/ios-push2.png
 
 Скачайте production и development сертификаты (``*.cer``). Возможно вам потребуется предварительно включить
 Push_ нотификации для своего приложения и создать их.
 
-.. image:: sources/ios-push3.png
+.. image:: /static/img/ios-push3.png
 
 Дальнейшие действия лучше провести на компьютере с OSX. Импортируйте полученные сертификаты и экспортируйте их в формате **p12**.
 Вероятно вам потребуется ключ разработчика с которым были созданы CSR запросы.
 
-.. image:: sources/ios-push4.png
+.. image:: /static/img/ios-push4.png
 
 Полученный файл в формате **p12** необходимо переконвертировать в pem. Для этой задачи я написал простенький shell скрипт.
 

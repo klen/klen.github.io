@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="https,ssl,nginx,csr,verysign,digicert,deploy," />
+        <meta name="description" content="Настройка HTTPS для чайников" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Настройка HTTPS для чайников" />
+
+        <title>Настройка HTTPS для чайников — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2012-03-12 00:00:00">12.03.2012</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Настройка HTTPS для чайников</h1><span class="article_meta">tags: <span><a href="./tag/https.html">https</a> , </span> <span><a href="./tag/ssl.html">ssl</a> , </span> <span><a href="./tag/nginx.html">nginx</a> , </span> <span><a href="./tag/csr.html">csr</a> , </span> <span><a href="./tag/verysign.html">verysign</a> , </span> <span><a href="./tag/digicert.html">digicert</a> , </span> <span><a href="./tag/deploy.html">deploy</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="ios-push-python.html" class="article_paginator_right_link">Серверная реализация IOS Push уведомлений (python)</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="django-snippets.html" class="article_paginator_left_link">Несколько полезных сниппетов для джанго</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id6">Введение</a></li>
+<li><a class="reference internal" href="#csr" id="id7">Запрос на получение сертификата (CSR)</a></li>
+<li><a class="reference internal" href="#ssl-90" id="id8">Получение подписанных SSL ключей на 90-дневной период</a></li>
+<li><a class="reference internal" href="#nginx-ssl" id="id9">Настройка Nginx для работы с SSL</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p><strong>HTTPS</strong> (Hypertext Transfer Protocol Secure) — расширение протокола <strong>HTTP</strong> поддерживающее шифрование. Данные, передаваемые по протоколу <strong>HTTPS</strong> «упаковываются» в криптографический протокол <a class="reference external" href="http://ru.wikipedia.org/wiki/SSL">SSL</a> или <a class="reference external" href="http://ru.wikipedia.org/wiki/TCL">TLS</a>, тем самым обеспечивается защита этих данных. В отличие от <strong>HTTP</strong> для <strong>HTTPS</strong> по умолчанию используется <a class="reference external" href="http://ru.wikipedia.org/wiki/TCP">TCP</a>-порт 443.</p>
+<p>В данной статье я расскажу о том, как бесплатно (90 дней) получить сертифицированные <a class="reference external" href="http://ru.wikipedia.org/wiki/SSL">SSL</a> ключи для своего сервера и настроить <strong>HTTPS</strong> соединения.
+На данный момент в русскоязычных источниках эта информация представлена разрозненно, поэтому данную статью можно использовать как руководство
+по получению подписанных ключей и быстрой настройке <strong>HTTPS</strong>.</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id6">Введение</a></h2>
+<p>Чтобы подготовить сервер для обработки https-соединений, администратор должен получить и установить в систему сертификат для этого веб-сервера.
+Сертификат можно создать самостоятельно с помощью <a class="reference external" href="http://ru.wikipedia.org/wiki/Unix">Unix</a> утилиты <cite>ssl-ca</cite> из пакета <strong>OpenSSL</strong>, но подписанный данным методом сертификат не
+является безопасным и большинство браузеров выдают предупреждения об этом. Часть агентов также блокирует сайты с такими сертификатами,
+например IPhone приложения.</p>
+<p>Сертификаты подписанные компаниями-сертификаторами избавлены от данной проблемы, но требуют оплаты для использования. Основные компании-сертификаторы:
+<a class="reference external" href="http://www.verisign.com/">VerySign</a>, <a class="reference external" href="http://www.ssl.com/">SSLCOM</a>, <a class="reference external" href="http://www.digicert.com/">DigiCert</a> и другие. Так сложилось, что я предпочитаю использовать <a class="reference external" href="http://www.ssl.com/">SSLCOM</a> в основном из-за их 90-дневного бесплатного периода
+использования для новых ключей, получение которого и будет описано в данной статье. За три месяца можно основательно протестировать проект, понять приоритеты,
+сделать полноценный запуск и в дальнейшем уже решить будете ли вы продлевать действие сертификата за деньги.</p>
+</div>
+<div class="section" id="csr">
+<h2><a class="toc-backref" href="#id7">Запрос на получение сертификата (CSR)</a></h2>
+<p><strong>CSR</strong> — запрос на получение сертификата, требуется для подписи ключей компанией-сертификатором. Я создаю его в консоли <a class="reference external" href="http://ru.wikipedia.org/wiki/Unix">Unix</a>-систем,
+например в терминале на стороне сервера. Если у вас нет такой возможности, вы можете создать <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> онлайн: <a class="reference external" href="https://www.reg.ru/sslcertificate/generate_key_and_csr">https://www.reg.ru/sslcertificate/generate_key_and_csr</a></p>
+<p>Из консоли:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Создадим директорию для работы</span>
+mkdir -p ~/csr <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/csr
+
+<span class="c"># Создадим приватный ключ и запрос на сертификат</span>
+openssl req -new -newkey rsa:2048 -nodes -keyout &lt;your_domain_name&gt;.key -out &lt;your_domain_name&gt;.csr
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p>Все поля <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> должны заполняться на английском. Код страны — двух буквенный <a class="reference external" href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">Alpha2</a> (RU для России).</p>
+<p><tt class="docutils literal">your_domain_name</tt> — имя домена для которого создается сертификат</p>
+<p class="last"><strong>Common name</strong> — адрес домена (без www). Wildcart записи вида *.domen.com не поддерживаются на бесплатном тарифе.</p>
+</div>
+<p>Пример заполнения:</p>
+<img alt="example" src="/images/https_0.png" />
+<p>Скопируйте полученный ключ <cite>&lt;your_domain_name&gt;.key</cite> и файл запроса <cite>&lt;your_domain_name&gt;.csr</cite> в надежное место.</p>
+</div>
+<div class="section" id="ssl-90">
+<h2>Получение подписанных <a class="reference external" href="http://ru.wikipedia.org/wiki/SSL">SSL</a> ключей на 90-дневной период</h2>
+<p>Подписывать ключи будем у <a class="reference external" href="http://ssl.com">http://ssl.com</a>. Для начала работы войдите на сервис или <a class="reference external" href="http://ssl.com/users/new">зарегистрируйтесь</a>.</p>
+<p>После входа попадаем на <a class="reference external" href="http://ssl.com/account">страницу задач</a> и выбираем <tt class="docutils literal">buy certificate</tt> для продолжения.</p>
+<img alt="page" src="/images/https_1.png" />
+<p>На открывшейся странице выбираем <tt class="docutils literal">Free SSL</tt>.</p>
+<img alt="page" src="/images/https_2.png" />
+<p>Нажимаем кнопку <tt class="docutils literal">GET</tt> и попадаем на первый шаг процесса подписания нашего сертификата. В открывшейся странице выберите чекбокс
+<tt class="docutils literal">I want to submit my CSR now</tt> для добавления полученного нами на предыдущем шаге <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a>.</p>
+<p>В данной статье мы будем настраивать <a class="reference external" href="http://ru.wikipedia.org/wiki/Nginx">Nginx</a> поэтому из выпадающего списка я выбрал соответствующую опцию.</p>
+<img alt="page" src="/images/https_3.png" />
+<p>Если <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> запрос был сформирован правильно, то на следующем шаге вас попросят принять условия использования. После принятия
+вы попадаете в форму ввода дополнительной информации, где от вас потребуется ввод адреса и почтового индекса. Далее информация
+для контактных лиц.</p>
+<p>Пятый шаг — подтверждение домена. Возможно два варианта, размещение файла на сервере или подтверждение по электронной почте.
+Адреса требуемые для подтверждения через email не всегда доступны, поэтому я обычно выкладываю на сервер полученный файл.</p>
+<img alt="page" src="/images/https_4.png" />
+<p>Пример конфигурации для <a class="reference external" href="http://ru.wikipedia.org/wiki/Nginx">Nginx</a> (файл <cite>D3AD7299FFC0954B0FD047063ABB7EFD.txt</cite> лежит в папке <cite>/home/user</cite>):</p>
+<pre class="literal-block">
+location = /D3AD7299FFC0954B0FD047063ABB7EFD.txt {
+    alias /home/user/D3AD7299FFC0954B0FD047063ABB7EFD.txt;
+}
+</pre>
+<p>После получения подписанного сертификата можно будет удалить файл и изменения в настройках.</p>
+<p>Если проверку вы прошли успешно, остается только ждать подтверждения от компании-сертификатора, что может занять от нескольких
+часов до суток.</p>
+<img alt="page" src="/images/https_5.png" />
+<p>После добавления ключей компанией сертификатором вам будет выслано уведомительное письмо. Откройте страницу заказа сертификата и
+загрузите его к себе на компьютер. Для <a class="reference external" href="http://ru.wikipedia.org/wiki/Nginx">Nginx</a> вы получите файл <tt class="docutils literal">ca_bundle.txt</tt></p>
+<img alt="" src="/images/https_6.png" />
+<p>Полученный файл переименуйте в формат <tt class="docutils literal"><span class="pre">&lt;your_domain_name&gt;.bundle.crt</span></tt> и вместе с ключом который мы создали на первом шаге
+(<tt class="docutils literal"><span class="pre">&lt;your_domain_name&gt;.key</span></tt>) положите на сервер.</p>
+</div>
+<div class="section" id="nginx-ssl">
+<h2><a class="toc-backref" href="#id9">Настройка Nginx для работы с SSL</a></h2>
+<p>Для включения <a class="reference external" href="http://ru.wikipedia.org/wiki/SSL">SSL</a> в <a class="reference external" href="http://ru.wikipedia.org/wiki/Nginx">Nginx</a> добавьте в конфигурацию сервера следующие настройки:</p>
+<pre class="literal-block">
+server {
+    ...
+    listen 443;
+    ssl                     on;
+    ssl_protocols   SSLv3 TLSv1;
+    ssl_certificate /&lt;path_to_file&gt;/&lt;your_domain_name&gt;.bundle.crt;
+    ssl_certificate_key     /&lt;path_to_file&gt;/&lt;your_domain_name&gt;.key;
+    ...
+}
+</pre>
+<p>Для автоматического направления всех HTTP запросов на HTTPS, обычно достаточно следующей конфигурации:</p>
+<pre class="literal-block">
+# HTTPS settings
+server {
+    listen 443;
+    ssl                     on;
+    ssl_protocols   SSLv3 TLSv1;
+    ssl_certificate /&lt;path_to_file&gt;/&lt;your_domain_name&gt;.bundle.crt;
+    ssl_certificate_key     /&lt;path_to_file&gt;/&lt;your_domain_name&gt;.key;
+    ...
+}
+
+# HTTP settings
+server {
+    listen 80
+    rewrite ^(.*) https://$server_name$1 permanent;
+}
+</pre>
+<p>И не забудьте обновить сертификаты через три месяца! :)</p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="ios-push-python.html" class="article_paginator_right_link">Серверная реализация IOS Push уведомлений (python)</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="django-snippets.html" class="article_paginator_left_link">Несколько полезных сниппетов для джанго</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'https-setup';
+        var disqus_url = './https-setup.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

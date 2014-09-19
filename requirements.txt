@@ -1,2 +1,5 @@
-pelican==3.2.2
-zetalibrary
+pelican                 == 3.4.0
+pelican-githubprojects  == 0.1.0
+pelicanfly              == 0.4.2
+pyserve                 == 0.2.8
+zetalibrary             == 0.5.93

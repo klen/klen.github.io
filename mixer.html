@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,flask,sqlalchemy,django,orm,tests,mongoengine," />
+        <meta name="description" content="Mixer -- удобная генерация данных для тестирования" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Mixer -- удобная генерация данных для тестирования" />
+
+        <title>Mixer -- удобная генерация данных для тестирования — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2013-06-17 00:00:00">17.06.2013</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Mixer -- удобная генерация данных для тестирования</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/flask.html">flask</a> , </span> <span><a href="./tag/sqlalchemy.html">sqlalchemy</a> , </span> <span><a href="./tag/django.html">django</a> , </span> <span><a href="./tag/orm.html">orm</a> , </span> <span><a href="./tag/tests.html">tests</a> , </span> <span><a href="./tag/mongoengine.html">mongoengine</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_left">
+            ←Ctrl <a href="concurrency-tests.html" class="article_paginator_left_link">Ускорение python тестов. Конкурентный запуск.</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id9">Пример работы</a></li>
+<li><a class="reference internal" href="#id3" id="id10">Продвинутое использование</a><ul>
+<li><a class="reference internal" href="#id4" id="id11">Указание моделей через путь</a></li>
+<li><a class="reference internal" href="#id5" id="id12">mixer.fake</a></li>
+<li><a class="reference internal" href="#id6" id="id13">mixer.select</a></li>
+<li><a class="reference internal" href="#mixer-mix" id="id14">mixer.mix</a></li>
+<li><a class="reference internal" href="#mixer-sequence" id="id15">mixer.sequence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7" id="id16">Преимущества по сравнению с другими библиотеками</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> — это удобная библиотека для генерации данных для тестов. Из коробки
+обладает поддержкой <a class="reference external" href="http://djangoproject.org/">Django</a> ORM, <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> ORM, <a class="reference external" href="http://mongoengine.org/">Mongoengine</a> ODM и простым
+синтаксисом для интеграции любых бэкэндов.
+Работает в версиях python 2-х и 3-х версий.</p>
+<p>Обычно при разработке тестов, программисты нуждаются в генерации данных для них.
+Тут можно выделить два пути, первый — подготовить данные заранее
+(используя так называемые <strong>fixtures</strong>) и второй — генерировать данные для
+тестов непосредственно в момент выполнения.</p>
+<p>Первый обладает рядом минусов. Во-первых данные необходимо готовить заранее.
+Во-вторых при изменении структуры данных необходимо тратить ресурсы на
+поддержку актуальности <strong>fixtures</strong>. В третьих вы не можете получить больше
+данных чем приготовили.</p>
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> предлагает второй способ. Вы получаете данные непосредственно в тестах,
+в любом необходимом количестве и не зависите от изменений в их структуре.</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id9">Пример работы</a></h2>
+<p>Несколько примеров для <a class="reference external" href="http://djangoproject.org/">Django</a> как для наиболее распространненного сейчас
+<strong>python-фреймворка</strong>.</p>
+<p>Создадим стандартного пользователя используя <tt class="docutils literal">django.contrib.auth.models.User</tt>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">mixer.backend.django</span> <span class="kn">import</span> <span class="n">mixer</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Мы только что создали и сохранили в тестовой базе пользователя, со всеми
+необходимыми полями. Разумеется <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> правильно обработает отношения и при
+необходимости автоматически создаст и объекты зависимых моделей.
+Вам нет необходимости настраивать параметры создавамого объекта, вы просто
+указываете модель и остальное <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> делает самостоятельно.</p>
+<p>По-умолчанию <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> старается генерировать данные не только учитывая тип полей,
+но и анализируя их названия. Например при проверке примеров библиотека
+сгенерировала пользователя с логином <cite>mixcookie1957</cite>, адресом электронной
+почты: <cite>limb_candy&#64;wordpress.br</cite> и именем: <cite>Robinson Wolverhampton</cite>. Но такое
+поведение разумеется можно отключить и получать абсолютно случайные данные.</p>
+<p>Если вам нужно сгенерировать несколько объектов, имеется короткий синтаксис.
+Создадим еще 5 пользователей.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">users</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Зачастую возникает неоходимость предопределить некоторые значения генерируемого
+объекта. Синтаксис <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> прост и интуитивно понятен. Создадим пользователя
+с логином <cite>testuser</cite> и группой <cite>admin</cite>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Group</span>
+
+<span class="n">group</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="n">group</span><span class="p">])</span>
+</pre></div>
+</td></tr></table><p>Но <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> позволяет сделать это еще быстрее. Вышеприведенный код генерации
+можно заменить одной строчкой:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">groups__name</span><span class="o">=</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Синтаксис знаком пользователям <a class="reference external" href="http://djangoproject.org/">Django</a>, <cite>&quot;__&quot;</cite> позволяет указывать в фильтрации
+запросов, поля зависимых объектов. Так и в <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> разделитель <cite>&quot;__&quot;</cite> позволяет
+предзадавать поля зависимых объектов не заботясь об их генерации. Использование
+может быть очень гибким.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">messages</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span>
+    <span class="n">Message</span><span class="p">,</span>
+    <span class="n">author__name</span><span class="o">=</span><span class="s">&#39;Duck Nukem&#39;</span><span class="p">,</span>
+    <span class="n">author__age</span><span class="o">=</span><span class="s">&#39;100&#39;</span><span class="p">,</span>
+    <span class="n">author__clan__title</span><span class="o">=</span><span class="s">&#39;crazy beaches&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table><p>По-умолчанию <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> пропускает поля имеющие значение по умолчанию или
+позволяющие <cite>None</cite> значение. Вы всегда можете предзадать их вручную как в
+вышеприведенном примере или позволить <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> сделать это за вас используя
+волшебный атрибут <cite>mixer.random</cite>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;food&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;drinks&#39;</span><span class="p">)),</span>
+        <span class="n">null</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+<span class="c"># Здесь price=0 и type=None</span>
+<span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Product</span><span class="p">)</span>
+
+<span class="c"># А здесь price это какой то decimal, а type равен `food` или `drinks`</span>
+<span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p id="generators">В качестве предзаданных данных <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> поддерживает также функции и генераторы.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Пример с функцией</span>
+
+<span class="k">def</span> <span class="nf">get_super</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">&quot;super&quot;</span>
+
+<span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Superman</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="n">get_super</span><span class="p">)</span>
+
+
+<span class="c"># Пример с генератором</span>
+
+<span class="n">gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+<span class="n">products</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Product</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">gen</span><span class="p">)</span>
+
+<span class="c"># Еще один</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Author</span><span class="p">)</span>
+<span class="n">books</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Book</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="p">(</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">authors</span><span class="p">))</span>
+</pre></div>
+</td></tr></table><p>Синтаксис для работы <a class="reference external" href="http://flask.pocoo.org/">Flask</a>, <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>, <a class="reference external" href="http://mongoengine.org/">Mongoengine</a> схож и в данной статье
+рассматриваться не будет. Импортируете необходимый бэкэнд, указываете модель
+и получаете данные.</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id10">Продвинутое использование</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id11">Указание моделей через путь</a></h3>
+<p>Вам необязательно импортировать модели для генерации тестовых данных. <a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a>
+способен сделать это за вас. Для <a class="reference external" href="http://djangoproject.org/">Django</a> достаточно указать строку вида:
+<tt class="docutils literal"><span class="pre">&lt;имя_приложения&gt;.&lt;имя_модели&gt;</span></tt>. Для других бэкэндов придется указать python
+путь для импорта. Пример из начала статьи можно изменить так:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p id="mixer-fake">Другие волшебные атрибуты:</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id12">mixer.fake</a></h3>
+<p>Поведение <tt class="docutils literal">mixer.fake</tt> похоже на <a class="reference internal" href="#mixer-random">mixer.random</a>, но в отличии от последнего,
+генерирующего случайные данные, данный атрибут генерирует данные «фейковые
+данные» анализируя имя поля. Например для строкового поля <tt class="docutils literal">login</tt> это будет
+строка имитирующая логин пользователя, а не просто случайный набор символов.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">test</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;app.message&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">fake</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">И <a class="reference internal" href="#mixer-random">mixer.random</a> и <a class="reference internal" href="#mixer-fake">mixer.fake</a> позволяют принудительно указать тип
+генерируемого значения: mixer.random(int), mixer.fake(models.CharField)</p>
+</div>
+</div>
+<div class="section" id="id6">
+<span id="mixer-select"></span><h3><a class="toc-backref" href="#id13">mixer.select</a></h3>
+<p><tt class="docutils literal">mixer.select</tt> похож на <a class="reference internal" href="#mixer-fake">mixer.fake</a> и <a class="reference internal" href="#mixer-random">mixer.random</a>, но работает с
+уже существующими данными. В приведенном ниже примере пользователю присваивается
+одна из существующих в базе данных групп.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">select</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p><tt class="docutils literal">mixer.select</tt> может принимать параметры фильтрации, например для <a class="reference external" href="http://djangoproject.org/">Django</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="mixer-mix">
+<h3><a class="toc-backref" href="#id14">mixer.mix</a></h3>
+<p><tt class="docutils literal">mixer.mix</tt> это волшебный атрибут указывающий на будущее сгенерированное
+значение. Например создадим пользователя с одинаковыми <cite>username</cite> и
+<cite>last_name</cite>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">first_name</span><span class="p">)</span>
+</pre></div>
+</td></tr></table><p>Как мы помним <tt class="docutils literal">mixer.mix</tt> указывает на объект который будет сгенерирован.
+Поэтому <tt class="docutils literal">mixer.mix.first_name</tt> будет указывать на поле этого объекта и цель
+достигнута.</p>
+<p>Использование <tt class="docutils literal">mixer.mix</tt> может быть и более интересным.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ship</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span>
+    <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">captain__country</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">country</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="o">.</span><span class="n">captain</span><span class="o">.</span><span class="n">nick</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table><p><tt class="docutils literal">mixer.mix</tt> может принимать функцию от одного аргумента, которая получит
+при вызове сгенерированный объект.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">user</span><span class="o">.</span><span class="n">last_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">mix</span><span class="p">(</span><span class="n">get_username</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="mixer-sequence">
+<h3><a class="toc-backref" href="#id15">mixer.sequence</a></h3>
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a>, как уже указывалось, умеет принимать в качестве значений полей генераторы.
+<tt class="docutils literal">mixer.sequence</tt> это помощник для создания генераторов из функций. Он принимает
+функцию от одного аргумента и на ее основе создает генератор.</p>
+<p>Например несколько пользователей с логинами вида: 'test0', 'test1' и тд.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="s">&#39;test&#39;</span> <span class="o">+</span> <span class="n">c</span>
+<span class="p">))</span>
+</pre></div>
+</td></tr></table><p>В функцию будет приходить счетчик итераций. Вышеприведенная операция встречается
+довольно часто, поэтому <tt class="docutils literal">mixer.sequence</tt> поддерживает короткий синтаксис.
+При передачи строки он трансформирует ее в функцию: <tt class="docutils literal">lambda c: value.format(c)</tt>.</p>
+<p>Результат кода аналогичен предыдущему.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">mixer</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;auth.user&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="s">&#39;test{0}&#39;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id16">Преимущества по сравнению с другими библиотеками</a></h2>
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> поддерживает <strong>python</strong> второй и третьей версии.</p>
+<p>Библиотека обладает интеграцией с <a class="reference external" href="http://djangoproject.org/">Django</a> ORM, <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> ORM, <a class="reference external" href="http://mongoengine.org/">Mongoengine</a>
+ODM и легко расширяется для других бэкэндов. Независимо от проекта вы получаете
+единый интерфейс для генерации данных.</p>
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> из коробки умеет генерировать не только случайные, но и фейковые данные,
+с которыми приятно работать.</p>
+<p><a class="reference external" href="http://mixer.readthedocs.org/">Mixer</a> интуитивно понятен, гибок в настройке и прост.</p>
+<p>Надеюсь с данным модулем генерация данных станет для вас легче и приятнее.</p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_left">
+            ←Ctrl <a href="concurrency-tests.html" class="article_paginator_left_link">Ускорение python тестов. Конкурентный запуск.</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'mixer';
+        var disqus_url = './mixer.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

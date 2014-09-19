@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %} 
+
+    {# Google custom search #}
+    <div id="cse" style="width: 100%; min-height:50px">&nbsp;</div>
+
+    <!-- <h1 class="content_title">My online</h1> -->
+    <ul class="social">
+
+        <!-- RSS -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <a href="{{ FEED_URL }}" style="color:#000"><i class="fa fa-3x fa-rss"></i></a> 
+            </div> 
+            <a class="social_item_title" href="./archives.html">Blog in Russian</a> 
+            {% for a in dates[:11] %}
+                {% if a.category != 'misc' %}
+                <p class="social_item_info">
+                    <time style="display:inline-block;width: 70px" datetime="{{ a.date }}">{{ a.date.strftime('%b %Y') }}</time>
+                    <a href="{{ a.url }}">{{ a.title }}</a>
+                </p>
+                {% endif %}
+            {% endfor %}
+        </li>
+
+        <!-- Github -->
+        <li class="social_item">
+            <div class="social_item_icon"> 
+                <i class="fa fa-3x fa-github"></i>
+                <a href="http://github.com/klen"></a> 
+            </div> 
+            <a class="social_item_title" href="http://github.com/klen">Github</a> 
+            <p class="social_item_info">There is some of my OpenSource projects</p>
+            <ul style="clear:both; margin: 0">
+
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/adrest">ADREST</a> — Another Django REST framework
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/atmark">Atmark</a> — Awk+Sed for humans
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/dealer">Dealer</a> — Provides current git/mercurial version in your projects
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/django-markdown">Django-Markdown</a> — Support Markdown in Django
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/Flask-collect">Flask-Collect</a> — Collect static files in Flask project
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/Flask-Foundation">Flask-Foundation</a> — Quick start with Flask
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/inirama">Inirama</a> — Simplest INI parser
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/mixer">Mixer</a> — Powerful data generation
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/pylama">Pylama</a> — Complex python code checker
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/python-mode">Python-mode</a> — powerfull vim-plugin for python programmers
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/python-scss">Python-scss</a> — First SCSS compiler for Python.
+                </li>
+                <li class="social_item_info">
+                    <a href="http://github.com/klen/Starter">Starter</a> — Creates the sceleton for new projects. Similar to the template part of PasteScript, but uses Jinja templates.
+                </li>
+                <li class="social_item_info">And etc.</li>
+            </ul>
+        </li>
+    </ul>
+
+    {% include "_gsearch.html" %}
+
+{% endblock content %}

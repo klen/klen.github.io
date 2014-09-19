@@ -19,7 +19,7 @@
 На текущий момент имеется набор утилит (setuptools_, distutils_, distribute_) выполняющих
 одинаковые задачи.
 
-.. image:: sources/state_of_packaging.jpg
+.. image:: /static/img/state_of_packaging.jpg
 
 В данной статье я на конкретных примерах покажу как создать и настроить простой python-пакет.
 

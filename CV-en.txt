@@ -1,0 +1,89 @@
+Kirill E. Klenov
+
+WEB DEVELOPER
+Russia, MO, Krasnogorsk, Shkolnaya 1-19
+mobile: +7 906 772 36 20
+email: horneds@gmail.com
+
+The latest version of this document can be found at:
+  http://klen.github.com/CV-en.txt
+
+
+Objective
+=========
+
+To obtain a development position that utilizes my skills and background
+with cross-platform technologies.
+
+
+Education
+=========
+
+Russia,  Syktyvkar State University
+Bachelor, Physics
+1997 — 2000 
+
+
+Work Experience
+===============
+
+V.I.K.T.O.R., http://viktortherobot.com
+---------------------------------------
+December 2011 — Present, Main Service developer
+
+  * Iphone mobile app. I maked all server side.
+  * REST API, Admin interfaces, Push notification, Inapp purchase and ets,
+    Documentation, Deployment (makesite, nginx, uwsgi)
+
+
+Venture Brothers, http://venturebrothers.ru, http://intaxi.ru
+-------------------------------------------------------------
+November 2010 — Present, Main Service developer
+
+  * Taxistation related startup
+  * REST and RPC API, Push notification, Admin interfaces (Javascript),
+    Continuous integration (Hudson), Documentation, Deployment (makesite,
+    nginx, uwsgi), Team management
+
+
+365Degrees, http://365degrees.ru, http://vsyako.ru
+--------------------------------------------------
+March 2010 — November 2011, Service developer
+
+  * Create ECommerce service
+  * Server side, database structure and design, deployment system.
+    CI system, team management.
+
+
+Interfaces developer
+--------------------
+Yandex, http://yandex.com, http://yaca.yandex.ru
+
+  * Best russian site directory. Full refactoring.
+
+
+Artlebedev study, http://artlebedev.com
+---------------------------------------
+Web developer
+
+  * Company intranet and web-store. Self written MVC framework.
+
+
+Software Development Proficiencies
+==================================
+
+* Very high experience:  Python (Django, Tornado, Werkzeug), JavaScript
+  (native, DOM, jQuery, ExtJS), Parser (Imprimatur 1-2), XML, XSLT.
+
+* Good experience: HTML4-5, CSS (bem), UML, SQL(Mysql, Postgres), Nonrel
+  (Mongo, Redis), GIS (Postgis, geodjango, Openlayers, pgrouting), *nix
+  (setup, deploy).
+
+* Base experience: Perl, Erlang.
+
+
+Languages
+=========
+
+* English (Limited working proficiency)
+* Russian (Native or bilingual proficiency)

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="aws,hosting,cloud,ec2,freedns," />
+        <meta name="description" content="Год облачного хостинга от Amazon — бесплатно" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Год облачного хостинга от Amazon — бесплатно" />
+
+        <title>Год облачного хостинга от Amazon — бесплатно — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2011-11-11 00:00:00">11.11.2011</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Год облачного хостинга от Amazon — бесплатно</h1><span class="article_meta">tags: <span><a href="./tag/aws.html">aws</a> , </span> <span><a href="./tag/hosting.html">hosting</a> , </span> <span><a href="./tag/cloud.html">cloud</a> , </span> <span><a href="./tag/ec2.html">ec2</a> , </span> <span><a href="./tag/freedns.html">freedns</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="gitolite-setup.html" class="article_paginator_right_link">Настройка сервера. Gitolite — хостинг git-репозиториев</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="python-mode.html" class="article_paginator_left_link">VIM плагин для комфортной работы с python</a>
+        </div></div>
+        <hr/>
+        <p>This post is part of a series:</p>
+        <ol class="parts">
+                <li style="font-weight: bold">Год облачного хостинга от Amazon — бесплатно</li>
+                <li><a href='./gitolite-setup.html'>Настройка сервера. Gitolite — хостинг git-репозиториев</a></li>
+                <li><a href='./deploy-setup.html'>Настройка сервера. Создаем и разворачиваем django-проект</a></li>
+        </ol>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<div class="contents topic" id="id1">
+<p class="topic-title first">Содержание:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#aws" id="id7">Бесплатный период использования сервиса от AWS</a></li>
+<li><a class="reference internal" href="#id3" id="id8">Регистрация на Amazon Web Services</a></li>
+<li><a class="reference internal" href="#vps" id="id9">Создание и запуск VPS</a></li>
+<li><a class="reference internal" href="#ip-dns" id="id10">Привязка IP и настройка DNS</a></li>
+<li><a class="reference internal" href="#id4" id="id11">Подключение к серверу</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<img alt="" src="/static/img/aws.png" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="AWS">Amazon Web Services</a> инфраструктура Web Services платформы в облаке, представленная компанией <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a> в начале 2006 года. В данной инфраструктуре представлено много сервисов для предоставления различных услуг, таких как: <a class="reference external" href="EC2">Amazon EC2</a> аренда виртуальных сервисов, <a class="reference external" href="SIMPLEDB">Amazon SimpleDB</a> облачная база данных, <a class="reference external" href="S3">Amazon S3</a> файловый хостинг и множество других.</p>
+</div>
+<p>Немногие знают, но компания <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a> каждому зарегистрировавшемуся пользователю, фактически предоставляет полноценную бесплатную VPS на год. Многие из тех кто знает об этом
+не используют это выгодное предложение так как боятся работать с &quot;облаками&quot;, считая их настройку чем-то сложным и недоступным.</p>
+<p>Облачный хостинг имеет ряд преимуществ перед прочими решениями:</p>
+<ul class="simple">
+<li>Гибкая ценовая политика, вы платите только за то, что используете;</li>
+<li>Легкое масштабирование проектов;</li>
+<li>Отказоустойчивость.</li>
+</ul>
+<p>В случае <a class="reference external" href="http://aws.amazon.com/">AWS</a>  к преимуществам добавляется:</p>
+<ul class="simple">
+<li>Огромное количество доступных образов систем;</li>
+<li>Удобные интерфейсы управления (включая консольные и GUI утилиты);</li>
+<li>Автоматический load-ballancer;</li>
+<li>И еще множество полезнейших опций, перечислять которые я сейчас просто не возьмусь.</li>
+</ul>
+<p>В данной статье мы создадим и запустим бесплатную VPS на <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a> с выделенным IP-адресом и прикрепленным доменом. В <a class="reference external" href="gitolite-setup-ru.html">следующих</a> статьях я покажу как настроить на ней <a class="reference external" href="http://git-scm.com/">Git</a> хостинг для ваших репозиториев и поднять <a class="reference external" href="http://djangoproject.com/">Django</a> проект с автообновлением кода.  Все вместе не должно занять у вас более нескольких часов.</p>
+<p>Итак поехали.</p>
+<div class="section" id="aws">
+<h2><a class="toc-backref" href="#id7">Бесплатный период использования сервиса от AWS</a></h2>
+<p>Для новых зарегистрированных пользователей <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a> предоставляет программу бесплатного использования
+<a class="reference external" href="http://aws.amazon.com/free/">AWS Free Usage Tier</a> сроком на год. Вкратце она включает в себя:</p>
+<ul class="simple">
+<li>750 часов работы <strong>VPS t1.micro</strong> в месяц (читаем 1 VPS в месяц бесплатно);</li>
+<li>10 ГБ гарантированного места бесплатно;</li>
+</ul>
+<p>На самом деле в программу входит несколько больше услуг и вы можете ознакомится с ними самостоятельно.</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">Регистрация на Amazon Web Services</a></h2>
+<p>Для использования <a class="reference external" href="http://aws.amazon.com/">AWS</a> вам нужен зарегистрированный, активный аккаунт.
+Чтобы зарегистрироваться вам потребуются:</p>
+<ul class="simple">
+<li>Кредитная карточка Visa или MasterCard (нужна только для проверки);</li>
+<li>Работающие email и мобильный номер для подтверждения.</li>
+</ul>
+<p>Ссылка для регистрации: <a class="reference external" href="https://aws-portal.amazon.com/gp/aws/developer/registration/index.html">https://aws-portal.amazon.com/gp/aws/developer/registration/index.html</a></p>
+<p>Я лишь коротко опишу этот процесс:</p>
+<ul class="simple">
+<li>На первых шагах вы создадите аккаунт на <a class="reference external" href="http://aws.amazon.com/">AWS</a>, введя свои электронную почту, пароль и адрес;</li>
+<li>После создания и подтверждения аккаунта пройдите по ссылке: <a class="reference external" href="https://aws-portal.amazon.com/gp/aws/developer/subscription/index.html?productCode=AmazonEC2">https://aws-portal.amazon.com/gp/aws/developer/subscription/index.html?productCode=AmazonEC2</a>
+и подпишитесь на услуги <a class="reference external" href="http://aws.amazon.com/ec2/">EC2</a>;</li>
+<li>В процессе подписки вас попросят ввести данные кредитной карты (с нее будет произведено пробное списание, с возвратом)
+и пройти верификацию вашего мобильного телефона (вам позвонит робот и попросит ввести код подтверждения в режиме тонального набора)</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Вы можете спокойно подписываться на все услуги <a class="reference external" href="http://aws.amazon.com/">AWS</a>. Это облачный хостинг и деньги с вас снимут только по факту реального использования услуг.</p>
+</div>
+<p>Если все прошло успешно вы можете пройти в консоль управления вашими сервисами от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>: <a class="reference external" href="https://console.aws.amazon.com/ec2/">https://console.aws.amazon.com/ec2/</a></p>
+</div>
+<div class="section" id="vps">
+<h2><a class="toc-backref" href="#id9">Создание и запуск VPS</a></h2>
+<img alt="" src="/static/img/aws_ec2.png" />
+<p>В левом верхнем углу вы видите меню выбора региона для вашей будущей системы.
+В левом нижнем углу <tt class="docutils literal">Key Pairs</tt>: меню управления вашими ключами доступа.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">У вас ведь есть своя пара rsa ssh ключей? Если да, то рекомендую выбрать <tt class="docutils literal">Key Pairs</tt>
+и нажав кнопку <tt class="docutils literal">Import Key Pair</tt> загрузить публичную часть вашего ключа на <a class="reference external" href="http://aws.amazon.com/">AWS</a>.</p>
+</div>
+<p>В центре находится кнопка создания и запуска сервера <tt class="docutils literal">Launch Instance</tt>.  После ее нажатия
+необходимо будет выбрать образ вашего будущего сервера из доступных,
+но сейчас я предлагаю поступить иначе.</p>
+<p>Я буду устанавливать <a class="reference external" href="http://ubuntu.com">Ubuntu</a> и воспользуюсь для этого замечательным сайтом: <a class="reference external" href="http://alestic.com/">http://alestic.com/</a>.
+Образы доступные на нем уже оптимизированы под <a class="reference external" href="http://aws.amazon.com/">AWS</a>.</p>
+<img alt="" src="/static/img/images.png" />
+<p>Выбираем из табов регион для создания вашей системы. Выбираем образ <strong>с загрузкой по EBS</strong>
+(это гарантирует вам сохранность данных если сервер по каким либо причинам будет остановлен)
+и нажимаем на кнопку рядом с 32 или 64-битной версией для перехода в консоль <a class="reference external" href="http://aws.amazon.com/">AWS</a>.</p>
+<p>Откроется окно с выбранной системой, нажимайте кнопку <tt class="docutils literal">&lt;Continue&gt;</tt> (обратите внимание, что для
+бесплатного периода <tt class="docutils literal">Instance type</tt> вашей системы должен быть <tt class="docutils literal">t1.micro</tt>, он выбран по умолчанию).</p>
+<p>Когда вы дойдете до этапа создания ключей (<tt class="docutils literal">Create Key Pair</tt>) вы сможете выбрать ключ из уже
+загруженных ранее или создать новый. Во втором случае сохраните полученный ключ на свой компьютер.</p>
+<p>Следующий этап <tt class="docutils literal">Configure Firewall</tt> управление политиками безопасности.  Политика безопасности
+(Security Group) регламентирует какие порты и типы соединений открыты наружу на вашем сервере.</p>
+<p>Создайте новую группу и откройте порты TCP 22, 80 для доступа по SSH и WWW.</p>
+<img alt="" src="/static/img/aws_group.png" />
+<p>Заканчивайте настройку и запускайте ваш сервер: <tt class="docutils literal">Launch</tt>.</p>
+<img alt="" src="/static/img/aws_instance.png" />
+<p>Запуск займет некоторое время в течении которого статус сервера изменится на <tt class="docutils literal">running</tt>.</p>
+</div>
+<div class="section" id="ip-dns">
+<h2><a class="toc-backref" href="#id10">Привязка IP и настройка DNS</a></h2>
+<p>При выделении сервера в нижней части страницы показывается область информации,
+в том числе и <strong>DNS</strong> адрес.</p>
+<p>Адрес по-умолчанию не слишком удобен для работы, например <cite>ec2-184-72-89-43.compute-1.amazonaws.com</cite>, поэтому далее мы привяжем более удобную DNS запись.</p>
+<p>Для начала нужно привязать к нашей VPS постоянный IP адрес. Откройте в вашей консоли пункт меню <tt class="docutils literal">Elastic IPs</tt> и нажмите кнопку <tt class="docutils literal">Allocate New Address</tt> для выделения вашим серверам нового постоянного IP-адреса.</p>
+<img alt="" src="/static/img/aws-ip.png" />
+<p>После создания адреса, его необходимо привязать к нашему серверу. Нажимаем <tt class="docutils literal">Associate Address</tt> в появившемся окне, в выпадающем списке, выбираем нашу VPS и подтверждаем привязку. Все, теперь наш сервер доступен по данному IP и мы можем привязать к нему DNS.</p>
+<p>Если у вас уже есть свой домен, то вы можете сразу прописать A-запись для связывания его с полученным выше IP-адресом. Если нет, то я предлагаю получить бесплатный, с помощью сервиса <a class="reference external" href="http://freedns.afraid.org/">FreeDNS</a>. Вообще, это обычный DNS-провайдер продающий регистрацию доменов и услуги по их сопровождению, но у его клиентов есть уникальная возможность расшаривать поддомены третьего уровня для бесплатного использования всеми желающими. Нет никаких гарантий, что клиент не остановит обслуживание корневого домена второго уровня, но например <cite>mooo.com</cite> существует с 2001 года. Вкратце, данный сервис позволит вам получить бесплатный домен третьего уровня с бесплатным хостингом DNS. Например: для данной статьи я создам <cite>awsdemo.us.to</cite>.</p>
+<p>Итак, регистрируйтесь на <a class="reference external" href="http://freedns.afraid.org/">FreeDNS</a>, заходите в консоль управления на вкладку <tt class="docutils literal">Subdomains</tt> и нажимайте добавить.</p>
+<img alt="" src="/static/img/aws-dns.png" />
+<p>В появившемся окне указываем имя нашего субдомена, выбираем корневой домен, вписываем IP-адрес, полученный от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>, и нажимаем сохранить. Поздравляю, у вашего сервера появился бесплатный домен.</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id11">Подключение к серверу</a></h2>
+<p>После запуска мы можем подключиться с помощью SSH к нашему серверу <cite>awsdemo.us.to</cite>.
+Учтите, что пользователь по умолчанию на образах с <a class="reference external" href="http://alestic.com/">http://alestic.com/</a> — <strong>ubuntu</strong>.</p>
+<p>Если вы предварительно загрузили свои ключи:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>ssh ubuntu@awsdemo.us.to
+</pre></div>
+</td></tr></table><p>Или с использованием полученного ключа от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># (Для ключа с именем test.pem)</span>
+<span class="c"># Устанавливаем необхожимые права</span>
+chmod 400 test.pem
+
+<span class="c"># Подключаемся с полученным ключом</span>
+ssh -i test.pem ubuntu@awsdemo.us.to
+</pre></div>
+</td></tr></table><p>В случае успеха вы должны попасть в терминал вашего запущенного сервера, поздравляю!</p>
+<img alt="" src="/static/img/aws_done.png" />
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Обязательно загляните в замечательную справку <a class="reference external" href="http://aws.amazon.com/">AWS</a>: <a class="reference external" href="http://aws.amazon.com/documentation/ec2/">http://aws.amazon.com/documentation/ec2/</a></p>
+</div>
+<p>Продолжение: <a class="reference external" href="../gitolite-setup-ru.html">Настройка сервера. Gitolite — хостинг git-репозиториев</a></p>
+</div>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_right">
+            <a href="gitolite-setup.html" class="article_paginator_right_link">Настройка сервера. Gitolite — хостинг git-репозиториев</a> Ctrl→
+        </div>        <div class="article_paginator_left">
+            ←Ctrl <a href="python-mode.html" class="article_paginator_left_link">VIM плагин для комфортной работы с python</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'aws';
+        var disqus_url = './aws.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2013 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

@@ -6,18 +6,11 @@
 :lang: ru
 :slug: deploy-setup
 :tags: hosting, deploy, makesite, django, uwsgi, nginx
+:parts: deploy_old
 
 ----
 
 .. contents:: Содержание:
-
-----
-
-**Создание и настройка полноценного сервера разработки:**
-
-1. `Год облачного хостинга от Amazon — бесплатно <../aws-ru.html>`_
-2. `Настройка сервера. Gitolite — хостинг git-репозиториев <../gitolite-setup-ru.html>`_
-3. **Настройка сервера. Создаем и разворачиваем django-проект**
 
 ----
 
@@ -384,7 +377,7 @@ Makesite
 базы данных, скопировал файлы статики, а также создал shell скрипты для обновления,
 удаления и перезапуска проекта.
 
-.. image:: sources/awsdemo2.png
+.. image:: /static/img/awsdemo2.png
 
 Для пробы удалим развернутый проект: 
 

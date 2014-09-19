@@ -40,7 +40,7 @@ Django-markdown — поддержка Markdown в Django
 - Поддержка в стандартном Django-admin_;
 - Поддержка в формах и виджетах (wysiwyg).
 
-.. image:: sources/django-markdown.jpg
+.. image:: /static/img/django-markdown.jpg
 
 
 Чаще всего я использую это приложение, когда на проекте есть Django-flatpages_
