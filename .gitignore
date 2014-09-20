@@ -2,4 +2,5 @@
 *.pyc
 .DS_Store
 .ropeproject
-_
+/cache
+/_

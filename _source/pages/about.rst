@@ -19,8 +19,8 @@ There is a little bit more
   <http://facebook.com/horneds>`_ and `Linkedin
   <http://www.linkedin.com/profile/view?id=27707936>`_ accounts
 * My Curriculum vitae (CV):
-  English `txt <{filename}static/cv-en.txt>`_, `pdf <{filename}static/cv-en.pdf>`_
-  Russian `txt <{filename}static/cv-ru.txt>`_, `pdf <{filename}static/cv-ru.pdf>`_
+  English `txt en <{filename}static/cv-en.txt>`_, `pdf en <{filename}static/cv-en.pdf>`_
+  Russian `txt ru <{filename}static/cv-ru.txt>`_, `pdf ru <{filename}static/cv-en.pdf>`_
 
 
 `Download vcard`_  
