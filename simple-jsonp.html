@@ -60,15 +60,7 @@
 <p>Когда в веб-проекте необходимы кроссдоменные <a class="reference external" href="http://en.wikipedia.org/wiki/JSONP">JSONP</a> запросы, а подключать
 javascript фреймворки не хочется, можно воспользоваться этой простейшей
 реализацией:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// simplest JSONP request implementation</span>
+<div class="highlight"><pre><span class="c1">// simplest JSONP request implementation</span>
 <span class="kd">function</span> <span class="nx">jsonp</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;jsonp&quot;</span> <span class="o">+</span>  <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">,</span>
         <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">),</span>
@@ -78,14 +70,12 @@ javascript фреймворки не хочется, можно воспольз
     <span class="nx">head</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">script</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table><p>Пример использования (получение информации о пользователе с использованием API twitter.com):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="s2">&quot;http://api.twitter.com/1/statuses/user_timeline.json?screen_name=horneds&amp;count=2&amp;callback=?&quot;</span>
+<p>Пример использования (получение информации о пользователе с использованием API twitter.com):</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="s2">&quot;http://api.twitter.com/1/statuses/user_timeline.json?screen_name=horneds&amp;count=2&amp;callback=?&quot;</span>
 
 <span class="nx">jsonp</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">});</span>
 </pre></div>
-</td></tr></table><div class="section" id="id2">
+<div class="section" id="id2">
 <h2><a class="toc-backref" href="#id4">Пример в действии:</a></h2>
 <p>Изменяйте значение поля ниже, на логин пользователя в твиттере, чтобы загрузить
 изображение его профиля.</p>
@@ -168,7 +158,7 @@ javascript фреймворки не хочется, можно воспольз
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

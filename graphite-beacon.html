@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Kirill Klenov" />
+        <meta name="keywords" content="python,graphite,tornado,monitoring," />
+        <meta name="description" content="Graphite-beacon — простая система оповещений для Graphite" />
+
+        <meta name="application-name" content="klen.github.io" />
+        <meta name="application-url" content="." />
+
+    <meta name="og:image" content="http://klen.github.io/theme/images/logo.png" />
+    <meta name="og:title" content="Graphite-beacon — простая система оповещений для Graphite" />
+
+        <title>Graphite-beacon — простая система оповещений для Graphite — klen.github.io</title>
+
+        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
+
+<link rel="openid.server" href="http://www.myopenid.com/server"> 
+            <link rel="openid.delegate" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.local_id" href="http://horneds.myopenid.com/"> 
+            <link rel="openid2.provider" href="http://www.myopenid.com/server"> 
+            <meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=horneds.myopenid.com">    </head>
+
+    <body class="cloud zeta">
+        <h1 class="header">
+            <a class="header_title" href=.><i class="fa fa-beer"></i>klen.github.io</a>
+        </h1>
+
+        <nav class="menu">            <a class="menu_item menu_link" href="./pages/about-en.html">About me</a>            <a class="menu_item menu_link" href="./category/blog.html">Blog</a>            <a class="menu_item menu_link" href="./category/notes.html">Notes</a>        </nav>
+
+        <div class="content">
+
+<article class="article">
+
+        <header class="article_header">
+            <time class="article_header_time" datetime="2014-10-30 00:00:00">30.10.2014</time>
+            <span>in <a href="./category/Blog.html">Blog</a></span>
+            <h1 class="article_header_title">Graphite-beacon — простая система оповещений для Graphite</h1><span class="article_meta">tags: <span><a href="./tag/python.html">python</a> , </span> <span><a href="./tag/graphite.html">graphite</a> , </span> <span><a href="./tag/tornado.html">tornado</a> , </span> <span><a href="./tag/monitoring.html">monitoring</a> </span> </span></header>
+
+<div class="article_paginator zeta">        <div class="article_paginator_left">
+            ←Ctrl <a href="mixer.html" class="article_paginator_left_link">Mixer -- удобная генерация данных для тестирования</a>
+        </div></div>
+
+        <div class="article_content">
+            <hr class="docutils" />
+<img alt="" src="/static/img/beacon/grafana.jpg" />
+<p>Для мониторинга своих проектов я использую связку из <a class="reference external" href="http://graphite.wikidot.com">Graphite</a> + <a class="reference external" href="http://grafana.org">Grafana</a>.
+Данные с серверов собирает <a class="reference external" href="http://collectd.org">Collectd</a>, метрики приложений принимает <a class="reference external" href="https://github.com/etsy/statsd">Statsd</a>.</p>
+<p>Недавно в очередной раз поднимая эту инфраструктуру, я понял, что мне не
+хватает сигналов на основе данных метрик из <a class="reference external" href="http://graphite.wikidot.com">Graphite</a>. Например
+оповещения при падении свободной памяти ниже критического значения и тп.</p>
+<p>Разумеется я не первый у кого возникла такая необходимость и существует ряд
+OpenSource приложений для данной задачи. Вот некоторые их них: <a class="reference external" href="https://github.com/scobal/seyren">Seyren</a>, <a class="reference external" href="https://github.com/arachnys/cabot">Cabot</a>,
+<a class="reference external" href="https://github.com/seatgeek/graphite-pager">graphite-pager</a>, <a class="reference external" href="https://github.com/ybrs/graphite-alerts">graphite-alerts</a>. Вооружившись системой конфигурирования
+серверов я уже начал писать роли для развертывания одного из перечисленных
+решений, но через некоторое время осознал, что хочу сделать еще одно.</p>
+<p>Итак, что же мне не понравилось?</p>
+<p><a class="reference external" href="https://github.com/scobal/seyren">Seyren</a> — Java приложение (требует установленного <strong>MongoDB</strong>) при настройке
+возникли проблемы (я уже не помню какого рода) и я вернулся к другим вариантам.</p>
+<p>Поддерживает множество типов оповещений: SMTP, Hubit, IRC, HipChat и прочее.</p>
+<p><a class="reference external" href="https://github.com/seatgeek/graphite-pager">graphite-pager</a> — Python-приложение (требует установленного <strong>Redis</strong>). При
+установке лично у меня возникли конфликты в python-зависимостях, в целом
+решаемые. Главная для меня проблема: нет поддержки <strong>SMTP</strong>.</p>
+<p><a class="reference external" href="https://github.com/ybrs/graphite-alerts">graphite-alerts</a> — Форк <a class="reference external" href="https://github.com/seatgeek/graphite-pager">graphite-pager</a>, как я понимаю добавлен веб-интерфейс
+для настройки. Также требует <strong>Redis</strong>, плюс судя по зависимостям БД для
+<strong>SQLAlchemy</strong>. Понятно, что можно использовать SQLLite, но тем не менее.
+Установка описана очень поверхностно и желания разбираться не вызывает. Плюс
+наследует от прародителя главный для меня недостаток: нет поддержки <strong>SMTP</strong>.</p>
+<p><a class="reference external" href="https://github.com/arachnys/cabot">Cabot</a> — Подозреваю самое мощное решение из перечисленных. Для установки
+предлагается использовать поставляемый с исходниками <strong>fabfile</strong>, требования и
+зависимости нигде не описаны. Судя по исходникам запускает <strong>Django +
+Gunicorn</strong> для веб-интерфейса и <strong>Celery</strong> для переодических задач. Хочет
+<strong>Postgres и Redis</strong> для базы данных и брокера соответственно.</p>
+<p>Не понравился прежде всего мутной процедурой установки (в принципе все ясно), но
+могли бы и прямо написать. Но это не главное, прежде всего я не хочу запускать
+столько процессов чтобы иметь оповещения об изменении метрик из <a class="reference external" href="http://graphite.wikidot.com">Graphite</a>.</p>
+<p>Я хочу легко устанавливаемое и конфигурируемое приложение, потребляющее минимум
+ресурсов, без дополнительных зависимостей и с поддержкой <strong>SMTP</strong>.</p>
+<img alt="" src="https://raw.githubusercontent.com/klen/graphite-beacon/develop/beacon.png" />
+<p>Поэтому на свет появился <a class="reference external" href="https://github.com/klen/graphite-beacon">Graphite-beacon</a>.</p>
+<p>Это простое python-приложение не требуещее для работы базы данных или очереди
+задач. Работает на основе <a class="reference external" href="http://www.tornadoweb.org/en/stable">Tornado</a> и написано в асинхронном стиле. На текущий
+момент для оповещений поддерживается SMTP и HipChat. При необходимости несложно
+добавить новые.</p>
+<p>Конфигурируется «маяк» при помощи JSON файлов и имеет интуитивно понятный
+формат:</p>
+<div class="highlight"><pre><span class="c1">// Да здесь даже можно использовать комментарии</span>
+<span class="p">{</span>
+<span class="s2">&quot;graphite_url&quot;</span><span class="o">:</span> <span class="s2">&quot;http://g.server.org&quot;</span><span class="p">,</span>
+<span class="s2">&quot;smtp&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;from&quot;</span><span class="o">:</span> <span class="s2">&quot;beacon@server.org&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;to&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;me@gmail.com&quot;</span><span class="p">]</span>
+<span class="p">},</span>
+<span class="s2">&quot;alerts&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>   <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;MEM&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="o">:</span> <span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="o">:</span> <span class="s2">&quot;aliasByNode(sumSeriesWithWildcards(collectd.*.memory.{memory-free,memory-cached}, 3), 1)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rules&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;critical: &lt; 200MB&quot;</span><span class="p">,</span> <span class="s2">&quot;warning: &lt; 400MB&quot;</span><span class="p">]</span> <span class="p">},</span>
+    <span class="p">{</span>   <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;CPU&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="o">:</span> <span class="s2">&quot;percent&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;interval&quot;</span><span class="o">:</span> <span class="s2">&quot;30m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="o">:</span> <span class="s2">&quot;aliasByNode(sumSeriesWithWildcards(collectd.*.cpu-*.cpu-user, 2), 1)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rules&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;critical: &gt;= 80%&quot;</span><span class="p">,</span> <span class="s2">&quot;warning: &gt;= 70%&quot;</span><span class="p">]</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+<p>В данном примере «маяк» получает информацию по всем нодам, и высылает
+предупреждения при низком количестве памяти или высокой загрузки процессора на
+каком либо из подключенных серверов. Включая вложенные в письма графики из
+<a class="reference external" href="http://graphite.wikidot.com">Graphite</a>.</p>
+<p>Подробнее смотрите в описании <a class="reference external" href="https://github.com/klen/graphite-beacon">Graphite-beacon</a>.</p>
+<p>Для Debian систем существует репозиторий с готовыми пакетами:
+<a class="reference external" href="http://dl.bintray.com/klen/deb">http://dl.bintray.com/klen/deb</a></p>
+<p>Возможно для вас этот простой инструмент будет также полезен как и для меня.
+Если у вас возникли вопросы, не стесняйтесь их задавать в комментариях.</p>
+<p>Задачи на будущее:</p>
+<ul class="simple">
+<li>Анализ аномальных пиков на метриках;</li>
+<li>Прикручивание поддержки Hubot;</li>
+<li>Веб-интерфейс, но зачем?</li>
+</ul>
+
+        </div>
+
+
+<g:plusone></g:plusone>
+<script>(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = 'https://apis.google.com/js/plusone.js';
+    g.text = '{lang:"nl"}';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+<div class="article_paginator zeta">        <div class="article_paginator_left">
+            ←Ctrl <a href="mixer.html" class="article_paginator_left_link">Mixer -- удобная генерация данных для тестирования</a>
+        </div></div>
+    </article>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'klengithubcom';
+        var disqus_identifier = 'graphite-beacon';
+        var disqus_url = './graphite-beacon.html';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e108f9f24976375"></script>
+</div>        </div>
+
+    <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
+        © 2011–2014 Kirill Klenov
+&nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
+        <div class='pos1'></div>
+        <div class='pos2'></div>
+    </footer>
+
+    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+        w.yaCounter7784947 = new Ya.Metrika({
+            id:7784947,
+            enableAll:true, webvisor:true});
+        } catch(e) {}
+    });
+})(window, 'yandex_metrika_callbacks');
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/7784947" style="position:absolute; left:-9999px;" alt="" /></div></noscript><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30512655-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

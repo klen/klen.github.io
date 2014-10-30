@@ -74,14 +74,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">В дальнейшем я буду приводить примеры для своего сайта: klen.github.com</p>
 </div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre>mkdir ~/Projects/klen.github.com
+<div class="highlight"><pre>mkdir ~/Projects/klen.github.com
 <span class="nb">cd</span> ~/Projects/klen.github.com
 git init
 <span class="nb">echo</span> <span class="s1">&#39;Hello world!&#39;</span> &gt; index.html
@@ -90,7 +83,7 @@ git commit -m <span class="s1">&#39;Initial commit&#39;</span>
 git remote add origin git@github.com:klen/klen.github.com.git
 git push -u origin master
 </pre></div>
-</td></tr></table><dl class="docutils">
+<dl class="docutils">
 <dt>Отлично, ваш статический сайт уже готов! В течении 10 минут он появится по адресу:</dt>
 <dd><cite>username.github.com</cite>. В дальнейшем он будет обновляться при коммитах в удаленный
 репозиторий.</dd>
@@ -118,42 +111,33 @@ HTML синтаксис, из коробки вы можете писать в �
 <ol class="arabic simple">
 <li>Так как мы будем использовать <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> нам необходимо выключить встроенный в <a class="reference external" href="http://github.com">Github</a> генератор <a class="reference external" href="http://github.com/mojombo/jekyll/">Jekyll</a>. Это делается добавлением в корень репозитория файла <cite>.nojekyll</cite>.</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre>touch .nojekyll
+<div class="highlight"><pre>touch .nojekyll
 git add .
 git commit -m <span class="s1">&#39;Disable Jekyll&#39;</span>
 </pre></div>
-</td></tr></table><ol class="arabic simple" start="2">
+<ol class="arabic simple" start="2">
 <li>Теперь создадим и активируем виртуальное окружение для модулей нашего сайта:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre>virtualenv .ve_blog
+<div class="highlight"><pre>virtualenv .ve_blog
 <span class="nb">source</span> .ve_blog/bin/activate
 </pre></div>
-</td></tr></table><ol class="arabic simple" start="3">
+<ol class="arabic simple" start="3">
 <li>Установим в созданный нами <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">VirtualEnv</a> генератор <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> и необходимый для него движок шаблонов <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a>:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre>easy_install pelican
+<div class="highlight"><pre>easy_install pelican
 easy_install jinja2
 </pre></div>
-</td></tr></table><ol class="arabic simple" start="4">
+<ol class="arabic simple" start="4">
 <li>Мы будем держать исходники сайта в поддиректории <strong>source</strong>, а созданные статические страницы в корне репозитория, чтобы <a class="reference external" href="http://github.com">Github</a> их видел.  Создадим файл <cite>source/hello.rst</cite> с нашей первой статьей:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="gh">Hello world!</span>
+<div class="highlight"><pre><span class="gh">Hello world!</span>
 <span class="gh">############</span>
 
 <span class="nc">:slug:</span> <span class="nf">hello</span>
 
 Hello from Pelican!
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Я использую синтаксис <a class="reference external" href="http://docutils.sourceforge.net/rst.html">RST</a>, но вы можете использовать <a class="reference external" href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> для своего сайта. Просто сохраняйте файлы с расширением <cite>*.md</cite>
 <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> поддерживает и другие форматы, но надо ставить соответствующие модули.</p>
@@ -161,9 +145,9 @@ Hello from Pelican!
 <ol class="arabic simple" start="6">
 <li>И соберем статику:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>pelican <span class="nb">source</span> -o .
+<div class="highlight"><pre>pelican <span class="nb">source</span> -o .
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p>Опция <em>-o .</em> заставляет <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> производить сборку статики в корне
 проекта.</p>
@@ -173,49 +157,29 @@ Hello from Pelican!
 <ol class="arabic simple" start="7">
 <li>Теперь наши изменения можно сохранить в <a class="reference external" href="http://git-scm.com">Git</a> и отправить на <a class="reference external" href="http://github.com">Github</a>.</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre>git add .
+<div class="highlight"><pre>git add .
 git commit -m <span class="s1">&#39;Add virtualenv and setup pelican.&#39;</span>
 git push origin master
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="section" id="id5">
 <h2><a class="toc-backref" href="#id11">Автоматизация</a></h2>
 <p>Настроим наш сайт и немного автоматизируем рутинные операции.</p>
 <ol class="arabic simple">
 <li>Создадим файл настроек нашего сайта <cite>source/settings.py</cite>:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;Kirill Klenov&#39;</span>
+<div class="highlight"><pre><span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;Kirill Klenov&#39;</span>
 <span class="n">SITENAME</span> <span class="o">=</span> <span class="s">&#39;klen.github.com&#39;</span>
 <span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;http://klen.github.com&#39;</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Подробнее про настройки <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a>, можно прочитать в его документации.</p>
 </div>
 <ol class="arabic simple" start="2">
 <li>Для упрощения сборки создадим sh-файл <cite>.compile</cite></li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
 
 <span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
 
@@ -233,25 +197,21 @@ pelican <span class="nv">$PRJ_DIR</span>/source -o <span class="nv">$PRJ_DIR</sp
 <span class="nv">PATH</span><span class="o">=</span><span class="nv">$OLD_PATH</span>
 <span class="nb">export </span>PATH
 </pre></div>
-</td></tr></table><p>И дадим ему права на исполнение:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>chmod +x .compile
+<p>И дадим ему права на исполнение:</p>
+<div class="highlight"><pre>chmod +x .compile
 </pre></div>
-</td></tr></table><p>Теперь в директории проекта можно вызывать <cite>./.compile</cite> и собирать статику даже без активации
+<p>Теперь в директории проекта можно вызывать <cite>./.compile</cite> и собирать статику даже без активации
 виртуального окружения.</p>
 <ol class="arabic simple" start="3">
 <li>Следующим шагом создадим <a class="reference external" href="http://git-scm.com">Git</a> хук для автоматической генерации сайта при коммитах. Создадим и отредактируем файл <cite>.git/hooks/pre-commit</cite>:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
 
 <span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
 
 <span class="nv">$PRJ_DIR</span>/.compile
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Не забудьте сделать его исполнемым.</p>
 </div>
@@ -313,7 +273,7 @@ pelican <span class="nv">$PRJ_DIR</span>/source -o <span class="nv">$PRJ_DIR</sp
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

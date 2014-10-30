@@ -13,7 +13,6 @@ DEFAULT_LANG = 'ru'
 DISQUS_SITENAME = 'klengithubcom'
 GITHUB_URL = 'https://github.com/klen'
 PLUGINS = ['neighbors', 'multi_part', 'youtube']
-PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 RELATIVE_URLS = True
 SITENAME = 'klen.github.io'
 SITEURL = 'http://klen.github.io'

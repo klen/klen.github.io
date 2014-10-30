@@ -80,17 +80,13 @@
 <p><strong>CSR</strong> — запрос на получение сертификата, требуется для подписи ключей компанией-сертификатором. Я создаю его в консоли <a class="reference external" href="http://ru.wikipedia.org/wiki/Unix">Unix</a>-систем,
 например в терминале на стороне сервера. Если у вас нет такой возможности, вы можете создать <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> онлайн: <a class="reference external" href="https://www.reg.ru/sslcertificate/generate_key_and_csr">https://www.reg.ru/sslcertificate/generate_key_and_csr</a></p>
 <p>Из консоли:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Создадим директорию для работы</span>
+<div class="highlight"><pre><span class="c"># Создадим директорию для работы</span>
 mkdir -p ~/csr <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/csr
 
 <span class="c"># Создадим приватный ключ и запрос на сертификат</span>
 openssl req -new -newkey rsa:2048 -nodes -keyout &lt;your_domain_name&gt;.key -out &lt;your_domain_name&gt;.csr
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p>Все поля <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> должны заполняться на английском. Код страны — двух буквенный <a class="reference external" href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">Alpha2</a> (RU для России).</p>
 <p><tt class="docutils literal">your_domain_name</tt> — имя домена для которого создается сертификат</p>
@@ -216,7 +212,7 @@ server {
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

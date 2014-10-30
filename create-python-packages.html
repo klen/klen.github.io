@@ -99,40 +99,24 @@ helloworld-project
 <p>Наша корневая директория <cite>helloworld-project</cite> будет содержать мета-данные пакета и вспомогательные файлы
 (тесты, лицензию, документацию и т.д.), а поддиректория <cite>helloworld</cite> непосредственно сам модуль <cite>helloworld</cite>.</p>
 <p>Теперь отредактируем файл: <cite>helloworld/core.py</cite> и добавим логику нашего приложения (получение и вывод строки &quot;Hello World!&quot;):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_message</span><span class="p">():</span>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">get_message</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">&quot;Hello World!&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">print_message</span><span class="p">():</span>
     <span class="k">print</span> <span class="n">get_message</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="section" id="setup-py">
 <h2><a class="toc-backref" href="#id9">Редактируем мета-информацию (setup.py)</a></h2>
 <p>Заполним файл описания <cite>README.rst</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="gh">Description</span>
+<div class="highlight"><pre><span class="gh">Description</span>
 <span class="gh">===========</span>
 
 An example Hello World project.
 </pre></div>
-</td></tr></table><p>Теперь отредактируем файл <cite>setup.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+<p>Теперь отредактируем файл <cite>setup.py</cite>:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span><span class="p">,</span> <span class="n">dirname</span>
 
 <span class="n">setup</span><span class="p">(</span>
@@ -142,16 +126,16 @@ An example Hello World project.
     <span class="n">long_description</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;README.txt&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
 <span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Убедитесь, что в вашей системе доступны <a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a>, в противном
 случае установите python-пакет <a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a></p>
 </div>
 <p>Этих операций достаточно, чтобы собрать пакет дистрибьюции. Выполните команду
 сборки:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>$ python setup.py sdist
+<div class="highlight"><pre>$ python setup.py sdist
 </pre></div>
-</td></tr></table><p>В случае успеха вы получите файл: <cite>dist/helloworld-1.0.tar.gz</cite>. Это полноценный,
+<p>В случае успеха вы получите файл: <cite>dist/helloworld-1.0.tar.gz</cite>. Это полноценный,
 архивированный python-пакет и вы можете распространять его среди прочих разработчиков.</p>
 </div>
 <div class="section" id="id3">
@@ -159,17 +143,11 @@ An example Hello World project.
 <p><a class="reference external" href="http://pypi.python.org/pypi/virtualenv/">Virtualenv</a> — пакет применяемый для создания изолированного python-окружения. Используем
 его для тестирования нашего проекта.</p>
 <p>Создадим окружение <tt class="docutils literal">env</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>$ virtualenv env
+<div class="highlight"><pre>$ virtualenv env
 </pre></div>
-</td></tr></table><p>Команда создаст директорию <tt class="docutils literal">env</tt> внутри нашего проекта и установит туда <tt class="docutils literal">python</tt>, <tt class="docutils literal">pip</tt> и <tt class="docutils literal">distribute</tt>.
+<p>Команда создаст директорию <tt class="docutils literal">env</tt> внутри нашего проекта и установит туда <tt class="docutils literal">python</tt>, <tt class="docutils literal">pip</tt> и <tt class="docutils literal">distribute</tt>.
 Произведем в него установку нашего проекта.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre>$ ./env/bin/python setup.py install
+<div class="highlight"><pre>$ ./env/bin/python setup.py install
 running install
 running bdist_egg
 running egg_info
@@ -177,31 +155,20 @@ running egg_info
 Processing dependencies for helloworld==1.0
 Finished processing dependencies for helloworld==1.0
 </pre></div>
-</td></tr></table><p>И протестируем его работоспособность:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre>$ ./env/bin/python
+<p>И протестируем его работоспособность:</p>
+<div class="highlight"><pre>$ ./env/bin/python
 &gt;&gt;&gt; import helloworld.core as hw
 &gt;&gt;&gt; hw.get_message()
 &#39;Hello World!&#39;
 &gt;&gt;&gt; hw.print_message()
 Hello World!
 </pre></div>
-</td></tr></table><p>Все работает. Осталось добавить поддержку команды <tt class="docutils literal">helloworld</tt> в консоли.</p>
+<p>Все работает. Осталось добавить поддержку команды <tt class="docutils literal">helloworld</tt> в консоли.</p>
 </div>
 <div class="section" id="id4">
 <h2><a class="toc-backref" href="#id11">Создание команд</a></h2>
 <p>Для создания команды <tt class="docutils literal">helloworld</tt> изменим файл <cite>setup.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">setup</span><span class="p">(</span>
+<div class="highlight"><pre><span class="n">setup</span><span class="p">(</span>
     <span class="o">...</span>
     <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
         <span class="s">&#39;console_scripts&#39;</span><span class="p">:</span>
@@ -209,24 +176,19 @@ Hello World!
         <span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
-</td></tr></table><p>В параметре <tt class="docutils literal">entry_points</tt> мы задаем словарь с &quot;точками вызова&quot; нашего приложения. Ключ <tt class="docutils literal">console_scripts</tt>
+<p>В параметре <tt class="docutils literal">entry_points</tt> мы задаем словарь с &quot;точками вызова&quot; нашего приложения. Ключ <tt class="docutils literal">console_scripts</tt>
 задает список создаваемых исполняемых скриптов (в Windows это будут exe-файлы). В данном случае
 мы указали создание исполняемого скрипта <tt class="docutils literal">helloworld</tt> при вызове которого будет запускаться метод <tt class="docutils literal">print_message</tt>
 из модуля <tt class="docutils literal">helloworld.core</tt>.</p>
 <p>Переустановим модуль в наше окружение и проверим работу созданного скрипта (для этого прийдется активировать наше окружение):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre>$ ./env/bin/python setup.py install
+<div class="highlight"><pre>$ ./env/bin/python setup.py install
 $ source ./env/bin/activate
 (env)
 $ helloworld
 Hello World!
 (env)
 </pre></div>
-</td></tr></table><p>Похоже все работает.</p>
+<p>Похоже все работает.</p>
 </div>
 <div class="section" id="id5">
 <h2><a class="toc-backref" href="#id12">Работа с версиями</a></h2>
@@ -236,16 +198,10 @@ Hello World!
 в python-коде. По существующим соглашения для хранения номера версии в модуле, используется
 переменная <tt class="docutils literal">__version__</tt>.</p>
 <p><cite>helloworld/__init__.py`</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;1.0&#39;</span>
+<div class="highlight"><pre><span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;1.0&#39;</span>
 </pre></div>
-</td></tr></table><p>Изменим файл <cite>setup.py</cite>, чтобы нам не приходилось редактировать номер версии в двух местах:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">...</span>
+<p>Изменим файл <cite>setup.py</cite>, чтобы нам не приходилось редактировать номер версии в двух местах:</p>
+<div class="highlight"><pre><span class="o">...</span>
 <span class="kn">import</span> <span class="nn">helloworld</span>
 
 <span class="n">setup</span><span class="p">(</span>
@@ -253,7 +209,7 @@ Hello World!
     <span class="n">version</span><span class="o">=</span><span class="n">helloworld</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span>
     <span class="o">...</span>
 </pre></div>
-</td></tr></table><p>Существует множество систем наименования версий в python обычно рекомендуется использовать <a class="reference external" href="http://www.python.org/dev/peps/pep-0386/">PEP386</a>.
+<p>Существует множество систем наименования версий в python обычно рекомендуется использовать <a class="reference external" href="http://www.python.org/dev/peps/pep-0386/">PEP386</a>.
 Можно представить, что обозначение версии состоит из номера мажорного, минорного релизов
 (номера багфикса при необходимости), разделенных точками. В последней части версии
 разрешается использовать буквы латинского алфавита. Примеры из официальной документации:</p>
@@ -276,22 +232,7 @@ Hello World!
 вебсервер отдающий страницу со строкой &quot;Hello world!&quot; генерируемой нашим модулем. Для этого
 воспользуемся пакетом <a class="reference external" href="http://pypi.python.org/pypi/Flask/0.8">Flask</a>.</p>
 <p>Добавляем файл <cite>helloworld/web.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 
 <span class="kn">from</span> <span class="nn">helloworld.core</span> <span class="kn">import</span> <span class="n">get_message</span>
 
@@ -308,20 +249,12 @@ Hello World!
 <span class="k">def</span> <span class="nf">run_server</span><span class="p">():</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
-</td></tr></table><p>И файл <cite>helloworld/templates/index.html</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<p>И файл <cite>helloworld/templates/index.html</cite>:</p>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="nt">&lt;body&gt;</span>{{message}}<span class="nt">&lt;/body&gt;</span>
 </pre></div>
-</td></tr></table><p>И опишем команду <tt class="docutils literal">serve</tt> в файле <cite>setup.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">...</span>
+<p>И опишем команду <tt class="docutils literal">serve</tt> в файле <cite>setup.py</cite>:</p>
+<div class="highlight"><pre><span class="o">...</span>
 <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
    <span class="s">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
        <span class="s">&#39;helloworld = helloworld.core:print_message&#39;</span><span class="p">,</span>
@@ -330,24 +263,15 @@ Hello World!
    <span class="p">},</span>
 <span class="o">...</span>
 </pre></div>
-</td></tr></table><p>Теперь в нашем проекте появилась зависимость от пакета <a class="reference external" href="http://pypi.python.org/pypi/Flask/0.8">Flask</a>. Без его установки наше приложение
+<p>Теперь в нашем проекте появилась зависимость от пакета <a class="reference external" href="http://pypi.python.org/pypi/Flask/0.8">Flask</a>. Без его установки наше приложение
 не будет правильно работать. За описание зависимостей в файле <cite>setup.py</cite> отвечает параметр <tt class="docutils literal">install_requires</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">...</span>
+<div class="highlight"><pre><span class="o">...</span>
 <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
     <span class="s">&#39;Flask==0.8&#39;</span>
 <span class="p">]</span>
 </pre></div>
-</td></tr></table><p>Проверим установку зависимостей обновив наш пакет и работу команды <tt class="docutils literal">serve</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre>$ ./env/bin/python setup.py develop
+<p>Проверим установку зависимостей обновив наш пакет и работу команды <tt class="docutils literal">serve</tt>:</p>
+<div class="highlight"><pre>$ ./env/bin/python setup.py develop
 ...
 Processing dependencies for helloworld==0.1
 Searching for Flask==0.8
@@ -355,7 +279,7 @@ Searching for Flask==0.8
 $ serve
    * Running on http://127.0.0.1:5000/
 </pre></div>
-</td></tr></table><p>Открыв браузер по адресу <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000</span></tt> вы должны увидеть нашу страницу.</p>
+<p>Открыв браузер по адресу <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000</span></tt> вы должны увидеть нашу страницу.</p>
 </div>
 <div class="section" id="manifest-in">
 <h2><a class="toc-backref" href="#id14">Управление файлами проекта (MANIFEST.in)</a></h2>
@@ -363,72 +287,40 @@ $ serve
 Необходимо включить в него файл <cite>helloworld/templates/index.html</cite> без которого проект работать не будет.</p>
 <p>Чтобы сделать это мы должны сообщить <tt class="docutils literal">distutils</tt> какие еще файлы надо включать в наш проект. Один из способов —
 это создание файла <cite>MANIFEST.in</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>recursive-include helloworld/templates *.html
+<div class="highlight"><pre>recursive-include helloworld/templates *.html
 </pre></div>
-</td></tr></table><p>Данная команда указывает <tt class="docutils literal">distutils</tt> на включение в проект <em>всех</em> html файлов в директории <cite>helloworld/templates</cite>.</p>
+<p>Данная команда указывает <tt class="docutils literal">distutils</tt> на включение в проект <em>всех</em> html файлов в директории <cite>helloworld/templates</cite>.</p>
 <p>Также придется обновить <cite>setup.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">...</span>
+<div class="highlight"><pre><span class="o">...</span>
 <span class="n">setup</span><span class="p">(</span>
     <span class="o">...</span>
     <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="o">...</span>
     <span class="p">)</span>
 </pre></div>
-</td></tr></table><p>Теперь шаблоны будут включены в наш проект.</p>
+<p>Теперь шаблоны будут включены в наш проект.</p>
 </div>
 <div class="section" id="id7">
 <h2><a class="toc-backref" href="#id15">Создание и запуск тестов</a></h2>
 <p>Хорошей практикой считается создание тестов для вашего проекта.
 Добавим простейшую реализацию, файл <cite>tests.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
 <span class="kn">from</span> <span class="nn">helloworld.core</span> <span class="kn">import</span> <span class="n">get_message</span>
 
 <span class="k">class</span> <span class="nc">HelloworldTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">test_helloworld</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">get_message</span><span class="p">(),</span> <span class="s">&#39;Hello World!&#39;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><p>И обновим <cite>setup.py</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="o">...</span>
+<p>И обновим <cite>setup.py</cite>:</p>
+<div class="highlight"><pre><span class="o">...</span>
 <span class="n">setup</span><span class="p">(</span>
     <span class="o">...</span>
     <span class="n">test_suite</span><span class="o">=</span><span class="s">&#39;tests&#39;</span><span class="p">,</span>
     <span class="o">...</span>
     <span class="p">)</span>
 </pre></div>
-</td></tr></table><p>Теперь мы можем произвести предварительное тестирование нашего проекта:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre>$ python setup.py test
+<p>Теперь мы можем произвести предварительное тестирование нашего проекта:</p>
+<div class="highlight"><pre>$ python setup.py test
 running test
 running egg_info
 writing requirements to helloworld.egg-info/requires.txt
@@ -447,20 +339,14 @@ Ran 1 test in 0.000s
 
 OK
 </pre></div>
-</td></tr></table><p>Обратите внимание, что для запуска тестов даже не нужно создание виртуального окружения. Необходимые
+<p>Обратите внимание, что для запуска тестов даже не нужно создание виртуального окружения. Необходимые
 зависимости будут скачаны в директорию проекта в виде <tt class="docutils literal">egg</tt> пакетов.</p>
 </div>
 <div class="section" id="pypi-python-org">
 <h2><a class="toc-backref" href="#id16">Публикация пакета на pypi.python.org</a></h2>
 <p>Прежде чем вы сможете опубликовать свой проект вам необходимо зарегистрироваться на <a class="reference external" href="http://pypi.python.org">PyPi</a>.
 Запишите ваши реквизиты в файле <cite>~/.pypirc</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre>[distutils]
+<div class="highlight"><pre>[distutils]
 index-servers =
     pypi
 
@@ -468,10 +354,10 @@ index-servers =
 username:&lt;username&gt;
 password:&lt;password&gt;
 </pre></div>
-</td></tr></table><p>Все ваш проект готов к публикации. Достаточно ввести соответствующую команду:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>$ python setup.py register sdist upload
+<p>Все ваш проект готов к публикации. Достаточно ввести соответствующую команду:</p>
+<div class="highlight"><pre>$ python setup.py register sdist upload
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Вы не сможете опубликовать пакет <cite>helloworld</cite>, тк данное имя проекта уже занято.</p>
 </div>
@@ -525,7 +411,7 @@ password:&lt;password&gt;
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

@@ -1,3 +1,4 @@
+argh                    == 0.25.0
 pelican                 == 3.4.0
 pelican-githubprojects  == 0.1.0
 pelicanfly              == 0.4.2

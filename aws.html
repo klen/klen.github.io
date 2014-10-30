@@ -172,22 +172,17 @@
 <p>После запуска мы можем подключиться с помощью SSH к нашему серверу <cite>awsdemo.us.to</cite>.
 Учтите, что пользователь по умолчанию на образах с <a class="reference external" href="http://alestic.com/">http://alestic.com/</a> — <strong>ubuntu</strong>.</p>
 <p>Если вы предварительно загрузили свои ключи:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>ssh ubuntu@awsdemo.us.to
+<div class="highlight"><pre>ssh ubuntu@awsdemo.us.to
 </pre></div>
-</td></tr></table><p>Или с использованием полученного ключа от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># (Для ключа с именем test.pem)</span>
+<p>Или с использованием полученного ключа от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>:</p>
+<div class="highlight"><pre><span class="c"># (Для ключа с именем test.pem)</span>
 <span class="c"># Устанавливаем необхожимые права</span>
 chmod 400 test.pem
 
 <span class="c"># Подключаемся с полученным ключом</span>
 ssh -i test.pem ubuntu@awsdemo.us.to
 </pre></div>
-</td></tr></table><p>В случае успеха вы должны попасть в терминал вашего запущенного сервера, поздравляю!</p>
+<p>В случае успеха вы должны попасть в терминал вашего запущенного сервера, поздравляю!</p>
 <img alt="" src="/static/img/aws_done.png" />
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -244,7 +239,7 @@ ssh -i test.pem ubuntu@awsdemo.us.to
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

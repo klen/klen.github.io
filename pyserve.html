@@ -53,12 +53,12 @@
 нацеленный на содержимое локальной директории.</p>
 <p>При установленном python это делается буквально в одну строку.</p>
 <p>Для python версий 2.*:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>python -m SimpleHTTPServer
+<div class="highlight"><pre><span class="nv">$ </span>python -m SimpleHTTPServer
 </pre></div>
-</td></tr></table><p>Для python версий 3.*:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>python -m http.server
+<p>Для python версий 3.*:</p>
+<div class="highlight"><pre><span class="nv">$ </span>python -m http.server
 </pre></div>
-</td></tr></table><p>Я часто пользовался этой функциональностью, например при отладке standalone HTML
+<p>Я часто пользовался этой функциональностью, например при отладке standalone HTML
 приложений работающих с удаленными API. В какой то момент мне захотелось большего:</p>
 <ul class="simple">
 <li>Одинаковый синтаксис для python 2 и 3 версий;</li>
@@ -70,13 +70,13 @@
 </ul>
 <p>Так появился пакет <a class="reference external" href="https://github.com/klen/pyserve">PyServe</a>.</p>
 <img alt="" src="/static/img/pyserve.png" />
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pip install pyserve
+<div class="highlight"><pre><span class="nv">$ </span>pip install pyserve
 </pre></div>
-</td></tr></table><p>Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
+<p>Пакет не содержит зависимостей, поддерживает всю вышеперечисленную функциональность и прост
 в установке. Теперь независимо от версии python вы можете запустить сервер одной командой:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>serve
+<div class="highlight"><pre><span class="nv">$ </span>serve
 </pre></div>
-</td></tr></table>
+
         </div>
 
 
@@ -125,7 +125,7 @@
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

@@ -95,26 +95,22 @@
 <div class="section" id="id2">
 <h2><a class="toc-backref" href="#id5">Установка</a></h2>
 <p>Приложение можно установить из <a class="reference external" href="http://pypi.python.org">PyPi</a></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre>easy_install django-markdown
+<div class="highlight"><pre>easy_install django-markdown
 
 <span class="c"># Или с помощью pip</span>
 
 pip install django-markdown
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="section" id="id3">
 <h2><a class="toc-backref" href="#id6">Подключение к проекту</a></h2>
 <p>Необходимо добавить <cite>django_markdown</cite> в <strong>INSTALLED_APPS</strong>, settings.py:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="s">&#39;django_markdown&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="s">&#39;django_markdown&#39;</span><span class="p">,</span>
 </pre></div>
-</td></tr></table><p>И создать url в базовом url_config, urls.py:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">&#39;^markdown/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span> <span class="s">&#39;django_markdown.urls&#39;</span><span class="p">)),</span>
+<p>И создать url в базовом url_config, urls.py:</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">&#39;^markdown/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span> <span class="s">&#39;django_markdown.urls&#39;</span><span class="p">)),</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Подключать URL необходимо если вы хотите использовать функционал
 предпросмотра в виджетах.</p>
@@ -125,43 +121,30 @@ pip install django-markdown
 <ol class="arabic simple">
 <li>Использование в формах:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.widgets</span> <span class="kn">import</span> <span class="n">MarkdownWidget</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.widgets</span> <span class="kn">import</span> <span class="n">MarkdownWidget</span>
 
 <span class="k">class</span> <span class="nc">MyMarkdownForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span> <span class="n">widget</span><span class="o">=</span><span class="n">MarkdownWidget</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Просто подключаем виджет к нужному полю.</p>
 </div>
 <ol class="arabic simple" start="2">
 <li>В стандартном <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/contrib/admin/">Django-admin</a>:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.admin</span> <span class="kn">import</span> <span class="n">MarkdownModelAdmin</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.admin</span> <span class="kn">import</span> <span class="n">MarkdownModelAdmin</span>
 
 <span class="n">adimin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyModel</span><span class="p">,</span> <span class="n">MarkdownModelAdmin</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Все поля типа TextField будут выведены с использованием <a class="reference external" href="http://ru.wikipedia.org/wiki/Markdown">Markdown</a> виджета</p>
 </div>
 <ol class="arabic simple" start="3">
 <li><a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/contrib/flatpages/">Django-flatpages</a>:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># В вашем базовом url_config</span>
+<div class="highlight"><pre><span class="c"># В вашем базовом url_config</span>
 <span class="kn">from</span> <span class="nn">django_markdown</span> <span class="kn">import</span> <span class="n">flatpages</span>
 
 <span class="o">...</span> <span class="n">URLS</span> <span class="o">..</span>
@@ -171,16 +154,16 @@ pip install django-markdown
 <span class="n">flatpages</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
 <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span> <span class="p">]</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Мы импортируем flatpages из django_markdown вместо стандартного пути.</p>
 </div>
 <ol class="arabic simple" start="4">
 <li>Настройка скинов wysiwyg (markitup по-умолчанию) settings.py:</li>
 </ol>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">MARKDOWN_EDITOR_SKIN</span> <span class="o">=</span> <span class="s">&#39;simple&#39;</span>
+<div class="highlight"><pre><span class="n">MARKDOWN_EDITOR_SKIN</span> <span class="o">=</span> <span class="s">&#39;simple&#39;</span>
 </pre></div>
-</td></tr></table><div class="note">
+<div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">Подробнее про настройку скинов и JS API читайте на сайте <a class="reference external" href="http://markitup.jaysalvat.com/home/">Markitup</a></p>
 </div>
@@ -235,7 +218,7 @@ pip install django-markdown
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

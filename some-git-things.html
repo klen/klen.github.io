@@ -50,66 +50,53 @@
 
         <div class="article_content">
             <p>Алиас для более компактного <cite>git status</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.st <span class="s1">&#39;status -sb&#39;</span>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.st <span class="s1">&#39;status -sb&#39;</span>
 <span class="nv">$ </span>git st
 </pre></div>
-</td></tr></table><p>Алиас для редактирования последнего коммита:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.amend <span class="s1">&#39;commit --amend -C HEAD&#39;</span>
+<p>Алиас для редактирования последнего коммита:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.amend <span class="s1">&#39;commit --amend -C HEAD&#39;</span>
 <span class="nv">$ </span>git amend
 </pre></div>
-</td></tr></table><p>Алиас для отмены последнего коммита:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.undo <span class="s1">&#39;reset --soft HEAD^&#39;</span>
+<p>Алиас для отмены последнего коммита:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.undo <span class="s1">&#39;reset --soft HEAD^&#39;</span>
 <span class="nv">$ </span>git undo
 </pre></div>
-</td></tr></table><p>Предпочитаемый мной вывод <cite>diff</cite>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.diff <span class="s1">&#39;diff --word-diff&#39;</span>
+<p>Предпочитаемый мной вывод <cite>diff</cite>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.diff <span class="s1">&#39;diff --word-diff&#39;</span>
 <span class="nv">$ </span>git undo
 </pre></div>
-</td></tr></table><p>«Визуальная» история веток в консоли:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hist <span class="s2">&quot;log --pretty=format:&#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&#39; --graph --date=short&quot;</span>
+<p>«Визуальная» история веток в консоли:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hist <span class="s2">&quot;log --pretty=format:&#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&#39; --graph --date=short&quot;</span>
 </pre></div>
-</td></tr></table><p>Удобная работа с <a class="reference external" href="https://github.com/nvie/gitflow/">Git-Flow</a>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hotfix <span class="s1">&#39;flow hotfix&#39;</span>
+<p>Удобная работа с <a class="reference external" href="https://github.com/nvie/gitflow/">Git-Flow</a>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hotfix <span class="s1">&#39;flow hotfix&#39;</span>
 <span class="nv">$ </span>git config --global alias.feature <span class="s1">&#39;flow feature&#39;</span>
 <span class="nv">$ </span>git config --global alias.release <span class="s1">&#39;flow release&#39;</span>
 </pre></div>
-</td></tr></table><p>Автоматическая коррекция опечаток во вводимых командах:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global help.autocorrect 1
+<p>Автоматическая коррекция опечаток во вводимых командах:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global help.autocorrect 1
 <span class="nv">$ </span>git comit
 <span class="nv">$ </span>git bronch
 </pre></div>
-</td></tr></table><p>Автоматическая запись разрешенных мердж конфликтов, для будущего использования:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git config --global rerere.enabled 1
+<p>Автоматическая запись разрешенных мердж конфликтов, для будущего использования:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global rerere.enabled 1
 </pre></div>
-</td></tr></table><p>Получение веток с не влитыми данными:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git branch --no-merged
+<p>Получение веток с не влитыми данными:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git branch --no-merged
 </pre></div>
-</td></tr></table><p>Список коммитов в ветке <em>branchA</em> отсуствующих в ветке <em>branchB</em>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>git log branchA ^branchB
+<p>Список коммитов в ветке <em>branchA</em> отсуствующих в ветке <em>branchB</em>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git log branchA ^branchB
 </pre></div>
-</td></tr></table><p>Многие используют баш функцию <cite>__git_ps1</cite> для вывода названия текущей ветки,
+<p>Многие используют баш функцию <cite>__git_ps1</cite> для вывода названия текущей ветки,
 но не все знают, что ее можно сделать более информативной.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># In your .bashrc or .profile:</span>
+<div class="highlight"><pre><span class="c"># In your .bashrc or .profile:</span>
 
     <span class="nv">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span>1
     <span class="nv">GIT_PS1_SHOWSTASHSTATE</span><span class="o">=</span>1
 
     <span class="nv">$ </span><span class="o">(</span>develop *<span class="nv">$)</span>:
 </pre></div>
-</td></tr></table>
+
         </div>
 
 
@@ -158,7 +145,7 @@
 </div>        </div>
 
     <a class="github" href="http://github.com/klen"><img src="./static/ForkMe_Wht.png" alt="alt"/></a>    <footer class="footer">
-        © 2011–2013 Kirill Klenov
+        © 2011–2014 Kirill Klenov
 &nbsp;&nbsp;|&nbsp;&nbsp;            <a href="./pages/about-en.html">About me</a>
         <div class='pos1'></div>
         <div class='pos2'></div>

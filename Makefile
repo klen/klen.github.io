@@ -16,7 +16,10 @@ compile: $(VIRTUALENV) clean
 	$(VIRTUALENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py
 	zeta theme
 
-run: $(VIRTUALENV)
+follow: $(VIRTUALENV)
+	$(VIRTUALENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py -r
+
+run: compile
 	pyserve $(CURDIR)
 
 # compile: clean index.html theme/_main.css
