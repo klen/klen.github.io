@@ -7,7 +7,7 @@
     <h1>Site archives.</h1>
 
     <ul class="tag-cloud">
-        {% for tag in tag_cloud %}
+        {% for tag in tag_cloud|sort %}
             <li class="tag-cloud_item tag-cloud_{{ tag.1 }}"><a href="{{ SITEURL }}/tag/{{ tag.0 }}.html">{{ tag.0 }}</a></li>
         {% endfor %}
     </ul>
