@@ -5,6 +5,7 @@ all: compile
 $(VIRTUALENV): requirements.txt
 	[ -d $(VIRTUALENV) ] || virtualenv $(VIRTUALENV) --no-site-packages
 	$(VIRTUALENV)/bin/pip install -r requirements.txt
+	@touch $(VIRTUALENV)
 
 clean:
 	# mv 404.html 404.bak

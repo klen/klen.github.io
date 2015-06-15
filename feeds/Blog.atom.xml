@@ -1,5 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.io</title><link href="http://klen.github.io/" rel="alternate"></link><link href="http://klen.github.io/feeds/blog.atom.xml" rel="self"></link><id>http://klen.github.io/</id><updated>2014-10-30T00:00:00+03:00</updated><entry><title>Graphite-beacon — простая система оповещений для Graphite</title><link href="http://klen.github.io/graphite-beacon.html" rel="alternate"></link><updated>2014-10-30T00:00:00+03:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2014-10-30:graphite-beacon.html</id><summary type="html">&lt;hr class="docutils" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>klen.github.io</title><link href="http://klen.github.io/" rel="alternate"></link><link href="http://klen.github.io/feeds/blog.atom.xml" rel="self"></link><id>http://klen.github.io/</id><updated>2015-06-15T00:00:00+03:00</updated><entry><title>Измерение производительности популярных python web-фреймворков</title><link href="http://klen.github.io/python-web-benchmarks.html" rel="alternate"></link><updated>2015-06-15T00:00:00+03:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2015-06-15:python-web-benchmarks.html</id><summary type="html">&lt;hr class="docutils" /&gt;
+&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title first"&gt;Содержание:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id6"&gt;Участники тестирования&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id7"&gt;Методика тестирования&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id8"&gt;Результаты&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id9"&gt;Выводы&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;На праздниках решил протестировать популярные python фреймворки для web на
+производительность. В отличии от других тестов не стал сосредотачиваться на
+деплойменте, тестируя разнообразные связки
+uwsgi/gunicorn/chaussette/waitress/nginx и тд. Но на тестировании именно самих
+платформ. В частности меня интересовала «плата за асинхронность» — насколько
+набирающие популярность асинхронные фреймворки превосходят/уступают синхронным
+WSGI-решениям.&lt;/p&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id6"&gt;Участники тестирования&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Описания взяты с оригиналов&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/KeepSafe/aiohttp"&gt;Aiohttp&lt;/a&gt; 0.16.3 -- Асинхронный фреймворк базирующийся на &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-3156/"&gt;Asyncio&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/bottlepy/bottle"&gt;Bottle&lt;/a&gt; 0.12.8  -- Быстрый, простой и легковесный WSGI микрофреймвок;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/django/django"&gt;Django&lt;/a&gt; 1.8.2   -- Веб-фреймворк для перфекционистов с горящими сроками;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/falconry/falcon"&gt;Falcon&lt;/a&gt; 0.3.0   -- Высоко-производительный фреймворк для построения облачных API;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/mitsuhiko/flask"&gt;Flask&lt;/a&gt; 0.10.1   -- Микрофреймворк базирующийся на Werkzeug, Jinja2 и хороших намерениях;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/klen/muffin"&gt;Muffin&lt;/a&gt; 0.0.88  -- Асинхронный фреймворк базирующийся на &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-3156/"&gt;Asyncio&lt;/a&gt; и &lt;a class="reference external" href="https://github.com/KeepSafe/aiohttp"&gt;Aiohttp&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/Pylons/pyramid"&gt;Pyramid&lt;/a&gt; 1.5.7  -- Небольшой, быстрый и понятный веб-фреймворк;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/tornadoweb/tornado"&gt;Tornado&lt;/a&gt; 4.2    -- Асинхронная сетевая библиотека и веб-фреймворк;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id7"&gt;Методика тестирования&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Тесты прогонялись на &lt;strong&gt;Amazon EC2&lt;/strong&gt; &lt;a class="reference external" href="http://aws.amazon.com/ec2/instance-types/"&gt;t2.medium&lt;/a&gt; сервере.
+Для создания нагрузки использовалась утилита &lt;a class="reference external" href="https://github.com/wg/wrk"&gt;WRK&lt;/a&gt; запущенная на том же сервере с параметрами:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+wrk -d30s -t12 -c400 [URL]
+&lt;/pre&gt;
+&lt;p&gt;Все приложения (кроме Tornado) запускались при помощи &lt;a class="reference external" href="http://gunicorn.org/"&gt;Gunicorn&lt;/a&gt; (2 процесса на
+каждое). Для синхронных WSGI библиотек использовался &lt;a class="reference external" href="http://meinheld.org/"&gt;Meinheld&lt;/a&gt; worker.&lt;/p&gt;
+&lt;p&gt;Приложение на Tornado запускало 2 процесса, используя средства самого
+фреймворка.&lt;/p&gt;
+&lt;p&gt;Все тесты производились с использованием &lt;strong&gt;Python 3.4&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Каждое приложение тестировалось по трем основным сценариям:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;JSON-тест&lt;/strong&gt; -- закодировать небольшой объект в JSON и вернуть клиенту.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remote-тест&lt;/strong&gt; -- требуется загрузить ответ от другого сервера и вернуть его
+клиенту.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Complete-тест&lt;/strong&gt; -- Используя ORM загрузить коллекцию объектов из базы,
+добавить к ней еще один и отрендерить список в шаблоне.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Первый сценарий это своеобразный «Hello World!» лишь несколько усложненный
+процессом кодирования в JSON, что практически не влияет на результаты.
+Показывает именно быстродействие в плане обработке HTTP-запросов.&lt;/p&gt;
+&lt;p&gt;Второй сценарий несколько синтетический, тк его результаты весьма предсказуемы.
+Тем неменее он должен показывать насколько хорошо платформа справляется с
+длительными операциями ожидания во время обработки запроса.&lt;/p&gt;
+&lt;p&gt;Третий сценарий предпалагается как комплексный тест и имитирует реальную жизнь,
+а именно использование базы данных, ORM, движка шаблонов.&lt;/p&gt;
+&lt;p&gt;В качестве базы данных использовался Postgresql с дефолтными настройками.&lt;/p&gt;
+&lt;p&gt;Исходники приложений можно найти &lt;a class="reference external" href="https://github.com/klen/py-frameworks-bench/tree/develop/frameworks"&gt;на Github&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;Результаты&lt;/a&gt;&lt;/h2&gt;
+&lt;link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.2.0/jquery.bootgrid.min.css" media="screen"&gt;
+&lt;style type="text/css" media="screen"&gt;
+    .chart {
+        width: 100%;
+        height: 400px;
+        margin: 3em 0 1.5em;
+    }
+    .table {
+        border-collapse: collapse !important;
+        font-size: .9rem;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    .table &gt; thead &gt; tr &gt; th,
+    .table &gt; tbody &gt; tr &gt; th,
+    .table &gt; tfoot &gt; tr &gt; th,
+    .table &gt; thead &gt; tr &gt; td,
+    .table &gt; tbody &gt; tr &gt; td,
+    .table &gt; tfoot &gt; tr &gt; td {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+    }
+    .table &gt; thead &gt; tr &gt; th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #ddd;
+    }
+    .table &gt; caption + thead &gt; tr:first-child &gt; th,
+    .table &gt; colgroup + thead &gt; tr:first-child &gt; th,
+    .table &gt; thead:first-child &gt; tr:first-child &gt; th,
+    .table &gt; caption + thead &gt; tr:first-child &gt; td,
+    .table &gt; colgroup + thead &gt; tr:first-child &gt; td,
+    .table &gt; thead:first-child &gt; tr:first-child &gt; td {
+        border-top: 0;
+    }
+    .table &gt; tbody + tbody {
+        border-top: 2px solid #ddd;
+    }
+    .table .table {
+        background-color: #fff;
+    }
+    .table-striped &gt; tbody &gt; tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+    .table-hover &gt; tbody &gt; tr:hover {
+        background-color: #f5f5f5;
+    }
+    .table &gt; thead &gt; tr &gt; td.active,
+    .table &gt; tbody &gt; tr &gt; td.active,
+    .table &gt; tfoot &gt; tr &gt; td.active,
+    .table &gt; thead &gt; tr &gt; th.active,
+    .table &gt; tbody &gt; tr &gt; th.active,
+    .table &gt; tfoot &gt; tr &gt; th.active,
+    .table &gt; thead &gt; tr.active &gt; td,
+    .table &gt; tbody &gt; tr.active &gt; td,
+    .table &gt; tfoot &gt; tr.active &gt; td,
+    .table &gt; thead &gt; tr.active &gt; th,
+    .table &gt; tbody &gt; tr.active &gt; th,
+    .table &gt; tfoot &gt; tr.active &gt; th {
+        background-color: #f5f5f5;
+    }
+    .table-hover &gt; tbody &gt; tr &gt; td.active:hover,
+    .table-hover &gt; tbody &gt; tr &gt; th.active:hover,
+    .table-hover &gt; tbody &gt; tr.active:hover &gt; td,
+    .table-hover &gt; tbody &gt; tr:hover &gt; .active,
+    .table-hover &gt; tbody &gt; tr.active:hover &gt; th {
+        background-color: #e8e8e8;
+    }
+    .table &gt; thead &gt; tr &gt; td.danger,
+    .table &gt; tbody &gt; tr &gt; td.danger,
+    .table &gt; tfoot &gt; tr &gt; td.danger,
+    .table &gt; thead &gt; tr &gt; th.danger,
+    .table &gt; tbody &gt; tr &gt; th.danger,
+    .table &gt; tfoot &gt; tr &gt; th.danger,
+    .table &gt; thead &gt; tr.danger &gt; td,
+    .table &gt; tbody &gt; tr.danger &gt; td,
+    .table &gt; tfoot &gt; tr.danger &gt; td,
+    .table &gt; thead &gt; tr.danger &gt; th,
+    .table &gt; tbody &gt; tr.danger &gt; th,
+    .table &gt; tfoot &gt; tr.danger &gt; th {
+        background-color: #f2dede;
+    }
+    .table-hover &gt; tbody &gt; tr &gt; td.danger:hover,
+    .table-hover &gt; tbody &gt; tr &gt; th.danger:hover,
+    .table-hover &gt; tbody &gt; tr.danger:hover &gt; td,
+    .table-hover &gt; tbody &gt; tr:hover &gt; .danger,
+    .table-hover &gt; tbody &gt; tr.danger:hover &gt; th {
+        background-color: #ebcccc;
+    }
+&lt;/style&gt;&lt;div id="json" class="chart"&gt;&lt;/div&gt;
+&lt;table class="table table-stripped table-condensed"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-column-id="name"&gt;Name&lt;/th&gt;
+            &lt;th data-column-id="p50" data-type="numeric"&gt;50% (ms)&lt;/th&gt;
+            &lt;th data-column-id="p75" data-type="numeric"&gt;75% (ms)&lt;/th&gt;
+            &lt;th data-column-id="avg" data-type="numeric"&gt;Avg (ms)&lt;/th&gt;
+            &lt;th data-column-id="req" data-type="numeric" data-order="desc"&gt;Req/s&lt;/th&gt;
+            &lt;th data-column-id="errors"&gt;Non 200-x&lt;/th&gt;
+            &lt;th data-column-id="timeouts"&gt;Timeouts&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+            &lt;tr&gt; &lt;td&gt;Aiohttp&lt;/td&gt; &lt;td&gt;91.67 &lt;/td&gt; &lt;td&gt;103.1 &lt;/td&gt; &lt;td&gt;108.01&lt;/td&gt; &lt;td&gt;4093.41 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Bottle&lt;/td&gt;  &lt;td&gt;24.77 &lt;/td&gt; &lt;td&gt;26.23 &lt;/td&gt; &lt;td&gt;25.06 &lt;/td&gt; &lt;td&gt;15761.45&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Django&lt;/td&gt;  &lt;td&gt;103.2 &lt;/td&gt; &lt;td&gt;112.19&lt;/td&gt; &lt;td&gt;103.36&lt;/td&gt; &lt;td&gt;3696.90 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Falcon&lt;/td&gt;  &lt;td&gt;19.24 &lt;/td&gt; &lt;td&gt;19.81 &lt;/td&gt; &lt;td&gt;19.19 &lt;/td&gt; &lt;td&gt;20677.13&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Flask&lt;/td&gt;   &lt;td&gt;64.32 &lt;/td&gt; &lt;td&gt;71.59 &lt;/td&gt; &lt;td&gt;65.68 &lt;/td&gt; &lt;td&gt;6023.40 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Muffin&lt;/td&gt;  &lt;td&gt;108.07&lt;/td&gt; &lt;td&gt;115.09&lt;/td&gt; &lt;td&gt;171.56&lt;/td&gt; &lt;td&gt;3575.36 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Pyramid&lt;/td&gt; &lt;td&gt;41.75 &lt;/td&gt; &lt;td&gt;43.49 &lt;/td&gt; &lt;td&gt;41.63 &lt;/td&gt; &lt;td&gt;9402.69 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Tornado&lt;/td&gt; &lt;td&gt;138.24&lt;/td&gt; &lt;td&gt;149.84&lt;/td&gt; &lt;td&gt;136.87&lt;/td&gt; &lt;td&gt;2829.72 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;В первом простом тесте с хорошим отрывом победили синхронные фреймворки. Не
+считая &lt;strong&gt;Django&lt;/strong&gt;, но в оправдание последнего, можно сказать, что по-умолчанию этот
+фреймворк делает множество работы (middlewares by default). Асинхронные
+фреймворки делят места аутсайдеров и неожиданно для меня на последнем месте
+оказался &lt;strong&gt;Tornado&lt;/strong&gt;. Очень хорошие результаты у &lt;strong&gt;Falcon&lt;/strong&gt; и &lt;strong&gt;Bottle&lt;/strong&gt;.&lt;/p&gt;
+&lt;div id="remote" class="chart"&gt;&lt;/div&gt;
+&lt;table class="table table-stripped"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-column-id="name"&gt;Name&lt;/th&gt;
+            &lt;th data-column-id="p50" data-type="numeric"&gt;50% (ms)&lt;/th&gt;
+            &lt;th data-column-id="p75" data-type="numeric"&gt;75% (ms)&lt;/th&gt;
+            &lt;th data-column-id="avg" data-type="numeric"&gt;Avg (ms)&lt;/th&gt;
+            &lt;th data-column-id="req" data-type="numeric" data-order="desc"&gt;Req/s&lt;/th&gt;
+            &lt;th data-column-id="errors"&gt;Non 200-x&lt;/th&gt;
+            &lt;th data-column-id="timeouts"&gt;Timeouts&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+            &lt;tr&gt; &lt;td&gt;Aiohttp&lt;/td&gt; &lt;td&gt;358.08 &lt;/td&gt; &lt;td&gt;369.08  &lt;/td&gt; &lt;td&gt;338.94 &lt;/td&gt; &lt;td&gt;1120.27&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;     &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Bottle&lt;/td&gt;  &lt;td&gt;3363.74&lt;/td&gt; &lt;td&gt;9911.84 &lt;/td&gt; &lt;td&gt;6403.92&lt;/td&gt; &lt;td&gt;19.09  &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;335  &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Django&lt;/td&gt;  &lt;td&gt;3317.64&lt;/td&gt; &lt;td&gt;12954.23&lt;/td&gt; &lt;td&gt;6918.64&lt;/td&gt; &lt;td&gt;18.96  &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;300  &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Falcon&lt;/td&gt;  &lt;td&gt;3196.23&lt;/td&gt; &lt;td&gt;12976.84&lt;/td&gt; &lt;td&gt;6696.17&lt;/td&gt; &lt;td&gt;19.28  &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;328  &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Flask&lt;/td&gt;   &lt;td&gt;3306.88&lt;/td&gt; &lt;td&gt;11690.8 &lt;/td&gt; &lt;td&gt;6824.88&lt;/td&gt; &lt;td&gt;19.16  &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;363  &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Muffin&lt;/td&gt;  &lt;td&gt;372.95 &lt;/td&gt; &lt;td&gt;428.75  &lt;/td&gt; &lt;td&gt;376.98 &lt;/td&gt; &lt;td&gt;1019.76&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;     &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Pyramid&lt;/td&gt; &lt;td&gt;3295.1 &lt;/td&gt; &lt;td&gt;10518.92&lt;/td&gt; &lt;td&gt;6673.78&lt;/td&gt; &lt;td&gt;19.35  &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;338  &lt;/td&gt;  &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Tornado&lt;/td&gt; &lt;td&gt;1994.39&lt;/td&gt; &lt;td&gt;2069.25 &lt;/td&gt; &lt;td&gt;1928.31&lt;/td&gt; &lt;td&gt;194.37 &lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;     &lt;/td&gt; &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;Для понимания результатов следующего теста необходимо пояснить, что приложения
+обращались к nginx настроенному на ответ с задержкой 100ms. Из-за этого
+результаты синхронных фреймворков очень близки, практически вся их работа после
+определенного момента сводилась к ожиданию. Опять неожиданные результаты от
+&lt;strong&gt;Tornado&lt;/strong&gt;, я предполагал, что он будет близок к &lt;strong&gt;Aiohttp&lt;/strong&gt; и &lt;strong&gt;Muffin&lt;/strong&gt;. Но тем неменее
+&lt;strong&gt;Tornado&lt;/strong&gt; в 10 раз эффективнее в этом кейсе чем ближайший синхронный фреймворк.&lt;/p&gt;
+&lt;div id="complete" class="chart"&gt;&lt;/div&gt;
+&lt;table class="table table-stripped"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-column-id="name"&gt;Name&lt;/th&gt;
+            &lt;th data-column-id="p50" data-type="numeric"&gt;50% (ms)&lt;/th&gt;
+            &lt;th data-column-id="p75" data-type="numeric"&gt;75% (ms)&lt;/th&gt;
+            &lt;th data-column-id="avg" data-type="numeric"&gt;Avg (ms)&lt;/th&gt;
+            &lt;th data-column-id="req" data-type="numeric" data-order="desc"&gt;Req/s&lt;/th&gt;
+            &lt;th data-column-id="errors"&gt;Non 2xx&lt;/th&gt;
+            &lt;th data-column-id="timeouts"&gt;Timeouts&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+            &lt;tr&gt; &lt;td&gt;Aiohttp&lt;/td&gt; &lt;td&gt;151.78 &lt;/td&gt; &lt;td&gt;156.9  &lt;/td&gt; &lt;td&gt;254.75 &lt;/td&gt; &lt;td&gt;1004.82&lt;/td&gt; &lt;td&gt;68%&lt;/td&gt; &lt;td&gt;236  &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Bottle&lt;/td&gt;  &lt;td&gt;613.5  &lt;/td&gt; &lt;td&gt;630.17 &lt;/td&gt; &lt;td&gt;1062.86&lt;/td&gt; &lt;td&gt;451.34 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;178  &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Django&lt;/td&gt;  &lt;td&gt;1610.46&lt;/td&gt; &lt;td&gt;1976.44&lt;/td&gt; &lt;td&gt;2632.36&lt;/td&gt; &lt;td&gt;88.57  &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;42   &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Falcon&lt;/td&gt;  &lt;td&gt;766.75 &lt;/td&gt; &lt;td&gt;805.35 &lt;/td&gt; &lt;td&gt;1457.99&lt;/td&gt; &lt;td&gt;350.26 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;81   &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Flask&lt;/td&gt;   &lt;td&gt;1032.63&lt;/td&gt; &lt;td&gt;1649.89&lt;/td&gt; &lt;td&gt;1465.25&lt;/td&gt; &lt;td&gt;222.78 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;496  &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Muffin&lt;/td&gt;  &lt;td&gt;420.14 &lt;/td&gt; &lt;td&gt;485.4  &lt;/td&gt; &lt;td&gt;1552.7 &lt;/td&gt; &lt;td&gt;819.62 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;     &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Pyramid&lt;/td&gt; &lt;td&gt;562.44 &lt;/td&gt; &lt;td&gt;601.49 &lt;/td&gt; &lt;td&gt;812.43 &lt;/td&gt; &lt;td&gt;248.42 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;235  &lt;/td&gt; &lt;/tr&gt;
+            &lt;tr&gt; &lt;td&gt;Tornado&lt;/td&gt; &lt;td&gt;937.37 &lt;/td&gt; &lt;td&gt;988.86 &lt;/td&gt; &lt;td&gt;910.06 &lt;/td&gt; &lt;td&gt;418.36 &lt;/td&gt; &lt;td&gt;&lt;/td&gt;    &lt;td&gt;     &lt;/td&gt; &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;И последний тест. Результаты Aiohttp можно игнорировать тк к сожалению более двух третей запросов вернули 502 ошибки.
+На первом месте неожиданно, но приятно, оказался мой фреймворк &lt;a class="reference external" href="https://github.com/klen/muffin"&gt;Muffin&lt;/a&gt; достаточно быстро обрабатывающий этот тест.
+&lt;a class="reference external" href="https://github.com/django/django"&gt;Django&lt;/a&gt; значительно проигрывает, лишь подтверждая медлительность стандартного движка шаблонов и ORM.&lt;/p&gt;
+&lt;script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.1.5/highcharts.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.2.0/jquery.bootgrid.min.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.2.0/jquery.bootgrid.fa.min.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript"&gt;
+    (function($){
+        $(function () {
+
+            var data = {
+                "pyramid": [[0.26, 41.75, 43.49, 45.49, 48.83, 204.31, 412.87, 41.63, 30.04, 282457.0, 0.0, 0.0, 0.0], [123.16, 3295.1, 10518.92, 17411.24, 23569.44, 24190.6, 24190.6, 6673.78, 30.07, 582.0, 0.0, 338.0, 0.0], [44.73, 562.44, 601.49, 872.25, 9289.18, 14654.82, 14714.02, 812.43, 30.09, 7475.0, 0.0, 235.0, 0.0]],
+                "aiohttp": [[1.96, 91.67, 103.1, 107.48, 848.42, 1892.42, 2347.08, 108.01, 30.05, 123007.0, 0.0, 0.0, 0.0], [104.16, 358.08, 369.08, 380.07, 402.21, 703.7, 904.4, 338.94, 30.04, 33653.0, 0.0, 0.0, 0.0], [2.58, 151.78, 156.9, 161.79, 5906.94, 12441.32, 13993.53, 254.75, 30.05, 30195.0, 20442.0, 236.0, 0.0]],
+                "flask": [[1.13, 64.32, 71.59, 74.38, 78.11, 328.78, 551.97, 65.68, 30.04, 180943.0, 0.0, 0.0, 0.0], [118.92, 3306.88, 11690.8, 16981.66, 22278.62, 29043.58, 29043.58, 6824.88, 30.06, 576.0, 0.0, 363.0, 0.0], [35.75, 1032.63, 1649.89, 2726.3, 8822.6, 10403.23, 10478.41, 1465.25, 30.07, 6699.0, 0.0, 496.0, 0.0]],
+                "muffin": [[2.41, 108.07, 115.09, 120.97, 2554.97, 4252.73, 4996.43, 171.56, 30.04, 107404.0, 0.0, 0.0, 0.0], [108.61, 372.95, 428.75, 449.83, 487.94, 1300.74, 1564.79, 376.98, 30.05, 30644.0, 0.0, 0.0, 0.0], [9.17, 420.14, 485.4, 4964.92, 16890.25, 21367.9, 23015.05, 1552.7, 30.06, 24638.0, 0.0, 0.0, 0.0]],
+                "django": [[5.75, 103.2, 112.19, 114.23, 117.67, 445.56, 681.68, 103.36, 30.04, 111055.0, 0.0, 0.0, 0.0], [121.64, 3317.64, 12954.23, 18790.94, 21321.65, 27579.58, 27579.58, 6918.64, 30.06, 570.0, 0.0, 300.0, 0.0], [155.24, 1610.46, 1976.44, 6974.99, 14514.59, 20437.6, 20478.44, 2632.36, 30.1, 2666.0, 0.0, 42.0, 0.0]],
+                "tornado": [[1.61, 138.24, 149.84, 156.4, 161.76, 169.15, 311.63, 136.87, 30.04, 85005.0, 0.0, 0.0, 0.0], [178.48, 1994.39, 2069.25, 2087.02, 2126.76, 2239.36, 2300.74, 1928.31, 30.05, 5841.0, 0.0, 0.0, 0.0], [19.12, 937.37, 988.86, 1015.01, 1049.07, 1576.72, 1603.96, 910.06, 30.06, 12576.0, 0.0, 0.0, 0.0]],
+                "bottle": [[0.19, 24.77, 26.23, 27.45, 31.91, 103.28, 295.81, 25.06, 30.04, 473474.0, 0.0, 0.0, 0.0], [122.9, 3363.74, 9911.84, 16793.91, 22170.11, 25412.56, 25412.56, 6403.92, 30.06, 574.0, 0.0, 335.0, 0.0], [37.44, 613.5, 630.17, 1866.8, 8491.27, 12824.83, 14535.27, 1062.86, 30.05, 13563.0, 0.0, 178.0, 0.0]],
+                "falcon": [[0.13, 19.24, 19.81, 20.45, 22.3, 100.12, 273.87, 19.19, 30.09, 622175.0, 0.0, 0.0, 0.0], [123.16, 3196.23, 12976.84, 16166.13, 21823.98, 24082.81, 24082.81, 6696.17, 30.07, 580.0, 0.0, 328.0, 0.0], [26.47, 766.75, 805.35, 3142.8, 14607.38, 17632.72, 17883.95, 1457.99, 30.1, 10543.0, 0.0, 81.0, 0.0]]
+            };
+
+            var frameworks = [
+                'aiohttp',
+                'bottle',
+                'django',
+                'falcon',
+                'flask',
+                'muffin',
+                'pyramid',
+                'tornado',
+            ],
+                categories = ["min", "50%", "75%", "90%", "99.9%", "max"],
+                series = [],
+                common_options = {
+                    xAxis: {
+                        categories: categories,
+                        startOnTick: true
+                    },
+                    yAxis: {
+                        title: { text: 'Values (ms)' },
+                        min: 0
+                    },
+                    tooltip: {
+                        valueSuffix: 'ms'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    chart: {
+                        zoomType: 'y',
+                        type: 'spline'
+                    }
+                };
+
+            for (i in [0, 1, 2]) {
+                var cur = series[i] = [], pie = {
+                    name: 'mid', type: 'pie', dataLabels: { enabled: true, format: '{point.name} {point.y:.2f} ms'},
+                    data: [], center: [100, 80], size: 100};
+
+                for (n in data) {
+                    if (data[n][i] instanceof Array) {
+                        pie.data.push({name: n, y: data[n][i][2]})
+                        cur.push({
+                            name: n,
+                            data: data[n][i].slice(0, 4)
+                        });
+                    }
+                };
+                cur.push(pie);
+            };
+
+            $('#json').highcharts($.extend({
+                title: { text: 'Encode a object to JSON and return as response' },
+                subtitle: { text: 'lower is better' },
+                series: series[0]}, common_options));
+
+            $('#remote').highcharts($.extend({
+                title: { text: 'Load a response from remote server and return as response' },
+                subtitle: { text: 'lower is better' },
+                series: series[1]}, common_options));
+
+            $('#complete').highcharts($.extend({
+                title: { text: 'Load data from database with ORM and render to template' },
+                subtitle: { text: 'lower is better' },
+                series: series[2]}, common_options));
+
+            $('table').bootgrid({ navigation: 0 });
+
+        });
+
+    })(jQuery);
+&lt;/script&gt;&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;Выводы&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Я предлагаю читателю сделать их самостоятельно. Данное тестирование
+производилось мой чтобы понять выгоду использования синхронных/асинхронных
+библиотек и показатели производительности популярных решений.&lt;/p&gt;
+&lt;p&gt;В дальнейшем планирую проводить данные измерения регулярно.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="benchmarks"></category><category term="aiohttp"></category><category term="muffin"></category><category term="django"></category><category term="tornado"></category><category term="flask"></category><category term="falcon"></category><category term="pyramid"></category><category term="bottle"></category></entry><entry><title>Graphite-beacon — простая система оповещений для Graphite</title><link href="http://klen.github.io/graphite-beacon.html" rel="alternate"></link><updated>2014-10-30T00:00:00+03:00</updated><author><name>Kirill Klenov</name></author><id>tag:klen.github.io,2014-10-30:graphite-beacon.html</id><summary type="html">&lt;hr class="docutils" /&gt;
 &lt;img alt="" src="/static/img/beacon/grafana.jpg" /&gt;
 &lt;p&gt;Для мониторинга своих проектов я использую связку из &lt;a class="reference external" href="http://graphite.wikidot.com"&gt;Graphite&lt;/a&gt; + &lt;a class="reference external" href="http://grafana.org"&gt;Grafana&lt;/a&gt;.
 Данные с серверов собирает &lt;a class="reference external" href="http://collectd.org"&gt;Collectd&lt;/a&gt;, метрики приложений принимает &lt;a class="reference external" href="https://github.com/etsy/statsd"&gt;Statsd&lt;/a&gt;.&lt;/p&gt;
