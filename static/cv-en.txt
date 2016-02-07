@@ -9,36 +9,47 @@ The latest version of this document can be found at:
   http://klen.github.io/static/cv-en.txt
 
 
-Objective
+OBJECTIVE
 =========
 
-To obtain a development position that utilizes my skills and background with
-cross-platform technologies.
+To use my intimate knowledge of WEB development to work as a backend engineer,
+to solve problems, to constantly improve systems, and to mentor others to do
+the same.
 
 
-Software Development Proficiencies
-==================================
+PROFESSIONAL SUMMARY
+====================
 
-Very high experience:  Python (Django, Tornado, Werkzeug), JavaScript (native,
-DOM, jQuery, ExtJS), Parser (Imprimatur 1-2), XML, XSLT;
+I am a technically sophisticated, business-savvy management-level professional,
+software architect, developer and engineer with strong leadership qualities and
+over 10 years of experience in the industry.
 
-Good experience: HTML4-5, CSS (bem), UML, SQL(Mysql, Postgres), Nonrel (Mongo,
-Redis), GIS (Postgis, geodjango, Openlayers, pgrouting), *nix (setup, deploy);
+I am principally known for my Open Source contributions including over a 50
+projects on my Github. I have a deep understanding of problems and solutions
+involved in producing secure, scalable, future-resistant, solutions.
 
-Base experience: Haskel, Perl, Erlang;
-
-More than nine years of experience in web development. Experienced to use and
-integrate suitable technologies to reach project’s goals.
-
-
-Education
-=========
-
-Russia,  Syktyvkar State University, Bachelor Physics 1997 — 2000 
+My background includes Linux, TCP/IP stack, Python/Javascript programming,
+most-recently focused on scalable enterprise solutions. I am very active in
+many Open Source communities and within projects that allow me to utilize my
+skills in these areas.
 
 
-Work Experience
-===============
+TECHNICAL SKILLS
+================
+
+Programming: Python (Any python framework such as Django, Flask, Tornado, etc), JavaScript (vanila,
+ReactJS, RiotJS)
+
+Web, Internet & Online presence: HTML4-5, CSS, XML/XSLT, JSON
+
+Architectures: SQL (Like Postgresql more)/ NoSQL (Prefer MongoDB), Elasticsearch, GIS
+
+Devops, Integration & Automation: AWS, Ansible, Chef, Docker, Consul, Jenkins,
+Logstash/Kibana, Graphite/Graphana
+
+
+PROFESSIONAL EXPERIENCE
+=======================
 
 TicketsCloud, http://nanobilet.ru, https://ticketscloud.ru
 ----------------------------------------------------------
