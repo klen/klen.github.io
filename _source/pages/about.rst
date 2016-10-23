@@ -14,13 +14,13 @@ horneds@gmail.com
 There is a little bit more
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* My "`Github resume`_" and `report card`_
-* My `Twitter <http://twitter.com/horneds>`_, `Facebook
-  <http://facebook.com/horneds>`_ and `Linkedin
+* My `Twitter <http://twitter.com/horneds>`_, `Instagram
+  <http://instagram.com/horneds>`_ and `Linkedin
   <http://www.linkedin.com/profile/view?id=27707936>`_ accounts
+
 * My Curriculum vitae (CV):
   `English (TXT) </static/cv-en.txt>`_, `English (PDF) </static/cv-en.pdf>`_,
-  `Russian (TXT) </static/cv-ru.txt>`_, `Russian (PDF) </static/cv-en.pdf>`_
+  `Russian (TXT) </static/cv-ru.txt>`_, `Russian (PDF) </static/cv-en.pdf>`_, `Github resume`_
 
 
 `Download vcard`_  

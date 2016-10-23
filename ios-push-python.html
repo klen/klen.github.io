@@ -16,7 +16,7 @@
 
         <title>Серверная реализация IOS Push уведомлений (python) — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -96,19 +96,19 @@
 <p>Полученный файл в формате <strong>p12</strong> необходимо переконвертировать в pem. Для этой задачи я написал простенький shell скрипт.</p>
 <p><a class="reference external" href="https://github.com/klen/klen.github.com/blob/master/_code/ios-push/convert12.sh">https://github.com/klen/klen.github.com/blob/master/_code/ios-push/convert12.sh</a></p>
 <p>Сконвертируем с его помощью полученный от Apple Dev сертификат в нужный нам формат:</p>
-<div class="highlight"><pre><span class="c"># Получим и подготовим скрипт конвертации</span>
+<div class="highlight"><pre><span></span><span class="c1"># Получим и подготовим скрипт конвертации</span>
 wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12.sh <span class="o">&amp;&amp;</span> chmod +x convert12.sh
 
-<span class="c"># Сконвертируем полученные от Apple сертификаты</span>
+<span class="c1"># Сконвертируем полученные от Apple сертификаты</span>
 ./convert12 convert pushprod.p12
 ./convert12 convert pushdev.p12
 </pre></div>
 <p>В процессе у вас будет запрошен пароль на сертификаты, если они создавались без пароля, просто нажмите <cite>Enter</cite>.
 Результатом этой операции будут <tt class="docutils literal">pem</tt> файлы с теми же названиями.</p>
 <p>Этим же скриптом их можно протестировать, что в дальнейшем избавит от множества проблем при отладке:</p>
-<div class="highlight"><pre><span class="c"># В результате должно быть установлено соединение с Apple</span>
-./convert12 <span class="nb">test </span>pushprod.pem prod
-./convert12 <span class="nb">test </span>pushdev.pem dev
+<div class="highlight"><pre><span></span><span class="c1"># В результате должно быть установлено соединение с Apple</span>
+./convert12 <span class="nb">test</span> pushprod.pem prod
+./convert12 <span class="nb">test</span> pushdev.pem dev
 </pre></div>
 <p>Если соединение сразу сбрасывается или выводятся SSL ошибки, вы что-то сделали неправильно.</p>
 </div>
@@ -116,45 +116,45 @@ wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12
 <h2><a class="toc-backref" href="#id9">Реализация IOS Push в python-приложениях</a></h2>
 <p>В своих проектах я использую <a class="reference external" href="https://github.com/simonwhitaker/PyAPNs">PyAPNs</a> библиотеку. Простой файл обвязка вокруг нее реализует все основные задачи:
 <a class="reference external" href="https://github.com/klen/klen.github.com/blob/master/_code/ios-push/push.py">push.py</a></p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 <span class="kn">from</span> <span class="nn">apns</span> <span class="kn">import</span> <span class="n">APNs</span><span class="p">,</span> <span class="n">Payload</span>
 
 
-<span class="n">KEYS_FILE</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;fakekey.pem&#39;</span><span class="p">))</span>
+<span class="n">KEYS_FILE</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;fakekey.pem&#39;</span><span class="p">))</span>
 
 <span class="k">assert</span> <span class="n">op</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">KEYS_FILE</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">get_server</span><span class="p">(</span><span class="n">use_sandbox</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">keys_file</span><span class="o">=</span><span class="n">KEYS_FILE</span><span class="p">):</span>
-    <span class="s">&quot; Create and return production or develop server. &quot;</span>
+    <span class="s2">&quot; Create and return production or develop server. &quot;</span>
     <span class="k">return</span> <span class="n">APNs</span><span class="p">(</span><span class="n">use_sandbox</span><span class="o">=</span><span class="n">use_sandbox</span><span class="p">,</span> <span class="n">cert_file</span><span class="o">=</span><span class="n">keys_file</span><span class="p">,</span> <span class="n">key_file</span><span class="o">=</span><span class="n">keys_file</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">send_notify</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">payloads</span><span class="p">):</span>
-    <span class="s">&quot; Send simple device notify. &quot;</span>
+    <span class="s2">&quot; Send simple device notify. &quot;</span>
     <span class="n">server</span> <span class="o">=</span> <span class="n">server</span> <span class="ow">or</span> <span class="n">get_server</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">server</span><span class="o">.</span><span class="n">gateway_server</span><span class="o">.</span><span class="n">send_notification</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">Payload</span><span class="p">(</span><span class="o">**</span><span class="n">payloads</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">get_feedbacks</span><span class="p">(</span><span class="n">server</span><span class="p">):</span>
-    <span class="s">&quot; Get inactive tokens. &quot;</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">feedback_server</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>  <span class="c"># Fix rst**</span>
+    <span class="s2">&quot; Get inactive tokens. &quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">feedback_server</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>  <span class="c1"># Fix rst**</span>
 </pre></div>
 <p>Пример использования:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">push</span> <span class="kn">import</span> <span class="n">send_notify</span><span class="p">,</span> <span class="n">get_server</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">push</span> <span class="kn">import</span> <span class="n">send_notify</span><span class="p">,</span> <span class="n">get_server</span>
 
-<span class="n">token_hex</span> <span class="o">=</span> <span class="s">&#39;b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b87&#39;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">send_notify</span><span class="p">(</span><span class="n">token_hex</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="s">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="n">sound</span><span class="o">=</span><span class="s">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">token_hex</span> <span class="o">=</span> <span class="s1">&#39;b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b87&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">send_notify</span><span class="p">(</span><span class="n">token_hex</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="n">sound</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
 </pre></div>
 <p>Вполне возможно, что токен от приложения будет приходить к вам в формате <a class="reference external" href="http://ru.wikipedia.org/wiki/Base64">Base64</a>, тогда перед сохранением
 необходимо проделать следующие преобразования.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">binascii</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">binascii</span>
 <span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">urlsafe_b64decode</span>
 
 <span class="k">def</span> <span class="nf">fix_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">)</span> <span class="k">else</span> <span class="n">token</span>
-    <span class="n">token</span> <span class="o">=</span> <span class="n">urlsafe_b64decode</span><span class="p">(</span><span class="n">token</span> <span class="o">+</span> <span class="s">&#39;=&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">)</span> <span class="k">else</span> <span class="n">token</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">urlsafe_b64decode</span><span class="p">(</span><span class="n">token</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">))</span>
     <span class="n">token</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -163,7 +163,7 @@ wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12
 <p>При интеграции с <a class="reference external" href="http://django-project.com">Django</a> проектом необходимо подумать о переключении между <strong>developer</strong> и <strong>production</strong>
 и об асинхронности запросов в <a class="reference external" href="http://en.wikipedia.org/wiki/Apple_Push_Notification_Service">APNS</a>.</p>
 <p>Асинхронность достигается использованием <a class="reference external" href="http://celeryproject.org/">Celery</a>.</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">celery.decorators</span> <span class="kn">import</span> <span class="n">task</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.decorators</span> <span class="kn">import</span> <span class="n">task</span>
 <span class="kn">from</span> <span class="nn">ios</span> <span class="kn">import</span> <span class="n">send_notify</span>
 
 <span class="nd">@task</span><span class="p">(</span><span class="n">ignore_result</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default_retry_delay</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -172,23 +172,23 @@ wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12
 
 
 <span class="k">def</span> <span class="nf">send_async_ios_notify</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="s">&quot; Send IOS push notification. &quot;</span>
+    <span class="s2">&quot; Send IOS push notification. &quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">False</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">alert</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;alert&#39;</span><span class="p">,</span> <span class="s">&#39;sound&#39;</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="s1">&#39;sound&#39;</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">_async_ios_push</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">sound</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;sound&#39;</span><span class="p">,</span> <span class="s">&#39;default&#39;</span><span class="p">),</span>
-        <span class="n">alert</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;alert&#39;</span><span class="p">),</span>
+        <span class="n">sound</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sound&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">),</span>
+        <span class="n">alert</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">),</span>
         <span class="n">custom</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">),</span>
-    <span class="p">)))</span>  <span class="c"># Fix rst**</span>
+    <span class="p">)))</span>  <span class="c1"># Fix rst**</span>
 </pre></div>
 <p>Стоит подумать и об отключении неактивных устройств: <tt class="docutils literal">tasks.py</tt>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">abstract_app.models</span> <span class="kn">import</span> <span class="n">Client</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abstract_app.models</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="kn">from</span> <span class="nn">celery.decorators</span> <span class="kn">import</span> <span class="n">periodic_task</span>
 
 <span class="kn">from</span> <span class="nn">.ios</span> <span class="kn">import</span> <span class="n">get_feedbacks</span>
@@ -201,7 +201,7 @@ wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12
     <span class="k">if</span> <span class="n">feedbacks</span><span class="p">:</span>
         <span class="n">tokens</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">feedbacks</span><span class="p">)</span>
         <span class="n">Client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">token__in</span><span class="o">=</span><span class="n">tokens</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">True</span>  <span class="c"># Fix rst*</span>
+    <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># Fix rst*</span>
 </pre></div>
 <p>Полностью пример модуля для <a class="reference external" href="http://django-project.com">Django</a> вы можете увидеть по ссылке: <a class="reference external" href="https://github.com/klen/klen.github.com/tree/master/_code/ios-push/django/push">https://github.com/klen/klen.github.com/tree/master/_code/ios-push/django/push</a></p>
 <p>Написать функцию для асинхронной <strong>broadcast</strong> рассылки сообщений множеству клиентов, предлагается для самостоятельного
@@ -262,7 +262,7 @@ wget https://raw.github.com/klen/klen.github.com/master/_code/ios-push/convert12
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

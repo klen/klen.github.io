@@ -18,7 +18,7 @@
 
         <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
         {# Feed -#}
         <link rel="alternate" type="application/atom+xml" title="{{ FEED_TITLE }}" href="{{ FEED_URL }}"> 
@@ -82,7 +82,7 @@
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="{{ SITEURL }}/theme/_main.js"></script>
+    <script language="javascript" type="text/javascript" src="{{ SITEURL }}/theme/build_main.js"></script>
 
     {#- Metrika #}
     {% include '_metrika.html' %}

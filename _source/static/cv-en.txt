@@ -2,75 +2,82 @@ Kirill Klenov
 
 CORE DEVELOPER, TEAM LEAD
 Russia, MO, Krasnogorsk, Shkolnaya 1-19
-mobile: +7 906 772 36 20
-email: horneds@gmail.com
+Mobile: +7 906 772 36 20
+Email: horneds@gmail.com
 
 The latest version of this document can be found at:
   http://klen.github.io/static/cv-en.txt
 
 
-Objective
-=========
-
-To obtain a development position that utilizes my skills and background with
-cross-platform technologies.
-
-
 Software Development Proficiencies
 ==================================
 
-Very high experience:  Python (Django, Tornado, Werkzeug), JavaScript (native,
-DOM, jQuery, ExtJS), Parser (Imprimatur 1-2), XML, XSLT;
+Very high experience:  Python (Django, Tornado, Flask, Asyncio),
+JavaScript/CoffeeScript (jQuery, RiotJS), DevOps (Ansible, Docker), XML/XSLT;
 
-Good experience: HTML4-5, CSS (bem), UML, SQL(Mysql, Postgres), Nonrel (Mongo,
+Good experience: HTML4-5, CSS (bem), SQL(Mysql, Postgres), NoSQL (Mongo,
 Redis), GIS (Postgis, geodjango, Openlayers, pgrouting), *nix (setup, deploy);
 
 Base experience: Haskel, Perl, Erlang;
 
-More than nine years of experience in web development. Experienced to use and
+More than ten years of experience in the web development. Experienced to use and
 integrate suitable technologies to reach project’s goals.
 
 
 Education
 =========
 
-Russia,  Syktyvkar State University, Bachelor Physics 1997 — 2000 
+Russia, Syktyvkar State University, Bachelor Physics 1997 — 2000 
 
 
 Work Experience
 ===============
 
+People.ai (Menlo Park), http://people.ai
+----------------------------------------
+Apr 2016 — Present, Lead engineer
+AI to quantify and optimize human productivity
+
+* Created from nothing fully functional service prototype in two months which
+  had pushed us to YC 2016
+* Full stack development: from architecture, throught backend and frontend, to
+  CI and devops (REST API, Data scrapping, ML, Reactive clientside)
+
+
+Mail.Ru Group (Moscow), https://mail.ru, https://calendar.mail.ru
+-----------------------------------------------------------------
+Apr 2015 — Apr 2016 Lead engineer
+One of the biggest Russian internet companies
+
+* Had to fight and won with legacy code
+
+
 TicketsCloud, http://nanobilet.ru, https://ticketscloud.ru
 ----------------------------------------------------------
-Apr 2014 — Present, Core developer
-
+Apr 2014 — Apr 2015, Core developer
 Organize tickets market in Russia. Provide b2b service for tickets stories.
-REST API, QA, CI and deployment.
 
-Multichannel, http://multichannel.net
--------------------------------------
+* Fullstack development, Create a bunch of micro services for the team and
+  system. REST API, QA, Backend/Frontend, CI and deployment.
+
+
+Multichannel (Hong Kong), http://multichannel.net
+-------------------------------------------------
 Feb 2013 — Feb 2014, Core developer, Development Team Lead
-
 Manage all your complex online advertising campaigns via the various
-distribution channels in a single platform. REST and RPC API, Setup CI and
-deployment, Architecture and design. QA and team management.
+distribution channels in a single platform.
 
-Venture Brothers, http://venturebrothers.ru, http://intaxi.ru
--------------------------------------------------------------
+* REST and RPC API, CI and deployment, Architecture and design. QA and team management.
+
+
+Venture Brothers (Moscow), http://venturebrothers.ru, http://intaxi.ru
+----------------------------------------------------------------------
 Nov 2010 — Jan 2013, Core developer, Team Lead
 
-  * Had created best service for taxies and passengers.
+  * Had implemented first russian «Uber» from zero
   * REST and RPC API, Push notification, Admin interfaces (Javascript),
     Continuous integration (Hudson), Documentation, Deployment (makesite,
     nginx, uwsgi), Team management
-
-V.I.K.T.O.R., http://viktortherobot.com
----------------------------------------
-Dec 2011 — Nov 2012, Core developer
-
-  * Iphone application, server-side support.
-  * REST API, Admin interfaces, Push notification, Inapp purchase and ets,
-    Documentation, Deployment (makesite, nginx, uwsgi)
 
 
 365Degrees, http://365degrees.ru, http://vsyako.ru
@@ -82,18 +89,35 @@ March 2010 — November 2011, Core developer, Team Lead
     CI system, team management.
 
 
-Interfaces developer
---------------------
 Yandex, http://yandex.com, http://yaca.yandex.ru
+------------------------------------------------
+Febrary 2009 — March 2010, Senior Engineer
 
-  * Best russian site directory. Full refactoring.
+  * The best russian site directory. Did full refactoring of the project.
 
 
 Artlebedev study, http://artlebedev.com
 ---------------------------------------
-Web developer
+January 2003 — Febrary 2009, Senior Engineer
+A largest and oldest russian web-study
 
-  * Company intranet and web-store. Self written MVC framework.
+  * Company intranet and web-store. Wrote and used self-written MVC
+    framework.
+
+
+Open source contributions
+=========================
+
+Maintainer of bunch python tools and packages such as:
+
+* VIM Python-mode -- Convert VIM to Python IDE
+* Graphite-Beacon -- Alerting system for Graphite
+* Muffin -- Asynchronous Web Framework for Python3
+* Mixer -- An fixtures generator for many ORM/ODM libs
+
+A lot of tools for Django and Flask and much more: https://github.com/klen
+
+Maintainer of bunch Ansible deployment roles https://github.com/Stouts
 
 
 Languages

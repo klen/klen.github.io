@@ -16,7 +16,7 @@
 
         <title>Django-markdown — поддержка Markdown в Django — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -95,9 +95,9 @@
 <div class="section" id="id2">
 <h2><a class="toc-backref" href="#id5">Установка</a></h2>
 <p>Приложение можно установить из <a class="reference external" href="http://pypi.python.org">PyPi</a></p>
-<div class="highlight"><pre>easy_install django-markdown
+<div class="highlight"><pre><span></span>easy_install django-markdown
 
-<span class="c"># Или с помощью pip</span>
+<span class="c1"># Или с помощью pip</span>
 
 pip install django-markdown
 </pre></div>
@@ -105,10 +105,10 @@ pip install django-markdown
 <div class="section" id="id3">
 <h2><a class="toc-backref" href="#id6">Подключение к проекту</a></h2>
 <p>Необходимо добавить <cite>django_markdown</cite> в <strong>INSTALLED_APPS</strong>, settings.py:</p>
-<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="s">&#39;django_markdown&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="s1">&#39;django_markdown&#39;</span><span class="p">,</span>
 </pre></div>
 <p>И создать url в базовом url_config, urls.py:</p>
-<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">&#39;^markdown/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span> <span class="s">&#39;django_markdown.urls&#39;</span><span class="p">)),</span>
+<div class="highlight"><pre><span></span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;^markdown/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span> <span class="s1">&#39;django_markdown.urls&#39;</span><span class="p">)),</span>
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -121,7 +121,7 @@ pip install django-markdown
 <ol class="arabic simple">
 <li>Использование в формах:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.widgets</span> <span class="kn">import</span> <span class="n">MarkdownWidget</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_markdown.widgets</span> <span class="kn">import</span> <span class="n">MarkdownWidget</span>
 
 <span class="k">class</span> <span class="nc">MyMarkdownForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span> <span class="n">widget</span><span class="o">=</span><span class="n">MarkdownWidget</span><span class="p">()</span> <span class="p">)</span>
@@ -133,7 +133,7 @@ pip install django-markdown
 <ol class="arabic simple" start="2">
 <li>В стандартном <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/contrib/admin/">Django-admin</a>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_markdown.admin</span> <span class="kn">import</span> <span class="n">MarkdownModelAdmin</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_markdown.admin</span> <span class="kn">import</span> <span class="n">MarkdownModelAdmin</span>
 
 <span class="n">adimin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyModel</span><span class="p">,</span> <span class="n">MarkdownModelAdmin</span><span class="p">)</span>
 </pre></div>
@@ -144,15 +144,15 @@ pip install django-markdown
 <ol class="arabic simple" start="3">
 <li><a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/contrib/flatpages/">Django-flatpages</a>:</li>
 </ol>
-<div class="highlight"><pre><span class="c"># В вашем базовом url_config</span>
+<div class="highlight"><pre><span></span><span class="c1"># В вашем базовом url_config</span>
 <span class="kn">from</span> <span class="nn">django_markdown</span> <span class="kn">import</span> <span class="n">flatpages</span>
 
 <span class="o">...</span> <span class="n">URLS</span> <span class="o">..</span>
 
-<span class="c"># Setup django admin and flatpages</span>
+<span class="c1"># Setup django admin and flatpages</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
 <span class="n">flatpages</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
-<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span> <span class="p">]</span>
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span> <span class="p">]</span>
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -161,7 +161,7 @@ pip install django-markdown
 <ol class="arabic simple" start="4">
 <li>Настройка скинов wysiwyg (markitup по-умолчанию) settings.py:</li>
 </ol>
-<div class="highlight"><pre><span class="n">MARKDOWN_EDITOR_SKIN</span> <span class="o">=</span> <span class="s">&#39;simple&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">MARKDOWN_EDITOR_SKIN</span> <span class="o">=</span> <span class="s1">&#39;simple&#39;</span>
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -224,7 +224,7 @@ pip install django-markdown
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

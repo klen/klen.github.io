@@ -16,7 +16,7 @@
 
         <title>Pylama — аудит python-кода — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -63,36 +63,36 @@
 рядом улучшений.</p>
 <div class="section" id="id2">
 <h2>Установка</h2>
-<div class="highlight"><pre><span class="nv">$ </span>pip install pylama
+<div class="highlight"><pre><span></span>$ pip install pylama
 </pre></div>
 </div>
 <div class="section" id="id3">
 <h2>Использование</h2>
 <p>Рекурсивная проверка текущей диектории:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pylama
+<div class="highlight"><pre><span></span>$ pylama
 </pre></div>
 <p>Игнорировать определенные типы (группы типов) ошибок:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pylama -i W,E501
+<div class="highlight"><pre><span></span>$ pylama -i W,E501
 </pre></div>
 <p>Изменение набора линтеров:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pylama -l <span class="s2">&quot;pep8,mccabe&quot;</span>
+<div class="highlight"><pre><span></span>$ pylama -l <span class="s2">&quot;pep8,mccabe&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="id4">
 <h2>Опции</h2>
-<div class="highlight"><pre><span class="nv">$ </span>pylama --help
+<div class="highlight"><pre><span></span>$ pylama --help
 
 usage: pylama <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--ignore IGNORE<span class="o">]</span> <span class="o">[</span>--verbose<span class="o">]</span> <span class="o">[</span>--select SELECT<span class="o">]</span>
             <span class="o">[</span>--linters LINTERS<span class="o">]</span> <span class="o">[</span>--complexity COMPLEXITY<span class="o">]</span> <span class="o">[</span>--skip SKIP<span class="o">]</span>
             <span class="o">[</span>path<span class="o">]</span>
 
-Code audit tool <span class="k">for </span>python.
+Code audit tool <span class="k">for</span> python.
 
 positional arguments:
 path                  Path on file or directory.
 
 optional arguments:
--h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+-h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
 --ignore IGNORE, -i IGNORE
                         Ignore errors and warnings.
 --verbose, -v         Verbose mode.
@@ -109,12 +109,12 @@ optional arguments:
 <h2>Переключение настроек pylama из файла</h2>
 <p>В любом python-файле вы можете установить опции проверки для pylama.
 Они будут установлены только для данного файла.</p>
-<div class="highlight"><pre><span class="o">..</span> <span class="err">Где</span><span class="o">-</span><span class="err">то</span> <span class="err">в</span> <span class="err">коде</span>
-<span class="c"># Игнорировать все Warnings кроме W301</span>
-<span class="c"># lint_ignore=W:lint_select=W301</span>
+<div class="highlight"><pre><span></span><span class="o">..</span> <span class="err">Где</span><span class="o">-</span><span class="err">то</span> <span class="err">в</span> <span class="err">коде</span>
+<span class="c1"># Игнорировать все Warnings кроме W301</span>
+<span class="c1"># lint_ignore=W:lint_select=W301</span>
 </pre></div>
 <p>Для выключения проверки текущего файла:</p>
-<div class="highlight"><pre><span class="c"># lint=0</span>
+<div class="highlight"><pre><span></span><span class="c1"># lint=0</span>
 </pre></div>
 <p>Разработка <a class="reference external" href="http://pypi.python.org/pypi/pylama/">pylama</a> ведется на Github: <a class="reference external" href="http://github.com/klen/pylama">http://github.com/klen/pylama</a></p>
 </div>
@@ -173,7 +173,7 @@ optional arguments:
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

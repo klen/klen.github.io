@@ -16,7 +16,7 @@
 
         <title>Полезности для GIT — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -50,51 +50,51 @@
 
         <div class="article_content">
             <p>Алиас для более компактного <cite>git status</cite>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.st <span class="s1">&#39;status -sb&#39;</span>
-<span class="nv">$ </span>git st
+<div class="highlight"><pre><span></span>$ git config --global alias.st <span class="s1">&#39;status -sb&#39;</span>
+$ git st
 </pre></div>
 <p>Алиас для редактирования последнего коммита:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.amend <span class="s1">&#39;commit --amend -C HEAD&#39;</span>
-<span class="nv">$ </span>git amend
+<div class="highlight"><pre><span></span>$ git config --global alias.amend <span class="s1">&#39;commit --amend -C HEAD&#39;</span>
+$ git amend
 </pre></div>
 <p>Алиас для отмены последнего коммита:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.undo <span class="s1">&#39;reset --soft HEAD^&#39;</span>
-<span class="nv">$ </span>git undo
+<div class="highlight"><pre><span></span>$ git config --global alias.undo <span class="s1">&#39;reset --soft HEAD^&#39;</span>
+$ git undo
 </pre></div>
 <p>Предпочитаемый мной вывод <cite>diff</cite>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.diff <span class="s1">&#39;diff --word-diff&#39;</span>
-<span class="nv">$ </span>git undo
+<div class="highlight"><pre><span></span>$ git config --global alias.diff <span class="s1">&#39;diff --word-diff&#39;</span>
+$ git undo
 </pre></div>
 <p>«Визуальная» история веток в консоли:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hist <span class="s2">&quot;log --pretty=format:&#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&#39; --graph --date=short&quot;</span>
+<div class="highlight"><pre><span></span>$ git config --global alias.hist <span class="s2">&quot;log --pretty=format:&#39;%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]&#39; --graph --date=short&quot;</span>
 </pre></div>
 <p>Удобная работа с <a class="reference external" href="https://github.com/nvie/gitflow/">Git-Flow</a>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global alias.hotfix <span class="s1">&#39;flow hotfix&#39;</span>
-<span class="nv">$ </span>git config --global alias.feature <span class="s1">&#39;flow feature&#39;</span>
-<span class="nv">$ </span>git config --global alias.release <span class="s1">&#39;flow release&#39;</span>
+<div class="highlight"><pre><span></span>$ git config --global alias.hotfix <span class="s1">&#39;flow hotfix&#39;</span>
+$ git config --global alias.feature <span class="s1">&#39;flow feature&#39;</span>
+$ git config --global alias.release <span class="s1">&#39;flow release&#39;</span>
 </pre></div>
 <p>Автоматическая коррекция опечаток во вводимых командах:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global help.autocorrect 1
-<span class="nv">$ </span>git comit
-<span class="nv">$ </span>git bronch
+<div class="highlight"><pre><span></span>$ git config --global help.autocorrect 1
+$ git comit
+$ git bronch
 </pre></div>
 <p>Автоматическая запись разрешенных мердж конфликтов, для будущего использования:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git config --global rerere.enabled 1
+<div class="highlight"><pre><span></span>$ git config --global rerere.enabled 1
 </pre></div>
 <p>Получение веток с не влитыми данными:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git branch --no-merged
+<div class="highlight"><pre><span></span>$ git branch --no-merged
 </pre></div>
 <p>Список коммитов в ветке <em>branchA</em> отсуствующих в ветке <em>branchB</em>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git log branchA ^branchB
+<div class="highlight"><pre><span></span>$ git log branchA ^branchB
 </pre></div>
 <p>Многие используют баш функцию <cite>__git_ps1</cite> для вывода названия текущей ветки,
 но не все знают, что ее можно сделать более информативной.</p>
-<div class="highlight"><pre><span class="c"># In your .bashrc or .profile:</span>
+<div class="highlight"><pre><span></span><span class="c1"># In your .bashrc or .profile:</span>
 
     <span class="nv">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span>1
     <span class="nv">GIT_PS1_SHOWSTASHSTATE</span><span class="o">=</span>1
 
-    <span class="nv">$ </span><span class="o">(</span>develop *<span class="nv">$)</span>:
+    $ <span class="o">(</span>develop *$<span class="o">)</span>:
 </pre></div>
 
         </div>
@@ -151,7 +151,7 @@
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

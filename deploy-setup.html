@@ -16,7 +16,7 @@
 
         <title>Настройка сервера. Создаем и разворачиваем django-проект — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -108,35 +108,35 @@
 </div>
 <p>Для начала работы на нашем сервере потребуется установить и настроить <a class="reference external" href="https://github.com/klen/makesite">Makesite</a>.
 Рекомендуется проводить установку при помощи <strong>setuptools</strong>:</p>
-<div class="highlight"><pre><span class="c"># Устанавливаем setup-tools</span>
+<div class="highlight"><pre><span></span><span class="c1"># Устанавливаем setup-tools</span>
 sudo apt-get install python-setuptools python-pip
 
-<span class="c"># Устанавливаем makesite</span>
+<span class="c1"># Устанавливаем makesite</span>
 sudo easy_install makesite
 
-<span class="c"># Или при помощи Pip</span>
+<span class="c1"># Или при помощи Pip</span>
 sudo pip install makesite
 </pre></div>
 <p>Теперь нам необходимо решить в какой директории будут развернуты наши проекты и указать ее для <a class="reference external" href="https://github.com/klen/makesite">Makesite</a>.
 Обычно я использую <cite>/var/www</cite>. Чтобы не вводить этот путь при каждой операции, определим системную переменную <cite>$MAKESITE_HOME</cite>. Удобно сразу это сделать при помощи следующей команды:</p>
-<div class="highlight"><pre><span class="c"># Создаем директорию для хранения наших будущих сайтов</span>
-<span class="nv">$ </span>sudo mkdir /var/www
+<div class="highlight"><pre><span></span><span class="c1"># Создаем директорию для хранения наших будущих сайтов</span>
+$ sudo mkdir /var/www
 
-<span class="c"># Выводим и проверяем настройки bash</span>
-<span class="nv">$ </span>makesite shell -p /var/www
+<span class="c1"># Выводим и проверяем настройки bash</span>
+$ makesite shell -p /var/www
 
-<span class="c"># Записываем их в ваш ~/.bashrc</span>
-<span class="nv">$ </span>makesite shell -p /var/www &gt;&gt; ~/.bashrc
+<span class="c1"># Записываем их в ваш ~/.bashrc</span>
+$ makesite shell -p /var/www &gt;&gt; ~/.bashrc
 
-<span class="c"># Загружаем настройки для текущего сеанса</span>
-<span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+<span class="c1"># Загружаем настройки для текущего сеанса</span>
+$ <span class="nb">source</span> ~/.bashrc
 </pre></div>
 <p>Создаем корневой файл конфигурации в указанной нами директории <cite>/var/www/makesite.ini</cite>.</p>
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">В примерах используется адрес созданного в предыдущих статьях <a class="reference external" href="http://aws.amazon.com/">AWS</a> сервера: <strong>awsdemo.us.to</strong>.</p>
 </div>
-<div class="highlight"><pre><span class="k">[Main]</span>
+<div class="highlight"><pre><span></span><span class="k">[Main]</span>
 
 <span class="c1"># Указываем источник получения кода проектов по умолчанию</span>
 <span class="c1"># В данном случае будет использоваться созданный нами репозиторий</span>
@@ -166,18 +166,18 @@ sudo pip install makesite
 </div>
 <p>Перейдем к репозиторию <cite>awsdemo</cite> на нашей локальной машине, который мы создали в
 прошлой статье и превратим его в Django-проект.</p>
-<div class="highlight"><pre><span class="c"># Переходим в директорию нашего проекта</span>
-<span class="nv">$ </span><span class="nb">cd</span> ~/Projects/awsdemo
+<div class="highlight"><pre><span></span><span class="c1"># Переходим в директорию нашего проекта</span>
+$ <span class="nb">cd</span> ~/Projects/awsdemo
 
-<span class="c"># Создаем новый django-проект</span>
-<span class="nv">$ </span>django-admin.py startproject aws
+<span class="c1"># Создаем новый django-проект</span>
+$ django-admin.py startproject aws
 
-<span class="c"># Переносим файлы из созданного проекта в наш репозиторий</span>
-<span class="nv">$ </span>mv aws/* . <span class="o">&amp;&amp;</span> rm -r aws
+<span class="c1"># Переносим файлы из созданного проекта в наш репозиторий</span>
+$ mv aws/* . <span class="o">&amp;&amp;</span> rm -r aws
 
-<span class="c"># Сохраняем изменения в git</span>
-<span class="nv">$ </span>git add .
-<span class="nv">$ </span>git commit -m <span class="s1">&#39;Start new django-project&#39;</span>
+<span class="c1"># Сохраняем изменения в git</span>
+$ git add .
+$ git commit -m <span class="s1">&#39;Start new django-project&#39;</span>
 </pre></div>
 <p>Теперь его надо подготовить к деплою.</p>
 <div class="note">
@@ -195,7 +195,7 @@ sudo pip install makesite
 <p>Рекомендуется, но совсем необязательно, создавать в корневой
 директории проекта файл конфигурации <a class="reference external" href="https://github.com/klen/makesite">Makesite</a> с основными параметрами деплоя.</p>
 <p>Создадим файл <cite>makesite.ini</cite>:</p>
-<div class="highlight"><pre><span class="k">[Main]</span>
+<div class="highlight"><pre><span></span><span class="k">[Main]</span>
 <span class="c1"># Шаблоны Makesite которые будут применятся для нашего сайта</span>
 <span class="c1"># всегда есть возможность создать собственные шаблоны</span>
 <span class="c1"># в том числе и в хранимые с исходниками проекта</span>
@@ -204,48 +204,48 @@ sudo pip install makesite
 <p>Для шаблона <cite>virtualenv</cite> (он создает и обновляет при необходимости
 виртуальное окружение проекта) необходимо создать файл с зависимостями.</p>
 <p><cite>requirements.txt</cite>:</p>
-<div class="highlight"><pre><span class="c"># Django</span>
+<div class="highlight"><pre><span></span><span class="c1"># Django</span>
 <span class="n">Django</span><span class="o">==</span><span class="mf">1.3</span>
 </pre></div>
 <p>Для шаблона <cite>uwsgi</cite> (он запускает наш проект с помощью uwsgi и nginx)
 необходимо создать файл определяющий наше wsgi-приложение.</p>
 <p><cite>wsgi.py</cite>:</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span>
 <span class="kn">from</span> <span class="nn">django.core.handlers.wsgi</span> <span class="kn">import</span> <span class="n">WSGIHandler</span>
 
-<span class="n">environ</span><span class="p">[</span><span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s">&#39;settings&#39;</span><span class="p">)</span>
+<span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;settings&#39;</span><span class="p">)</span>
 
 <span class="n">application</span> <span class="o">=</span> <span class="n">WSGIHandler</span><span class="p">()</span>
 </pre></div>
 <p>Следующее, что необходимо сделать это поправить <cite>settings.py</cite>
 изменив его следующим образом (включаем базу данных, интерфейс администрирования,
 определяем путь к STATIC_ROOT и правим urlconf):</p>
-<div class="highlight"><pre><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
-        <span class="s">&#39;NAME&#39;</span><span class="p">:</span> <span class="s">&#39;aws.db&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;aws.db&#39;</span><span class="p">,</span>
 <span class="o">...</span>
 
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">op</span>
 <span class="n">DEPLOY_DIR</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
-<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEPLOY_DIR</span><span class="p">,</span> <span class="s">&#39;static&#39;</span><span class="p">)</span>
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEPLOY_DIR</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
 
 <span class="o">...</span>
 
-<span class="n">ROOT_URLCONF</span> <span class="o">=</span> <span class="s">&#39;urls&#39;</span>
+<span class="n">ROOT_URLCONF</span> <span class="o">=</span> <span class="s1">&#39;urls&#39;</span>
 
 <span class="o">...</span>
 
-<span class="c"># Uncomment the next line to enable the admin:</span>
-<span class="s">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+<span class="c1"># Uncomment the next line to enable the admin:</span>
+<span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
 
 <span class="o">...</span>
 </pre></div>
 <p>И последнее создадим фикстуру для создания первого пользователя <cite>initial_data.json</cite>
 (login: admin, pasword: admin):</p>
-<div class="highlight"><pre><span class="p">[{</span>
+<div class="highlight"><pre><span></span><span class="p">[{</span>
         <span class="s2">&quot;model&quot;</span><span class="o">:</span> <span class="s2">&quot;auth.user&quot;</span><span class="p">,</span>
         <span class="s2">&quot;pk&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">&quot;fields&quot;</span><span class="o">:</span> <span class="p">{</span>
@@ -275,22 +275,22 @@ sudo pip install makesite
 надо или перенести свой приватный ключ на сервер или создать новый и дать
 на него доступ в <strong>gitolite-admin</strong>.</p>
 <p>Я предпочитаю второй вариант:</p>
-<div class="highlight"><pre><span class="c"># Переходим в нашу домашнюю .ssh директорию</span>
-<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
+<div class="highlight"><pre><span></span><span class="c1"># Переходим в нашу домашнюю .ssh директорию</span>
+$ <span class="nb">cd</span> ~/.ssh
 
-<span class="c"># Создаем отдельный ключ для makesite (укажите makesite в имени файла)</span>
-<span class="c"># без паролей</span>
-<span class="nv">$ </span>ssh-keygen
+<span class="c1"># Создаем отдельный ключ для makesite (укажите makesite в имени файла)</span>
+<span class="c1"># без паролей</span>
+$ ssh-keygen
   Generating public/private rsa key pair.
   Enter file in which to save the key <span class="o">(</span>/home/ubuntu/.ssh/id_rsa<span class="o">)</span>: makesite
-  Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>:
+  Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>:
   Enter same passphrase again:
   Your identification has been saved in makesite.
   Your public key has been saved in makesite.pub.
 
-<span class="c"># Копируем ключ в id_rsa</span>
-<span class="nv">$ </span>cp makesite id_rsa
-<span class="nv">$ </span>cp makesite.pub id_rsa.pub
+<span class="c1"># Копируем ключ в id_rsa</span>
+$ cp makesite id_rsa
+$ cp makesite.pub id_rsa.pub
 </pre></div>
 <p>Полученный ключ надо подключить к нашему репозиторию, путем редактирования <cite>gitolite_admin</cite> (подробности в предыдущей статье). Вкратце ваш порядок действий:</p>
 <ol class="arabic simple">
@@ -299,7 +299,7 @@ sudo pip install makesite
 <li>Сделать коммит с изменениями и пуш на сервер.</li>
 </ol>
 <p>Теперь можно проверить работу с репозиторием на стороне сервера:</p>
-<div class="highlight"><pre>git clone git@awsdemo.us.to:awsdemo.git /tmp/aws
+<div class="highlight"><pre><span></span>git clone git@awsdemo.us.to:awsdemo.git /tmp/aws
 </pre></div>
 <p>В случае успеха репозиторий должен быть скопирован с удаленного сервера иначе вы, что-то неправильно сделали
 с ключами.</p>
@@ -311,7 +311,7 @@ sudo pip install makesite
 <p class="last">Данные действия выполняются на сервере</p>
 </div>
 <p>Дадим команду <a class="reference external" href="https://github.com/klen/makesite">Makesite</a> на деплой нашего проекта:</p>
-<div class="highlight"><pre>makesite install awsdemo
+<div class="highlight"><pre><span></span>makesite install awsdemo
 </pre></div>
 <p>Помните мы указали строку &quot;src = <a class="reference external" href="mailto:git+git&#64;awsdemo.us.to">git+git&#64;awsdemo.us.to</a>:%(project)s.git&quot; в <cite>/var/www/makesite.ini</cite>, она говорит <a class="reference external" href="https://github.com/klen/makesite">Makesite</a> где получать исходники проекта. То есть вышеприведенная команда по факту транслируется следующим образом:</p>
 <pre class="literal-block">
@@ -356,7 +356,7 @@ See log: /tmp/tmp8IAJYB
 <p>Он говорит нам о том, что на стадии проверки зависимостей <a class="reference external" href="https://github.com/klen/makesite">Makesite</a> прервал установку.
 Команда <cite>virtualenv</cite> не была найдена в системе.</p>
 <p>Мы можем поставить <cite>python-virtualenv</cite> и повторить попытку, но споткнемся на <cite>nginx</cite>, <cite>uwsgi</cite> или других зависимостях. Поэтому поставим все сразу одной командой.</p>
-<div class="highlight"><pre>sudo apt-get install python-virtualenv nginx uwsgi uwsgi-plugin-python nginx supervisor
+<div class="highlight"><pre><span></span>sudo apt-get install python-virtualenv nginx uwsgi uwsgi-plugin-python nginx supervisor
 sudo /etc/init.d/nginx start
 </pre></div>
 </div>
@@ -367,7 +367,7 @@ sudo /etc/init.d/nginx start
 <p class="last">Данные действия выполняются на сервере</p>
 </div>
 <p>Теперь повторим деплой нашего проекта:</p>
-<div class="highlight"><pre><span class="nv">$ </span>makesite install awsdemo
+<div class="highlight"><pre><span></span>$ makesite install awsdemo
 </pre></div>
 <p>Эта команда создаст следующую структуру директорий:</p>
 <pre class="literal-block">
@@ -394,11 +394,11 @@ sudo /etc/init.d/nginx start
 <p class="first admonition-title">Note</p>
 <p class="last">В bash, для большинства команд <a class="reference external" href="https://github.com/klen/makesite">Makesite</a>, работает автодополнение.</p>
 </div>
-<div class="highlight"><pre><span class="c"># Указываем короткое имя проекта (ветка.проект)</span>
-<span class="nv">$ </span>makesite uninstall master.awsdemo
+<div class="highlight"><pre><span></span><span class="c1"># Указываем короткое имя проекта (ветка.проект)</span>
+$ makesite uninstall master.awsdemo
 
-<span class="c"># Или можно указать полный путь</span>
-<span class="nv">$ </span>makesite uninstall /var/www/awsdemo/master
+<span class="c1"># Или можно указать полный путь</span>
+$ makesite uninstall /var/www/awsdemo/master
 </pre></div>
 <p>Проект удален из системы, nginx и supervisor перезагружены. Теперь можно развернуть его
 снова вышеприведенной командой.</p>
@@ -410,17 +410,17 @@ sudo /etc/init.d/nginx start
 <p class="last">Данные действия выполняются локально</p>
 </div>
 <p>Изменим что-нибудь в нашем проекте, например добавим <cite>views.py</cite>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
 
 
 <span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&quot;Hello from makesite!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;Hello from makesite!&quot;</span><span class="p">)</span>
 </pre></div>
 <p>Подключим его в <cite>urls.py</cite>:</p>
-<div class="highlight"><pre><span class="o">...</span>
+<div class="highlight"><pre><span></span><span class="o">...</span>
 
-<span class="c"># Examples:</span>
-<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;views.home&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;home&#39;</span><span class="p">),</span>
+<span class="c1"># Examples:</span>
+<span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^$&#39;</span><span class="p">,</span> <span class="s1">&#39;views.home&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;home&#39;</span><span class="p">),</span>
 
 <span class="o">...</span>
 </pre></div>
@@ -491,7 +491,7 @@ sudo /etc/init.d/nginx start
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

@@ -16,7 +16,7 @@
 
         <title>Неделя с Flask — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -89,34 +89,34 @@
 но может использоваться и в других случаях (пакетная генерация данных).</p>
 <p>Адрес на <a class="reference external" href="http://github.com">Github</a>: <a class="reference external" href="http://github.com/klen/Flask-Mixer">http://github.com/klen/Flask-Mixer</a></p>
 <p>Примеры работы:</p>
-<div class="highlight"><pre><span class="c"># Простая генерация модели</span>
+<div class="highlight"><pre><span></span><span class="c1"># Простая генерация модели</span>
 <span class="n">user1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">user1</span><span class="o">.</span><span class="n">id</span> <span class="ow">and</span> <span class="n">user1</span><span class="o">.</span><span class="n">username</span> <span class="ow">and</span> <span class="n">user1</span><span class="o">.</span><span class="n">created_at</span>
 <span class="k">assert</span> <span class="n">user1</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">50</span>
 <span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">user</span>
 
-<span class="c"># Модель может быть задана строкой</span>
-<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s">&#39;app.models.Role&#39;</span><span class="p">)</span>
+<span class="c1"># Модель может быть задана строкой</span>
+<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="s1">&#39;app.models.Role&#39;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">role1</span><span class="o">.</span><span class="n">user</span>
 <span class="k">assert</span> <span class="n">role1</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">role1</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
 
-<span class="c"># Генерация объекта с предопределенными значениями</span>
-<span class="n">user2</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">user2</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;test&#39;</span>
+<span class="c1"># Генерация объекта с предопределенными значениями</span>
+<span class="n">user2</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user2</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span>
 
-<span class="c"># Это могут быть значения для референс-объектов</span>
-<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Role</span><span class="p">,</span> <span class="n">user__username</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">role2</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;test2&#39;</span>
+<span class="c1"># Это могут быть значения для референс-объектов</span>
+<span class="n">role1</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Role</span><span class="p">,</span> <span class="n">user__username</span><span class="o">=</span><span class="s1">&#39;test2&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">role2</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s1">&#39;test2&#39;</span>
 
-<span class="c"># Значение может быть функцией</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="s">&#39;callable_value&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">&#39;callable_value&#39;</span>
+<span class="c1"># Значение может быть функцией</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="s1">&#39;callable_value&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s1">&#39;callable_value&#39;</span>
 
-<span class="c"># Принудительная установка случайного значения для поля с default value</span>
+<span class="c1"># Принудительная установка случайного значения для поля с default value</span>
 <span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">score</span> <span class="o">!=</span> <span class="mi">50</span>
 
-<span class="c"># Установка случайного значения из базы данных</span>
+<span class="c1"># Установка случайного значения из базы данных</span>
 <span class="n">profiles</span> <span class="o">=</span> <span class="n">Profile</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="n">user</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">mixer</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">user</span><span class="o">.</span><span class="n">profile</span> <span class="ow">in</span> <span class="n">profiles</span>
@@ -134,12 +134,12 @@
 как их собирать. Не найдя ничего на Pypi я написал свое.</p>
 <p>Использование:</p>
 <p>В коде:</p>
-<div class="highlight"><pre><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">collect</span> <span class="o">=</span> <span class="n">Collect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 <span class="n">collect</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 <p>или из консоли при использовании <a class="reference external" href="http://github.com/rduplain/flask-script">Flask-Script</a>:</p>
-<div class="highlight"><pre>$ ./manage.py collect
+<div class="highlight"><pre><span></span>$ ./manage.py collect
 </pre></div>
 <p>Адрес на <a class="reference external" href="http://github.com">Github</a>: <a class="reference external" href="http://github.com/klen/Flask-Collect">http://github.com/klen/Flask-Collect</a></p>
 </div>
@@ -205,7 +205,7 @@
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

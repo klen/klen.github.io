@@ -16,7 +16,7 @@
 
         <title>Год облачного хостинга от Amazon — бесплатно — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -172,14 +172,14 @@
 <p>После запуска мы можем подключиться с помощью SSH к нашему серверу <cite>awsdemo.us.to</cite>.
 Учтите, что пользователь по умолчанию на образах с <a class="reference external" href="http://alestic.com/">http://alestic.com/</a> — <strong>ubuntu</strong>.</p>
 <p>Если вы предварительно загрузили свои ключи:</p>
-<div class="highlight"><pre>ssh ubuntu@awsdemo.us.to
+<div class="highlight"><pre><span></span>ssh ubuntu@awsdemo.us.to
 </pre></div>
 <p>Или с использованием полученного ключа от <a class="reference external" href="http://ru.wikipedia.org/wiki/Amazon">Amazon</a>:</p>
-<div class="highlight"><pre><span class="c"># (Для ключа с именем test.pem)</span>
-<span class="c"># Устанавливаем необхожимые права</span>
-chmod 400 test.pem
+<div class="highlight"><pre><span></span><span class="c1"># (Для ключа с именем test.pem)</span>
+<span class="c1"># Устанавливаем необхожимые права</span>
+chmod <span class="m">400</span> test.pem
 
-<span class="c"># Подключаемся с полученным ключом</span>
+<span class="c1"># Подключаемся с полученным ключом</span>
 ssh -i test.pem ubuntu@awsdemo.us.to
 </pre></div>
 <p>В случае успеха вы должны попасть в терминал вашего запущенного сервера, поздравляю!</p>
@@ -245,7 +245,7 @@ ssh -i test.pem ubuntu@awsdemo.us.to
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

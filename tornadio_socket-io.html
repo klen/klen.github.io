@@ -16,7 +16,7 @@
 
         <title>Создание сервера оповещений с использованием Tornado и Socket.IO — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -108,20 +108,20 @@ Flashsocket, XHR multipart и тд.).</p>
 <ol class="arabic simple">
 <li>Для начала создадим и активируем виртуальное окружение (<a class="reference external" href="http://pypi.python.org/pypi/virtualenv">VirtualEnv</a>) для нашего сервера:</li>
 </ol>
-<div class="highlight"><pre><span class="c"># Создаем директорию для сервера</span>
+<div class="highlight"><pre><span></span><span class="c1"># Создаем директорию для сервера</span>
 mkdir -p ~/Projects/tornado_pushserver
 <span class="nb">cd</span> ~/Projects/tornado_pushserver
 
-<span class="c"># Создаем виртульное окружение</span>
+<span class="c1"># Создаем виртульное окружение</span>
 virtualenv .ve
 
-<span class="c"># Активируем виртуальное окружение</span>
+<span class="c1"># Активируем виртуальное окружение</span>
 <span class="nb">source</span> .ve/bin/activate
 </pre></div>
 <ol class="arabic simple" start="2">
 <li>Устанавливаем в созданное окружение <a class="reference external" href="http://tornadoweb.org">Tornado</a> и <a class="reference external" href="https://github.com/MrJoes/tornadio">Tornadio</a>:</li>
 </ol>
-<div class="highlight"><pre>easy_install tornadio
+<div class="highlight"><pre><span></span>easy_install tornadio
 </pre></div>
 </div>
 <div class="section" id="tornado">
@@ -130,29 +130,29 @@ virtualenv .ve
 <li>Напишем обработчик HTTP подключений к нашему серверу. Создадим и
 отредактируем файл <cite>handler.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">tornado.web</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tornado.web</span>
 
 
 <span class="k">class</span> <span class="nc">BroadcastHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Hello from tornadio!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello from tornadio!&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Все, что он делает, это отдает строку 'Hello from tornadio!' при GET запросах.</p>
 <ol class="arabic simple" start="2">
 <li>Создадим основной файл приложения <cite>app.py</cite></li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">tornado.web</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tornado.web</span>
 <span class="kn">from</span> <span class="nn">tornadio</span> <span class="kn">import</span> <span class="n">server</span>
 
 <span class="kn">from</span> <span class="nn">handler</span> <span class="kn">import</span> <span class="n">BroadcastHandler</span>
 
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s">r&quot;/&quot;</span><span class="p">,</span> <span class="n">BroadcastHandler</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s2">r&quot;/&quot;</span><span class="p">,</span> <span class="n">BroadcastHandler</span><span class="p">)</span> <span class="p">]</span>
 
 <span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span> <span class="n">urls</span> <span class="p">)</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">server</span><span class="o">.</span><span class="n">SocketServer</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
 </pre></div>
 <p>Здесь мы создали <a class="reference external" href="http://tornadoweb.org">Tornado</a> application использующее наш обработчик соединений.</p>
@@ -170,10 +170,10 @@ virtualenv .ve
 <ol class="arabic simple">
 <li>Создайте страницу для клиентов <cite>console.html</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.socket.io/stable/socket.io.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://cdn.socket.io/stable/socket.io.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
         <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">);</span>
 
@@ -188,10 +188,10 @@ virtualenv .ve
                 <span class="nx">log</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;&#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;&lt;/p&gt;&#39;</span><span class="p">;</span>
             <span class="p">});</span>
         <span class="p">};</span>
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;h2&gt;</span>Console client<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;log&#39;</span><span class="nt">&gt;&lt;/div&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Console client<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;log&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 <p>Разберем, что в ней происходит. Подключается <a class="reference external" href="http://socket.io/">SocketIO</a> скрипт реализации
 протоколов. Создается объект <cite>socket</cite> с параметрами подключения к нашему
@@ -200,9 +200,9 @@ virtualenv .ve
 <ol class="arabic simple" start="2">
 <li>Теперь подключим этот шаблон на стороне сервера, изменив <cite>handler.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">BroadcastHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BroadcastHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;console.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;console.html&#39;</span><span class="p">)</span>
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -219,59 +219,59 @@ virtualenv .ve
 <ol class="arabic simple">
 <li>Создайте файл <cite>connection.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">tornadio</span> <span class="kn">import</span> <span class="n">SocketConnection</span>
 
 
 <span class="k">class</span> <span class="nc">ClientConnection</span><span class="p">(</span><span class="n">SocketConnection</span><span class="p">):</span>
     <span class="n">clients</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">on_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;client connected&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;client connected&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;client disconnected&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;client disconnected&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="c"># **</span>
+    <span class="c1"># **</span>
 </pre></div>
 <p>Здесь мы создали класс для наших подключений. При подключении он сохраняет
 ссылку на себя в ClientConnection.client. При разрыве соединения удаляет.</p>
 <ol class="arabic simple" start="2">
 <li>Подключим его в наше приложение <cite>app.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">tornado.web</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tornado.web</span>
 <span class="kn">from</span> <span class="nn">tornadio</span> <span class="kn">import</span> <span class="n">server</span><span class="p">,</span> <span class="n">get_router</span>
 
 <span class="kn">from</span> <span class="nn">connection</span> <span class="kn">import</span> <span class="n">ClientConnection</span>
 <span class="kn">from</span> <span class="nn">handler</span> <span class="kn">import</span> <span class="n">BroadcastHandler</span>
 
 
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s">r&quot;/&quot;</span><span class="p">,</span> <span class="n">BroadcastHandler</span><span class="p">),</span> <span class="n">get_router</span><span class="p">(</span><span class="n">ClientConnection</span><span class="p">)</span><span class="o">.</span><span class="n">route</span><span class="p">()</span> <span class="p">]</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s2">r&quot;/&quot;</span><span class="p">,</span> <span class="n">BroadcastHandler</span><span class="p">),</span> <span class="n">get_router</span><span class="p">(</span><span class="n">ClientConnection</span><span class="p">)</span><span class="o">.</span><span class="n">route</span><span class="p">()</span> <span class="p">]</span>
 
 <span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span> <span class="n">urls</span> <span class="p">)</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">server</span><span class="o">.</span><span class="n">SocketServer</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
 </pre></div>
 <p>Сейчас мы создали ресурс <a class="reference external" href="http://socket.io/">SocketIO</a> для клиентских подключений.</p>
 <ol class="arabic simple" start="3">
 <li>И доработаем на <cite>handler.py</cite> для отправки сообщений подключенным клиентам:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">tornado.web</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tornado.web</span>
 <span class="kn">from</span> <span class="nn">connection</span> <span class="kn">import</span> <span class="n">ClientConnection</span>
 
 
 <span class="k">class</span> <span class="nc">BroadcastHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;console.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;console.html&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s">&#39;message&#39;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="n">ClientConnection</span><span class="o">.</span><span class="n">clients</span><span class="p">:</span>
             <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;message send.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;message send.&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Мы добавили обработчик POST запросов, отправляющий сообщения нашим подключениям.</p>
 <div class="note">
@@ -283,7 +283,7 @@ virtualenv .ve
 В консоли сервера вы должны увидеть сообщения о подключении. Давайте попробуем
 отправить сообщения подключенным клиентам с помощью POST запросов к нашему
 серверу.</p>
-<div class="highlight"><pre>curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Ping
+<div class="highlight"><pre><span></span>curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Ping
 curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Another_ping
 </pre></div>
 <p>Вы должны увидеть как сообщения появляются на открытых страницах. Сейчас самый
@@ -296,10 +296,10 @@ curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>An
 пользовательскую сессию если она существует. Сейчас мы просто будем сообщать
 случайно генерированный ID серверу после подключения. Доработаем немного
 <cite>console.html</cite>:</p>
-<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.socket.io/stable/socket.io.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://cdn.socket.io/stable/socket.io.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
         <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
 
             <span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">);</span>
@@ -323,17 +323,17 @@ curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>An
                 <span class="nx">log</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;&#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;&lt;/p&gt;&#39;</span><span class="p">;</span>
             <span class="p">});</span>
         <span class="p">};</span>
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;h2&gt;</span>Console client<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;log&#39;</span><span class="nt">&gt;&lt;/div&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Console client<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;log&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 <p>Мы добавили реакцию на событие <cite>connect</cite> и отправляем на сервер информацию о
 нашем текущем ID.</p>
 <ol class="arabic simple" start="2">
 <li>Добавим обработку идентификатора в наш класс подключений <cite>connection.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">tornadio</span> <span class="kn">import</span> <span class="n">SocketConnection</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tornadio</span> <span class="kn">import</span> <span class="n">SocketConnection</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 
@@ -346,42 +346,42 @@ curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>An
         <span class="nb">super</span><span class="p">(</span><span class="n">ClientConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;client connected&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;client connected&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&#39;Hello client </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Hello client </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;client disconnected&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;client disconnected&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="c"># **</span>
+    <span class="c1"># **</span>
 </pre></div>
 <p>Теперь при получении сообщения, мы регистрируем идентификатор клиента.</p>
 <ol class="arabic simple" start="3">
 <li>И добавим функциональности в <cite>handler.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">tornado.web</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tornado.web</span>
 <span class="kn">from</span> <span class="nn">connection</span> <span class="kn">import</span> <span class="n">ClientConnection</span>
 
 
 <span class="k">class</span> <span class="nc">BroadcastHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;console.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;console.html&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s">&#39;message&#39;</span><span class="p">)</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="n">ClientConnection</span><span class="o">.</span><span class="n">clients</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">key</span> <span class="o">==</span> <span class="n">client</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;message send.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;message send.&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Сейчас мы проверяем запрос на наличие параметра id и в этом случае отправляем
 сообщение только конкретному подключенному клиенту.</p>
@@ -400,8 +400,8 @@ Connected.
 Hello client 63
 </pre>
 <p>Отправим несколько сообщений:</p>
-<div class="highlight"><pre>curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Hello_all
-curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Hello_63&amp;id<span class="o">=</span>63
+<div class="highlight"><pre><span></span>curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Hello_all
+curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>Hello_63<span class="p">&amp;</span><span class="nv">id</span><span class="o">=</span>63
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -482,7 +482,7 @@ curl localhost:8001 -d <span class="nv">message</span><span class="o">=</span>He
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

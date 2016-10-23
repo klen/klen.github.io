@@ -16,7 +16,7 @@
 
         <title>Запуск django и других python проектов при помощи uwsgi+nginx — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -92,13 +92,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Рассмотрено для debian-based дистрибутивов. Права суперпользователя.</p>
 </div>
-<div class="highlight"><pre><span class="c"># nginx и uwsgi устанавливаем прямо из репозиториев</span>
-<span class="c"># для последних версий uwsgi неоюходимо дополнительно</span>
-<span class="c"># установить пакет: uwsgi-plugin-python</span>
+<div class="highlight"><pre><span></span><span class="c1"># nginx и uwsgi устанавливаем прямо из репозиториев</span>
+<span class="c1"># для последних версий uwsgi неоюходимо дополнительно</span>
+<span class="c1"># установить пакет: uwsgi-plugin-python</span>
 apt-get install nginx uwsgi uwsgi-plugin-python
 </pre></div>
 <p>Для управления <a class="reference external" href="http://projects.unbit.it/uwsgi/">uwsgi</a> и множеством других процессов, я использую <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
-<div class="highlight"><pre>apt-get install supervisor
+<div class="highlight"><pre><span></span>apt-get install supervisor
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -115,12 +115,12 @@ apt-get install nginx uwsgi uwsgi-plugin-python
 </div>
 <p>Предположим у нас есть python-проект расположенный состоящий
 из очень простого <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a> приложения (<cite>wsgi.py</cite>):</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-    <span class="n">status</span> <span class="o">=</span> <span class="s">&#39;200 OK&#39;</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;Pong!&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;Pong!&#39;</span>
 
-    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s">&#39;text/plain&#39;</span><span class="p">),</span>
-                        <span class="p">(</span><span class="s">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)))]</span>
+    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)))]</span>
     <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">output</span><span class="p">]</span>
 </pre></div>
@@ -135,7 +135,7 @@ apt-get install nginx uwsgi uwsgi-plugin-python
 <p class="last">В данном примере рассмотрен XML формат, но можно использовать
 INI или параметры строки запуска</p>
 </div>
-<div class="highlight"><pre><span class="c">&lt;!-- UWSGI XML Configuration File --&gt;</span>
+<div class="highlight"><pre><span></span><span class="c">&lt;!-- UWSGI XML Configuration File --&gt;</span>
 <span class="nt">&lt;uwsgi&gt;</span>
 
     <span class="c">&lt;!-- Сокет для передачи данных --&gt;</span>
@@ -172,7 +172,7 @@ INI или параметры строки запуска</p>
 <span class="nt">&lt;/uwsgi&gt;</span>
 </pre></div>
 <p>Создадим конфигурационный файл с настройками для <a class="reference external" href="http://supervisord.org/">supervisor</a>: <cite>supervisor.conf</cite></p>
-<div class="highlight"><pre><span class="k">[program:example]</span>
+<div class="highlight"><pre><span></span><span class="k">[program:example]</span>
 <span class="na">command</span><span class="o">=</span><span class="s">/usr/bin/uwsgi -x /home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.xml</span>
 <span class="na">user</span><span class="o">=</span><span class="s">www-data</span>
 <span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/home/klen/Projects/klen.github.com/_code/uwsgi/logs/uwsgi.log</span>
@@ -189,7 +189,7 @@ INI или параметры строки запуска</p>
 на нее симлинки в <cite>/etc/supervisor/conf.d</cite></p>
 </div>
 <p>Настроим <strong>server</strong> в <a class="reference external" href="http://nginx.net/">nginx</a>:</p>
-<div class="highlight"><pre><span class="k">upstream</span> <span class="s">example.proxy</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">upstream</span> <span class="s">example.proxy</span> <span class="p">{</span>
     <span class="kn">ip_hash</span><span class="p">;</span>
     <span class="kn">server</span> <span class="s">unix:///home/klen/Projects/klen.github.com/_code/uwsgi/uwsgi.sock</span><span class="p">;</span>
 <span class="p">}</span>
@@ -228,13 +228,13 @@ INI или параметры строки запуска</p>
 <div class="section" id="id4">
 <h2><a class="toc-backref" href="#id9">Запуск</a></h2>
 <p>Создадим ссылку на файлы конфигурации проекта для <a class="reference external" href="http://nginx.net/">nginx</a> и <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
-<div class="highlight"><pre><span class="c"># создадим папку для логов</span>
+<div class="highlight"><pre><span></span><span class="c1"># создадим папку для логов</span>
 mkdir logs
 
-<span class="c"># nginx</span>
+<span class="c1"># nginx</span>
 ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/nginx.conf /etc/nginx/sites-enabled/uwsgi-example.conf
 
-<span class="c"># supervisor</span>
+<span class="c1"># supervisor</span>
 ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/supervisor.conf /etc/supervisor/conf.d/uwsgi-example.conf
 </pre></div>
 <p>Дадим права на запись всем пользователям:</p>
@@ -242,10 +242,10 @@ ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/supervisor.conf /etc/super
 <p class="first admonition-title">Note</p>
 <p class="last">По хорошему надо просто изменить владельца проекта на www-data.</p>
 </div>
-<div class="highlight"><pre>chmod a+w -R /home/klen/Projects/klen.github.com/_code/uwsgi
+<div class="highlight"><pre><span></span>chmod a+w -R /home/klen/Projects/klen.github.com/_code/uwsgi
 </pre></div>
 <p>Перезапустим <a class="reference external" href="http://nginx.net/">nginx</a> и <a class="reference external" href="http://supervisord.org/">supervisor</a>:</p>
-<div class="highlight"><pre>/etc/init.d/nginx restart
+<div class="highlight"><pre><span></span>/etc/init.d/nginx restart
 /etc/init.d/supervisor stop
 /etc/init.d/supervisor start
 </pre></div>
@@ -255,14 +255,14 @@ ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/supervisor.conf /etc/super
 <div class="section" id="django">
 <h2><a class="toc-backref" href="#id10">Настройка django-проекта</a></h2>
 <p>Для <a class="reference external" href="http://django-project.com">Django</a> проекта вам необходимо просто изменить <cite>wsgi.py</cite>:</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">django.core.handlers.wsgi</span> <span class="kn">import</span> <span class="n">WSGIHandler</span>
 
 
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-    <span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s">&#39;settings&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;settings&#39;</span><span class="p">)</span>
 
 <span class="n">application</span> <span class="o">=</span> <span class="n">WSGIHandler</span><span class="p">()</span>
 </pre></div>
@@ -274,16 +274,16 @@ ln -s /home/klen/Projects/klen.github.com/_code/uwsgi/supervisor.conf /etc/super
 </div>
 <div class="section" id="id5">
 <h2><a class="toc-backref" href="#id11">Управление</a></h2>
-<div class="highlight"><pre><span class="c"># Старт проекта</span>
+<div class="highlight"><pre><span></span><span class="c1"># Старт проекта</span>
 supervisorctl start example
 
-<span class="c"># Перезапуск проекта</span>
+<span class="c1"># Перезапуск проекта</span>
 supervisorctl restart example
 
-<span class="c"># Останов проекта</span>
+<span class="c1"># Останов проекта</span>
 supervisorctl stop example
 
-<span class="c"># Статус проекта</span>
+<span class="c1"># Статус проекта</span>
 supervisorctl status example
 </pre></div>
 <div class="note">
@@ -348,7 +348,7 @@ supervisorctl status example
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

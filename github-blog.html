@@ -16,7 +16,7 @@
 
         <title>Создаем свой персональный сайт на Github. — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -74,7 +74,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">В дальнейшем я буду приводить примеры для своего сайта: klen.github.com</p>
 </div>
-<div class="highlight"><pre>mkdir ~/Projects/klen.github.com
+<div class="highlight"><pre><span></span>mkdir ~/Projects/klen.github.com
 <span class="nb">cd</span> ~/Projects/klen.github.com
 git init
 <span class="nb">echo</span> <span class="s1">&#39;Hello world!&#39;</span> &gt; index.html
@@ -111,26 +111,26 @@ HTML синтаксис, из коробки вы можете писать в �
 <ol class="arabic simple">
 <li>Так как мы будем использовать <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> нам необходимо выключить встроенный в <a class="reference external" href="http://github.com">Github</a> генератор <a class="reference external" href="http://github.com/mojombo/jekyll/">Jekyll</a>. Это делается добавлением в корень репозитория файла <cite>.nojekyll</cite>.</li>
 </ol>
-<div class="highlight"><pre>touch .nojekyll
+<div class="highlight"><pre><span></span>touch .nojekyll
 git add .
 git commit -m <span class="s1">&#39;Disable Jekyll&#39;</span>
 </pre></div>
 <ol class="arabic simple" start="2">
 <li>Теперь создадим и активируем виртуальное окружение для модулей нашего сайта:</li>
 </ol>
-<div class="highlight"><pre>virtualenv .ve_blog
+<div class="highlight"><pre><span></span>virtualenv .ve_blog
 <span class="nb">source</span> .ve_blog/bin/activate
 </pre></div>
 <ol class="arabic simple" start="3">
 <li>Установим в созданный нами <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">VirtualEnv</a> генератор <a class="reference external" href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a> и необходимый для него движок шаблонов <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a>:</li>
 </ol>
-<div class="highlight"><pre>easy_install pelican
+<div class="highlight"><pre><span></span>easy_install pelican
 easy_install jinja2
 </pre></div>
 <ol class="arabic simple" start="4">
 <li>Мы будем держать исходники сайта в поддиректории <strong>source</strong>, а созданные статические страницы в корне репозитория, чтобы <a class="reference external" href="http://github.com">Github</a> их видел.  Создадим файл <cite>source/hello.rst</cite> с нашей первой статьей:</li>
 </ol>
-<div class="highlight"><pre><span class="gh">Hello world!</span>
+<div class="highlight"><pre><span></span><span class="gh">Hello world!</span>
 <span class="gh">############</span>
 
 <span class="nc">:slug:</span> <span class="nf">hello</span>
@@ -145,7 +145,7 @@ Hello from Pelican!
 <ol class="arabic simple" start="6">
 <li>И соберем статику:</li>
 </ol>
-<div class="highlight"><pre>pelican <span class="nb">source</span> -o .
+<div class="highlight"><pre><span></span>pelican <span class="nb">source</span> -o .
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -157,7 +157,7 @@ Hello from Pelican!
 <ol class="arabic simple" start="7">
 <li>Теперь наши изменения можно сохранить в <a class="reference external" href="http://git-scm.com">Git</a> и отправить на <a class="reference external" href="http://github.com">Github</a>.</li>
 </ol>
-<div class="highlight"><pre>git add .
+<div class="highlight"><pre><span></span>git add .
 git commit -m <span class="s1">&#39;Add virtualenv and setup pelican.&#39;</span>
 git push origin master
 </pre></div>
@@ -168,9 +168,9 @@ git push origin master
 <ol class="arabic simple">
 <li>Создадим файл настроек нашего сайта <cite>source/settings.py</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="n">AUTHOR</span> <span class="o">=</span> <span class="s">&#39;Kirill Klenov&#39;</span>
-<span class="n">SITENAME</span> <span class="o">=</span> <span class="s">&#39;klen.github.com&#39;</span>
-<span class="n">SITEURL</span> <span class="o">=</span> <span class="s">&#39;http://klen.github.com&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;Kirill Klenov&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s1">&#39;klen.github.com&#39;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;http://klen.github.com&#39;</span>
 </pre></div>
 <div class="note">
 <p class="first admonition-title">Note</p>
@@ -179,33 +179,33 @@ git push origin master
 <ol class="arabic simple" start="2">
 <li>Для упрощения сборки создадим sh-файл <cite>.compile</cite></li>
 </ol>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
 
 <span class="nv">VE_DIR</span><span class="o">=</span><span class="nv">$PRJ_DIR</span>/.ve_blog
 
-<span class="c"># Modify path</span>
+<span class="c1"># Modify path</span>
 <span class="nv">OLD_PATH</span><span class="o">=</span><span class="nv">$PATH</span>
-<span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$VE_DIR/bin:$PRJ_DIR:$PATH&quot;</span>
-<span class="nb">export </span>PATH
+<span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$VE_DIR</span><span class="s2">/bin:</span><span class="nv">$PRJ_DIR</span><span class="s2">:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="nb">export</span> PATH
 
-<span class="c"># Compile static files</span>
+<span class="c1"># Compile static files</span>
 pelican <span class="nv">$PRJ_DIR</span>/source -o <span class="nv">$PRJ_DIR</span> -s <span class="nv">$PRJ_DIR</span>/source/settings.py -v
 
-<span class="c"># Return PATH</span>
+<span class="c1"># Return PATH</span>
 <span class="nv">PATH</span><span class="o">=</span><span class="nv">$OLD_PATH</span>
-<span class="nb">export </span>PATH
+<span class="nb">export</span> PATH
 </pre></div>
 <p>И дадим ему права на исполнение:</p>
-<div class="highlight"><pre>chmod +x .compile
+<div class="highlight"><pre><span></span>chmod +x .compile
 </pre></div>
 <p>Теперь в директории проекта можно вызывать <cite>./.compile</cite> и собирать статику даже без активации
 виртуального окружения.</p>
 <ol class="arabic simple" start="3">
 <li>Следующим шагом создадим <a class="reference external" href="http://git-scm.com">Git</a> хук для автоматической генерации сайта при коммитах. Создадим и отредактируем файл <cite>.git/hooks/pre-commit</cite>:</li>
 </ol>
-<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="nv">PRJ_DIR</span><span class="o">=</span>/home/klen/Projects/klen.github.com
 
@@ -279,7 +279,7 @@ pelican <span class="nv">$PRJ_DIR</span>/source -o <span class="nv">$PRJ_DIR</sp
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

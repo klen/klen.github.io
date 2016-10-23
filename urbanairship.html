@@ -16,7 +16,7 @@
 
         <title>Urbanairship, push-уведомления для мобильных приложений — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -152,7 +152,7 @@ Service</strong>. В уведомлениях можно использоват�
 </ul>
 </blockquote>
 <p>Реализация на python (django) может выглядеть следующим образом:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">urlencode</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">urlencode</span>
 <span class="kn">from</span> <span class="nn">urllib2</span> <span class="kn">import</span> <span class="n">urlopen</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">URLError</span>
 
 <span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">simplejson</span>
@@ -174,19 +174,19 @@ Service</strong>. В уведомлениях можно использоват�
                 <span class="n">settings</span><span class="o">.</span><span class="n">URBANSHIP_PUSH_URL</span><span class="p">,</span>
                 <span class="n">simplejson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
                     <span class="n">device_tokens</span> <span class="o">=</span> <span class="p">[</span> <span class="n">device_token</span> <span class="p">],</span>
-                    <span class="n">aps</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sound</span><span class="o">=</span><span class="n">sound</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;alert&#39;</span><span class="p">),</span>
-                                <span class="n">data</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">))</span>
+                    <span class="n">aps</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sound</span><span class="o">=</span><span class="n">sound</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">),</span>
+                                <span class="n">data</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">))</span>
                 <span class="p">)),</span>
                 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s">&#39;Basic </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span>
-                        <span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">URBANSHIP_APP_KEY</span><span class="p">,</span>
+                    <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s1">&#39;Basic </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span>
+                        <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">URBANSHIP_APP_KEY</span><span class="p">,</span>
                                     <span class="n">settings</span><span class="o">.</span><span class="n">URBANSHIP_MASTER_SECRET</span><span class="p">)),</span>
-                    <span class="s">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s">&#39;application/json&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
                 <span class="p">},</span>
             <span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">URLError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">_send_ios</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;urbanairship server is unresponsible, cannot send ios notification&quot;</span><span class="p">)</span>
+            <span class="n">_send_ios</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;urbanairship server is unresponsible, cannot send ios notification&quot;</span><span class="p">)</span>
             <span class="n">_send_ios</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span><span class="n">exc</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
 <div class="note">
@@ -202,20 +202,20 @@ URBANSHIP_APP_KEY, URBANSHIP_MASTER_SECRET'</strong> полученные нам
 <p>Обратите внимание, что для использования этой функции нам необходимо знать
 <strong>device_token</strong>, который нам должно сообщить приложение.</p>
 <p>Использование:</p>
-<div class="highlight"><pre><span class="c"># simple message</span>
-<span class="n">send_ios</span><span class="p">(</span><span class="s">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="c1"># simple message</span>
+<span class="n">send_ios</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s1">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
 
-<span class="c"># message with sound</span>
-<span class="n">send_ios</span><span class="p">(</span><span class="s">&#39;Beep&#39;</span><span class="p">,</span> <span class="n">sound</span><span class="o">=</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
+<span class="c1"># message with sound</span>
+<span class="n">send_ios</span><span class="p">(</span><span class="s1">&#39;Beep&#39;</span><span class="p">,</span> <span class="n">sound</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s1">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
 
-<span class="c"># message with data</span>
+<span class="c1"># message with data</span>
 <span class="n">send_ios</span><span class="p">({</span>
-    <span class="n">alert</span> <span class="o">=</span> <span class="s">&#39;Some data&#39;</span><span class="p">,</span>
+    <span class="n">alert</span> <span class="o">=</span> <span class="s1">&#39;Some data&#39;</span><span class="p">,</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">order</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span>
-        <span class="n">status</span><span class="p">:</span> <span class="s">&#39;updated&#39;</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="s1">&#39;updated&#39;</span><span class="p">,</span>
     <span class="p">}</span>
-<span class="p">},</span> <span class="n">sound</span><span class="o">=</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
+<span class="p">},</span> <span class="n">sound</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">device_token</span><span class="o">=</span><span class="s1">&#39;FAKEDEVICETOKEN&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Если отправка не происходит откройте приложение в <a class="reference external" href="http://urbanairship.com/">Urbanairship</a> в режиме
 просмотра и посмотрите сообщения в консоли (для отладки должен быть
@@ -291,7 +291,7 @@ URBANSHIP_APP_KEY, URBANSHIP_MASTER_SECRET'</strong> полученные нам
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

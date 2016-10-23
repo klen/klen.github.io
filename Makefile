@@ -2,10 +2,10 @@ VIRTUAL_ENV ?= env
 
 all: compile
 
-$(VIRTUALENV): requirements.txt
-	[ -d $(VIRTUALENV) ] || virtualenv $(VIRTUALENV) --no-site-packages
-	$(VIRTUALENV)/bin/pip install -r requirements.txt
-	@touch $(VIRTUALENV)
+$(VIRTUAL_ENV): requirements.txt
+	[ -d $(VIRTUAL_ENV) ] || virtualenv $(VIRTUAL_ENV) --no-site-packages
+	$(VIRTUAL_ENV)/bin/pip install -r requirements.txt
+	@touch $(VIRTUAL_ENV)
 
 clean:
 	# mv 404.html 404.bak
@@ -13,12 +13,12 @@ clean:
 	# mv 404.bak 404.html
 	find . -name "*.py[co]" -delete
 
-compile: $(VIRTUALENV) clean
-	$(VIRTUALENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py
-	zeta theme
+compile: $(VIRTUAL_ENV) clean
+	$(VIRTUAL_ENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py
+	zeta theme -p "build_" 
 
-follow: $(VIRTUALENV)
-	$(VIRTUALENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py -r
+follow: $(VIRTUAL_ENV)
+	$(VIRTUAL_ENV)/bin/pelican $(CURDIR)/_source -o $(CURDIR) -s $(CURDIR)/config.py -r
 
 run: compile
 	pyserve $(CURDIR)

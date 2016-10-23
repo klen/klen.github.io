@@ -16,7 +16,7 @@
 
         <title>Настройка сервера. Gitolite — хостинг git-репозиториев — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -78,17 +78,17 @@
 <div class="section" id="id3">
 <h2><a class="toc-backref" href="#id7">Начало работы</a></h2>
 <p>Первые мои команды на новом сервере:</p>
-<div class="highlight"><pre><span class="c"># Обновление системы (да мне нравятся свежие пакеты)</span>
+<div class="highlight"><pre><span></span><span class="c1"># Обновление системы (да мне нравятся свежие пакеты)</span>
 sudo apt-get update
 sudo apt-get upgrade
 
-<span class="c"># Утилиты для сборки</span>
-<span class="nv">$ </span>sudo apt-get install build-essential
+<span class="c1"># Утилиты для сборки</span>
+$ sudo apt-get install build-essential
 
-<span class="c"># Конфигурирование локалей</span>
-<span class="nv">$ </span>sudo locale-gen ru_RU.UTF-8
-<span class="nv">$ </span>sudo locale-gen en_US.UTF-8
-<span class="nv">$ </span>sudo dpkg-reconfigure locales
+<span class="c1"># Конфигурирование локалей</span>
+$ sudo locale-gen ru_RU.UTF-8
+$ sudo locale-gen en_US.UTF-8
+$ sudo dpkg-reconfigure locales
 </pre></div>
 </div>
 <div class="section" id="gitolite">
@@ -100,22 +100,22 @@ sudo apt-get upgrade
 <p>Самые распространенные решения: <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> и <a class="reference external" href="https://github.com/res0nat0r/gitosis.git">Gitosis</a>. Я предпочитаю <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a>
 из-за удобства настройки и установки.</p>
 <p>Для начала установим <a class="reference external" href="http://git-scm.com/">Git</a>  и <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a> из пакетов:</p>
-<div class="highlight"><pre><span class="c"># Установка git и gitolite</span>
-<span class="nv">$ </span>sudo apt-get install git gitolite
+<div class="highlight"><pre><span></span><span class="c1"># Установка git и gitolite</span>
+$ sudo apt-get install git gitolite
 </pre></div>
 <p>Теперь нужно создать владельца репозиториев. Обычно используется пользователь
 с логином: <strong>git</strong>. Создадим его и выполним под ним настройку <a class="reference external" href="https://github.com/sitaramc/gitolite">Gitolite</a>:</p>
-<div class="highlight"><pre><span class="c"># Создание пользователя git</span>
-<span class="nv">$ </span>sudo useradd -m git
+<div class="highlight"><pre><span></span><span class="c1"># Создание пользователя git</span>
+$ sudo useradd -m git
 
-<span class="c"># Копируем свой публичный ssh rsa ключ из домашней директории</span>
-<span class="c"># для настройки управления репозиторием</span>
-<span class="nv">$ </span>sudo cp ~/.ssh/id_rsa.pub /home/git/admin.pub
+<span class="c1"># Копируем свой публичный ssh rsa ключ из домашней директории</span>
+<span class="c1"># для настройки управления репозиторием</span>
+$ sudo cp ~/.ssh/id_rsa.pub /home/git/admin.pub
 
-<span class="c"># Заходим под пользователем git и заканчиваем настройку</span>
-<span class="nv">$ </span>sudo su git
-<span class="nv">$ </span><span class="nb">cd</span>
-<span class="nv">$ </span>gl-setup admin.pub
+<span class="c1"># Заходим под пользователем git и заканчиваем настройку</span>
+$ sudo su git
+$ <span class="nb">cd</span>
+$ gl-setup admin.pub
 </pre></div>
 <p>В этот момент откроется <a class="reference external" href="www.vim.org">Vim</a> с настройками репозитория по-умолчанию. Сохраняя
 спокойствие, нажмите <cite>:x</cite> для сохранения и выхода из редактора. Нажмите <strong>Ctrl+D</strong>
@@ -136,8 +136,8 @@ sudo apt-get upgrade
 <cite>awsdemo.us.to</cite>. Для вас он будет отличаться. Как создать и прикрепить
 свой домен было рассказано в прошлой статье.</p>
 </div>
-<div class="highlight"><pre><span class="c"># -- Ваша локальная машина --</span>
-<span class="c"># git clone git@&lt;your_vps_domain&gt;:gitolite-admin.git</span>
+<div class="highlight"><pre><span></span><span class="c1"># -- Ваша локальная машина --</span>
+<span class="c1"># git clone git@&lt;your_vps_domain&gt;:gitolite-admin.git</span>
 git clone git@awsdemo.us.to:gitolite-admin.git
 </pre></div>
 <p>Если вы ничего не напутали с ключами и настройками, то <strong>gitolite-admin</strong> будет
@@ -149,7 +149,7 @@ git clone git@awsdemo.us.to:gitolite-admin.git
 Папка <cite>conf</cite> содержит файлы конфигурации gitolite.</p>
 </div>
 <p>Посмотрим на файл <cite>conf/gitolite.conf</cite>:</p>
-<div class="highlight"><pre>repo    gitolite-admin
+<div class="highlight"><pre><span></span>repo    gitolite-admin
         RW+     <span class="o">=</span>   admin
 
 repo    testing
@@ -160,7 +160,7 @@ repo    testing
 и запись имеет только пользователь с ключом сохраненным в файле
 <cite>keys/admin.pub</cite>, а ко второму все пользователи.</p>
 <p>Добавим еще одну запись для нашего будущего <a class="reference external" href="www.djangoproject.org">Django</a>-проекта, я назову его <cite>awsdemo</cite>:</p>
-<div class="highlight"><pre>repo    gitolite-admin
+<div class="highlight"><pre><span></span>repo    gitolite-admin
         RW+     <span class="o">=</span>   admin
 
 repo    testing
@@ -170,31 +170,31 @@ repo    awsdemo
         RW+     <span class="o">=</span>   admin
 </pre></div>
 <p>Сохраним изменения и отправим их на сервер:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git commit -am <span class="s1">&#39;Add django repo&#39;</span>
-<span class="nv">$ </span>git push origin master
+<div class="highlight"><pre><span></span>$ git commit -am <span class="s1">&#39;Add django repo&#39;</span>
+$ git push origin master
 </pre></div>
 <p>Теперь можно создавать сам проект и привязывать его к удаленному хостингу:</p>
-<div class="highlight"><pre><span class="c"># Создание директории для будущего проекта</span>
-<span class="nv">$ </span>mkdir -p ~/Projects/awsdemo
-<span class="nv">$ </span><span class="nb">cd</span> ~/Projects/awsdemo
+<div class="highlight"><pre><span></span><span class="c1"># Создание директории для будущего проекта</span>
+$ mkdir -p ~/Projects/awsdemo
+$ <span class="nb">cd</span> ~/Projects/awsdemo
 
-<span class="c"># Создание репозитория</span>
-<span class="nv">$ </span>git init
+<span class="c1"># Создание репозитория</span>
+$ git init
 
-<span class="c"># Привязываем его к нашему хостингу</span>
-<span class="nv">$ </span>git remote add origin git@awsdemo.us.to:awsdemo.git
+<span class="c1"># Привязываем его к нашему хостингу</span>
+$ git remote add origin git@awsdemo.us.to:awsdemo.git
 
-<span class="c"># Первый коммит</span>
-<span class="nv">$ </span>touch README
-<span class="nv">$ </span>git add .
-<span class="nv">$ </span>git commit -am <span class="s2">&quot;Initial commit&quot;</span>
+<span class="c1"># Первый коммит</span>
+$ touch README
+$ git add .
+$ git commit -am <span class="s2">&quot;Initial commit&quot;</span>
 
-<span class="c"># Отправляем изменения на сервер</span>
-<span class="nv">$ </span>git push origin master
+<span class="c1"># Отправляем изменения на сервер</span>
+$ git push origin master
 
   Counting objects: 3, <span class="k">done</span>.
-  Writing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, 210 bytes, <span class="k">done</span>.
-  Total 3 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+  Writing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="m">210</span> bytes, <span class="k">done</span>.
+  Total <span class="m">3</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
   To git@ec2-174-129-57-41.compute-1.amazonaws.com:django.git
     * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
 </pre></div>
@@ -256,7 +256,7 @@ repo    awsdemo
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

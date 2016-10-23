@@ -16,7 +16,7 @@
 
         <title>Несколько полезных сниппетов для джанго — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -80,7 +80,7 @@
 <li>Путь файла однозначно говорит нам о том, что за инстанс его использует;</li>
 <li>Система не позволяет тысячам файлов скапливаться в одной папке;</li>
 </ul>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">op</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
@@ -89,10 +89,10 @@
     <span class="sd">&quot;&quot;&quot; Auto generate name for File and Image fields.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ext</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">pk</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">unique</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">pk</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">())</span> <span class="k">if</span> <span class="n">unique</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
-    <span class="c"># We think that we use utf8 based OS file system</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">+</span> <span class="n">ext</span>
+    <span class="c1"># We think that we use utf8 based OS file system</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">+</span> <span class="n">ext</span>
     <span class="n">basedir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">module_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
         <span class="n">basedir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
@@ -101,7 +101,7 @@
 <div class="section" id="id3">
 <h3><a class="toc-backref" href="#id10">Пример работы</a></h3>
 <p>Например у нас есть модель <tt class="docutils literal">Archive</tt> в приложении <tt class="docutils literal">storage</tt>, <cite>storage/models.py</cite>:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 <span class="k">class</span> <span class="nc">Archive</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -125,13 +125,13 @@
 <p>Но как использовать все эти параметры если <a class="reference external" href="http://djangoproject.com/">Django</a> передает в указанную функцию только первые два? Здесь нам поможет <a class="reference external" href="http://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%80%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">Каррирование</a>.
 Мы используем функцию <strong>curry</strong> из <cite>django.utils.functional</cite>, которая имитирует это поведение в python.</p>
 <p>Например в нижеприведенном коде:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.utils.functional</span> <span class="kn">import</span> <span class="n">curry</span>
 
 <span class="k">class</span> <span class="nc">Archive</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">cover</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="n">curry</span><span class="p">(</span><span class="n">upload_to</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&#39;cover&#39;</span><span class="p">))</span>
-    <span class="nb">file</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="n">curry</span><span class="p">(</span><span class="n">upload_to</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&#39;file&#39;</span><span class="p">))</span>
+    <span class="n">cover</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="n">curry</span><span class="p">(</span><span class="n">upload_to</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;cover&#39;</span><span class="p">))</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="n">curry</span><span class="p">(</span><span class="n">upload_to</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">))</span>
     <span class="n">other</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="n">curry</span><span class="p">(</span><span class="n">upload_to</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 </pre></div>
 <p>Файлы из поля <cite>cover</cite> будут сохраняться с путями вида: <cite>{MEDIA_URL}/storage/archive/cover/21/40/2140e8fe8678bc08ff6e9b10c9639068.jpg</cite></p>
@@ -147,7 +147,7 @@
 инвалидацию? Для <a class="reference external" href="http://djangoproject.com/">Django</a> существуют приложения помогающие решать эту проблему, но зачастую они слишком
 перегружены и сложны в использовании.</p>
 <p>Для простых проектов я написал несколько полезных функций:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">hashlib</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">from</span> <span class="nn">django.core.cache</span> <span class="kn">import</span> <span class="n">cache</span>
@@ -160,10 +160,10 @@
     <span class="sd">&quot;&quot;&quot; Auto cached model instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="s">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;&#39;model_class&#39; must be either a model&quot;</span>
-                                <span class="s">&quot; or a model name in the format&quot;</span>
-                                <span class="s">&quot; app_label.model_name&quot;</span><span class="p">)</span>
-        <span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;&#39;model_class&#39; must be either a model&quot;</span>
+                                <span class="s2">&quot; or a model name in the format&quot;</span>
+                                <span class="s2">&quot; app_label.model_name&quot;</span><span class="p">)</span>
+        <span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">app_label</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
 
     <span class="n">cache_key</span> <span class="o">=</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">filters</span><span class="p">)</span>
@@ -191,15 +191,15 @@
         <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cached</span><span class="o">.</span><span class="n">query</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cached</span><span class="p">,</span> <span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">ModelBase</span><span class="p">)):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cached</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cached</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>
                 <span class="n">cached</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span>
-                <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()))</span>
+                <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()))</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Objects must be queryset or model.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Objects must be queryset or model.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Cache key cannot be empty.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Cache key cannot be empty.&#39;</span><span class="p">)</span>
 
     <span class="n">key</span> <span class="o">=</span> <span class="n">clean_cache_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">key</span>
@@ -208,11 +208,11 @@
 <span class="k">def</span> <span class="nf">clean_cache_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Replace spaces with &#39;-&#39; and hash if length is greater than 250.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cache_key</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;\s+&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
     <span class="n">cache_key</span> <span class="o">=</span> <span class="n">smart_str</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="n">cache_key</span> <span class="o">=</span> <span class="n">cache_key</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="n">cache_key</span> <span class="o">=</span> <span class="n">cache_key</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">cache_key</span>
 
@@ -232,45 +232,45 @@
 
     <span class="k">return</span> <span class="n">result</span>
 
-    <span class="c">#**</span>
+    <span class="c1">#**</span>
 </pre></div>
 <div class="section" id="id6">
 <h3><a class="toc-backref" href="#id13">Примеры работы</a></h3>
-<div class="highlight"><pre><span class="c"># Генерация ключей для Queryset (разные ключи для разных запросов)</span>
+<div class="highlight"><pre><span></span><span class="c1"># Генерация ключей для Queryset (разные ключи для разных запросов)</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-<span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;intaxi&quot;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;intaxi&quot;</span><span class="p">))</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 
-<span class="c"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--873aa3b2fbd81cdaa9fce75e60706579&#39;</span>
-<span class="c"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--873aa3b2fbd81cdaa9fce75e60706579&#39;</span>
-<span class="c"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--043271300c8db6cc9152ef3119e6195c&#39;</span>
-<span class="c"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--98960ebe77c30e08fe6b4a4fd2b1ab57&#39;</span>
-<span class="c"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--043271300c8db6cc9152ef3119e6195c&#39;</span>
+<span class="c1"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--873aa3b2fbd81cdaa9fce75e60706579&#39;</span>
+<span class="c1"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--873aa3b2fbd81cdaa9fce75e60706579&#39;</span>
+<span class="c1"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--043271300c8db6cc9152ef3119e6195c&#39;</span>
+<span class="c1"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--98960ebe77c30e08fe6b4a4fd2b1ab57&#39;</span>
+<span class="c1"># Output: &#39;SELECT-&quot;main_taxistation&quot;.&quot;id&quot;,-&quot;main_taxistation&quot;.&quot;active&quot;,-&quot;main_taxistation&quot;.&quot;title&quot;,-&quot;main_taxistation&quot;.&quot;city_id&quot;,-&quot;main_taxistation&quot;.&quot;agent_id&quot;,--043271300c8db6cc9152ef3119e6195c&#39;</span>
 
-<span class="c"># Генерация ключей для Model</span>
+<span class="c1"># Генерация ключей для Model</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">generate_cache_key</span><span class="p">(</span><span class="n">TaxiStation</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
-<span class="c"># Output: main.taxistation:pk=50</span>
+<span class="c1"># Output: main.taxistation:pk=50</span>
 
-<span class="c"># Кеширование Queryset (получение данных из кеша или из БД с сохранением в кеш)</span>
+<span class="c1"># Кеширование Queryset (получение данных из кеша или из БД с сохранением в кеш)</span>
 <span class="nb">all</span> <span class="o">=</span> <span class="n">cached_query</span><span class="p">(</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
 <span class="n">some_results</span> <span class="o">=</span>  <span class="n">cached_query</span><span class="p">(</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 
-<span class="c"># Принудительная очистка кеша Queryset</span>
+<span class="c1"># Принудительная очистка кеша Queryset</span>
 <span class="n">clean_cache</span><span class="p">(</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
 <span class="n">clean_cache</span><span class="p">(</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 
-<span class="c"># Кеширование instance</span>
-<span class="n">order</span> <span class="o">=</span> <span class="n">cached_instance</span><span class="p">(</span><span class="n">Order</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Some title&quot;</span><span class="p">)</span>
+<span class="c1"># Кеширование instance</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">cached_instance</span><span class="p">(</span><span class="n">Order</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some title&quot;</span><span class="p">)</span>
 
-<span class="c"># можно и по имени</span>
-<span class="n">order</span> <span class="o">=</span> <span class="n">cached_instance</span><span class="p">(</span><span class="s">&#39;app.order&#39;</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Some title&quot;</span><span class="p">)</span>
+<span class="c1"># можно и по имени</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">cached_instance</span><span class="p">(</span><span class="s1">&#39;app.order&#39;</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some title&quot;</span><span class="p">)</span>
 
-<span class="c"># Очистка кеша</span>
-<span class="n">clean_cache</span><span class="p">(</span><span class="n">Order</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Some title&quot;</span><span class="p">)</span>
+<span class="c1"># Очистка кеша</span>
+<span class="n">clean_cache</span><span class="p">(</span><span class="n">Order</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -278,19 +278,19 @@
 <h2><a class="toc-backref" href="#id14">Атомарные обновления</a></h2>
 <p>Часто возникают ситуации когда нам необходимо обновить одно или несколько полей объекта.
 В <a class="reference external" href="http://djangoproject.com/">Django</a> по-умолчанию это можно сделать при помощи следующего кода:</p>
-<div class="highlight"><pre><span class="c"># Допустим у нас есть объект order (instance of model)</span>
+<div class="highlight"><pre><span></span><span class="c1"># Допустим у нас есть объект order (instance of model)</span>
 <span class="n">order</span><span class="o">.</span><span class="n">custom_field</span> <span class="o">=</span> <span class="n">custom_value</span>
 <span class="n">order</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
 <span class="n">order</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </pre></div>
 <p>При этом ORM <a class="reference external" href="http://djangoproject.com/">Django</a> создает и выполняет запрос содержащий обновление <strong>всех полей</strong> объекта, что может быть довольно медленной операцией.</p>
 <p>Значительно быстрее сработает следующая конструкция:</p>
-<div class="highlight"><pre><span class="n">order</span><span class="o">.</span><span class="n">custom_field</span> <span class="o">=</span> <span class="n">custom_value</span>
+<div class="highlight"><pre><span></span><span class="n">order</span><span class="o">.</span><span class="n">custom_field</span> <span class="o">=</span> <span class="n">custom_value</span>
 <span class="n">order</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
 <span class="n">Order</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">order</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_field</span> <span class="o">=</span> <span class="n">custom_value</span><span class="p">)</span>
 </pre></div>
 <p>Но она несколько неудобна. Следующая функция решает эту проблему.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">operator</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">operator</span>
 
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.db.models.expressions</span> <span class="kn">import</span> <span class="n">F</span><span class="p">,</span> <span class="n">ExpressionNode</span>
@@ -326,40 +326,40 @@
     <span class="k">return</span> <span class="n">runner</span>
 
 <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">full_clean</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="s">&quot;Atomically update instance, setting field/value pairs from kwargs&quot;</span>
+    <span class="s2">&quot;Atomically update instance, setting field/value pairs from kwargs&quot;</span>
 
-    <span class="c"># apply the updated args to the instance to mimic the change</span>
-    <span class="c"># note that these might slightly differ from the true database values</span>
-    <span class="c"># as the DB could have been updated by another thread. callers should</span>
-    <span class="c"># retrieve a new copy of the object if up-to-date values are required</span>
+    <span class="c1"># apply the updated args to the instance to mimic the change</span>
+    <span class="c1"># note that these might slightly differ from the true database values</span>
+    <span class="c1"># as the DB could have been updated by another thread. callers should</span>
+    <span class="c1"># retrieve a new copy of the object if up-to-date values are required</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ExpressionNode</span><span class="p">):</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">resolve_expression_node</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
-    <span class="c"># clean instance before update</span>
+    <span class="c1"># clean instance before update</span>
     <span class="k">if</span> <span class="n">full_clean</span><span class="p">:</span>
         <span class="n">instance</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
 
-    <span class="c"># fields that use auto_now=True should be updated corrected, too!</span>
+    <span class="c1"># fields that use auto_now=True should be updated corrected, too!</span>
     <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s">&#39;auto_now&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">auto_now</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="s1">&#39;auto_now&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">auto_now</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">pre_save</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
     <span class="n">rows_affected</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">_default_manager</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">instance</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rows_affected</span>
 
-<span class="c">#**</span>
+<span class="c1">#**</span>
 </pre></div>
 <p>Теперь мы можем делать так:</p>
-<div class="highlight"><pre><span class="c"># Обновили объект и сохранили его в базу, через</span>
+<div class="highlight"><pre><span></span><span class="c1"># Обновили объект и сохранили его в базу, через</span>
 <span class="n">update</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">custom_field</span><span class="o">=</span><span class="n">custom_value</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">order</span><span class="o">.</span><span class="n">custom_field</span>
-<span class="c"># Output: custom_value</span>
+<span class="c1"># Output: custom_value</span>
 </pre></div>
 <p>Или даже так:</p>
-<div class="highlight"><pre><span class="n">update</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">custom_field</span><span class="o">=</span><span class="n">custom_value</span><span class="p">,</span> <span class="n">other_field</span><span class="o">=</span><span class="n">other_value</span><span class="p">,</span> <span class="n">more_field</span><span class="o">=</span><span class="n">more_value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">update</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">custom_field</span><span class="o">=</span><span class="n">custom_value</span><span class="p">,</span> <span class="n">other_field</span><span class="o">=</span><span class="n">other_value</span><span class="p">,</span> <span class="n">more_field</span><span class="o">=</span><span class="n">more_value</span><span class="p">)</span>
 </pre></div>
 <p>Обходясь при этом без тяжелых запросов к базе.</p>
 <pre class="literal-block">
@@ -427,7 +427,7 @@ UPDATE &quot;main_order&quot; SET &quot;price&quot; = E'100.00' WHERE &quot;main
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

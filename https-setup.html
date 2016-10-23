@@ -16,7 +16,7 @@
 
         <title>Настройка HTTPS для чайников — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -80,10 +80,10 @@
 <p><strong>CSR</strong> — запрос на получение сертификата, требуется для подписи ключей компанией-сертификатором. Я создаю его в консоли <a class="reference external" href="http://ru.wikipedia.org/wiki/Unix">Unix</a>-систем,
 например в терминале на стороне сервера. Если у вас нет такой возможности, вы можете создать <a class="reference external" href="http://en.wikipedia.org/wiki/Certificate_signing_request">CSR</a> онлайн: <a class="reference external" href="https://www.reg.ru/sslcertificate/generate_key_and_csr">https://www.reg.ru/sslcertificate/generate_key_and_csr</a></p>
 <p>Из консоли:</p>
-<div class="highlight"><pre><span class="c"># Создадим директорию для работы</span>
+<div class="highlight"><pre><span></span><span class="c1"># Создадим директорию для работы</span>
 mkdir -p ~/csr <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/csr
 
-<span class="c"># Создадим приватный ключ и запрос на сертификат</span>
+<span class="c1"># Создадим приватный ключ и запрос на сертификат</span>
 openssl req -new -newkey rsa:2048 -nodes -keyout &lt;your_domain_name&gt;.key -out &lt;your_domain_name&gt;.csr
 </pre></div>
 <div class="note">
@@ -218,7 +218,7 @@ server {
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

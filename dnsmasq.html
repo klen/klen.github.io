@@ -16,7 +16,7 @@
 
         <title>Настройка dnsmasq для локальной разработки (linux) — klen.github.io</title>
 
-        <link href="/theme/_main.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/theme/build_main.css" rel="stylesheet" type="text/css" media="screen" />
 
 <link rel="alternate" type="application/atom+xml" title="klen.github.io - all posts" href="http://feeds.feedburner.com/klengihubcom"> 
 
@@ -70,18 +70,18 @@
 <div class="section" id="dnsmasq">
 <h2><a class="toc-backref" href="#id4">Установка и использование Dnsmasq</a></h2>
 <p>debian-based (вам понадобятся root права):</p>
-<div class="highlight"><pre><span class="c"># Устанавливаем dnsmasq</span>
+<div class="highlight"><pre><span></span><span class="c1"># Устанавливаем dnsmasq</span>
 apt-get install dnsmasq
 
-<span class="c"># Редактируем кнфигурацию dnsmasq</span>
+<span class="c1"># Редактируем кнфигурацию dnsmasq</span>
 vim /etc/dnsmasq.conf
-<span class="c">#   # Добавляем строку со своим &quot;вируальным доменом для localhost&quot;</span>
-<span class="c">#   address=/dev.me/127.0.0.1</span>
+<span class="c1">#   # Добавляем строку со своим &quot;вируальным доменом для localhost&quot;</span>
+<span class="c1">#   address=/dev.me/127.0.0.1</span>
 
-<span class="c"># Перезапускаем сервис</span>
+<span class="c1"># Перезапускаем сервис</span>
 /etc/init.d/dnsmasq restart
 
-<span class="c"># Все, наши локальные поддомены готовы.</span>
+<span class="c1"># Все, наши локальные поддомены готовы.</span>
 ping dev.me
 ping something.dev.me
 ping another.domain.dev.me
@@ -143,7 +143,7 @@ ping another.domain.dev.me
         <div class='pos2'></div>
     </footer>
 
-    <script language="javascript" type="text/javascript" src="./theme/_main.js"></script><div style="display:none;"><script type="text/javascript">
+    <script language="javascript" type="text/javascript" src="./theme/build_main.js"></script><div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
