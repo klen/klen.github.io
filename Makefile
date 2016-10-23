@@ -1,4 +1,4 @@
-VIRTUALENV=$(shell echo "$${VDIR:-'.env'}")
+VIRTUAL_ENV ?= env
 
 all: compile
 
